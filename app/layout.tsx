@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Noto_Sans_TC} from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Noto_Sans_TC({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Tiny_Murky\' Blogger',
@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className}`}>
+      <body className={` dark:bg-gray-800`}>
         {children}
       </body>
     </html>

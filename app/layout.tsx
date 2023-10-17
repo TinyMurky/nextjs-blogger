@@ -2,6 +2,9 @@ import type { Metadata } from 'next'
 import { Noto_Sans_TC} from 'next/font/google'
 import './globals.css'
 
+// components
+import Navbar from './components/Navbar'
+
 const inter = Noto_Sans_TC({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -17,6 +20,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={` dark:bg-gray-800`}>
+        <Navbar />
         {children}
       </body>
     </html>

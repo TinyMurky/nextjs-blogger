@@ -58,7 +58,7 @@ export default async function Post({ params: { blogId } }: Params) {
         {/* 用 dangerouslySetInnerHTML 直接把處理好的markdown轉html直接放入section*/}
         <section dangerouslySetInnerHTML={{__html:contentHtml}} />
         <p>
-          <Link href={`/blog${category}`}>⬅️ Go Back to {category.charAt(1).toUpperCase() + category.slice(2)}</Link>
+          <Link href={`/blogs${category}`}>⬅️ Go Back to {category.charAt(1).toUpperCase() + category.slice(2)}</Link>
         </p>
       </article>
     </main>

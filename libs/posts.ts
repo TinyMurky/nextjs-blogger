@@ -8,6 +8,8 @@ import remark2rehype from 'remark-rehype'
 import highlight from 'rehype-highlight'
 import stringify from 'rehype-stringify'
 
+import { replaceDotFolder } from "./removeRepeatUrl"
+
 export function getSortedPostsData(
   folderName:string,
   extension:string="md",
@@ -44,6 +46,10 @@ export function getSortedPostsData(
       category: `/${dir ? path.basename(dir) : ""}` ,
       title: matterResult.data.title,
       date: matterResult.data.date,
+      tag: matterResult.data.tag,
+      readTime: matterResult.data.readTime,
+      cover: replaceDotFolder(matterResult.data.cover, postFolder),
+      description: matterResult.data.description
     }
     return blog
   })
@@ -58,9 +64,9 @@ export function getSortedPostsData(
   return allPostsData.sort((a, b) => a.date < b.date ? 1 : -1);
 }
 
-export async function getPostData(post:Blog):Promise<BlogWithContent> {
-  const fileContent:string = fs.readFileSync(post.path, { encoding: 'utf8', flag: 'r' })
-  const fileFolder:string = path.dirname(post.path)
+export async function getPostData(blog:Blog):Promise<BlogWithContent> {
+  const fileContent:string = fs.readFileSync(blog.path, { encoding: 'utf8', flag: 'r' })
+  const fileFolder:string = path.dirname(blog.path)
   const  matterResult: matter.GrayMatterFile<string> = matter(fileContent)
 
   // markdown to html
@@ -73,7 +79,7 @@ export async function getPostData(post:Blog):Promise<BlogWithContent> {
   const contentHtml = processedContent.toString()
 
   return {
-    ...post,
+    ...blog,
     contentHtml
   }
 }

@@ -5,7 +5,11 @@ interface Blog {
   path: string,
   category: string
   title: string,
-  date: string
+  date: string,
+  tag: string,
+  readTime: number,
+  cover: string | null,
+  description: string
 }
 
 // BlogPost多一個content

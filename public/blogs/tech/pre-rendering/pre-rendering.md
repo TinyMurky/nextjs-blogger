@@ -1,6 +1,10 @@
 ---
 title: 'Two Forms of Pre-rendering'
 date: '2023-03-14'
+tag: '後端'
+readTime: 5
+cover: './images/testPic.jpg'
+description: 'We recommend using **Static Generation** (with and without data) whenever possible because your page can be built once and served by CDN, which makes it much faster than having a server render the page on every request.'
 ---
 ![image info](./images/testPic.jpg)
 

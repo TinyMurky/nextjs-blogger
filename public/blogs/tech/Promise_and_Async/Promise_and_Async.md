@@ -1,0 +1,85 @@
+---
+title: JavaScript自學撞牆經驗：Promise與Async function
+description: 最近在撰寫可以將往只縮短成短網址的專案。 其中MongoDB需要使用套件mongoose操作，而mongoose多數語法是由Promise組成，然而Promise寫法很容易變成Callback Hell，讓程式碼難以維護與使用。
+date: '2023-05-17T04:37:54.155Z'
+tag: 'JavaScript'
+readTime: 4
+cover: './images/1__kMhyakHhws4BsHoKazoRwg.png'
+slug: >-
+  /@tinymurky/javascript%E8%87%AA%E5%AD%B8%E6%92%9E%E7%89%86%E7%B6%93%E9%A9%97-promise%E8%88%87async-function-f92832ab7dd5
+---
+
+![](./images/1__kMhyakHhws4BsHoKazoRwg.png)
+
+### 前言
+
+最近在撰寫可以將往只縮短成短網址的專案（[github:TinyMurky/URL\_shortener](https://github.com/TinyMurky/URL_shortener)）。其中MongoDB需要使用套件mongoose操作，而mongoose多數語法是由Promise組成，然而Promise寫法很容易變成Callback Hell，讓程式碼難以維護與使用。
+
+### Promise 撞牆經驗
+
+在縮短網址這份專案當中，需要有一個function檢查原始網址是不是已經被縮短過了，如果曾建立過則回傳以前建立過的短網址，未建立過則建立一筆新的短網址資料後，並回傳建立好的短網址提供前端畫面渲染。
+
+然而mongoose套件使用Promise語法，如果在Promise語法中要回傳值給Function之外，需要使用 `resolve()` 並 `return new Promise()` 物件，而我又疊了兩層，整段程式碼如下方呈現的樣子變成了Callback Hell。
+
+另外我嘗試想寫error handling，發現在Promise語法下，不僅要在個Promise物件後使用 `catch` ，在 `resolve()` 還需要外掛 `try and error` ，讓程式碼更長更難懂(結果我還是catch不到error)
+
+```javascript
+export function createShortURL(origin\_URL) {  
+  return new Promise((resolve, reject) => {  
+    resolve(  
+      shortURL  
+        .find({ origin\_URL: origin\_URL })  
+        .lean()  
+        .then((URL) => {  
+          if (URL.length) {  
+            return URL\[0\]  
+          } else {  
+            return new Promise((resolve, reject) => {  
+              resolve(  
+                randomID().then((newID) => {  
+                  const newURLConfig = { \_id: newID, origin\_URL: origin\_URL }  
+                  const newShortURL = new shortURL(newURLConfig)  
+                  newShortURL.save()  
+                  return new Promise((resolve, reject) => {  
+                    resolve(newURLConfig)  
+                  })  
+                })  
+              )  
+            })  
+          }  
+        })  
+    )  
+  })  
+}
+```
+### 尋找Mongoose的Async寫法
+
+![](./images/1__sn28iA1CkjXLNqrhnIM52A.png)
+
+為了避免Callback Hell，我想使用async/await的語法，結果mongoose官網已經有[async寫法教學](https://mongoosejs.com/docs/async-await.html) 了。跟著教學我把上面那段很醜的的程式碼改寫成下方比較容易閱讀的版本，並且可以直接把 `save()` 的Promise物件回傳。
+
+另外直接把function內的程式碼用 `try` 包起來就可以簡單catch到error。
+```javascript
+export async function createShortURL(origin\_URL) {  
+  try {  
+    const urlArray = await shortURL.find({ origin\_URL })  
+    if (urlArray.length) {  
+      urlArray\[0\].set("updatedAt", new Date())  
+      return urlArray\[0\].save()  
+    } else {  
+      const newID = await randomID()  
+      const newURLConfig = {  
+        \_id: newID,  
+        origin\_URL: origin\_URL,  
+      }  
+      const newShortURL = new shortURL(newURLConfig)  
+      return newShortURL.save()  
+    }  
+  } catch (error) {  
+    throw Error(error)  
+  }  
+}
+```
+### 結語
+
+不好意思這篇有一點短，我想提醒自己的是以後遇到Promise盡量用async/await改寫，並且多花心思在官方文件上，裡面常常會有答案。

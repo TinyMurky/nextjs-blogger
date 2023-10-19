@@ -14,15 +14,15 @@ const routerLinks:routerLink[] = [
     name: 'About Me'
   },
   {
-    path: '/all',
+    path: '/blogs',
     name: 'All'
   },
   {
-    path: '/tech',
+    path: '/blogs/tech',
     name: 'Tech'
   },
   {
-    path: '/insight',
+    path: '/blogs/insight',
     name: 'Insight'
   }
 ]

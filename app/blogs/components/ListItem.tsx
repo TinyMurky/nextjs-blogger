@@ -38,7 +38,7 @@ export default function ListItem({ blog }: Props) {
 
       <Link
         href={`/blogs${category}/${id}`}
-        className="no-underline justify-between flex flex-row gap-2"
+        className="no-underline justify-between flex flex-row gap-6"
       >
         <div>
           <div className=" hover:text-black/70 dark:hover:text-white">
@@ -48,7 +48,7 @@ export default function ListItem({ blog }: Props) {
             </p>
           </div>
         </div>
-        <div className="hidden lg:inline-flex overflow-clip object-fill h-36 w-auto">
+        <div className="hidden lg:inline-flex overflow-clip object-fill  aspect-[4/3] h-40 w-auto">
           {image}
         </div>
       </Link>

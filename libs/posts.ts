@@ -72,9 +72,9 @@ export async function getPostData(blog:Blog):Promise<BlogWithContent> {
   // markdown to html
   const processedContent= await remark()
     .use(transformImgSrc(fileFolder))
-    .use(remark2rehype)
+    .use(remark2rehype, {allowDangerousHtml: true}) //啟用inframe
     .use(highlight)
-    .use(stringify)
+    .use(stringify, {allowDangerousHtml: true})
     .process(matterResult.content)
   const contentHtml = processedContent.toString()
 

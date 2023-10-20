@@ -1,6 +1,5 @@
 import Link from "next/link"
 import HamburgerButton from "./HamburgerButton"
-import SearchBar from "./SearchBar"
 import { GiKiwiBird } from "react-icons/gi";
 
 export default function Navbar() {
@@ -14,7 +13,6 @@ export default function Navbar() {
           <GiKiwiBird className='inline-block lg:hidden text-4xl text-white/90 font-bold tracking-wide' />
         </Link>
         <HamburgerButton />
-        <SearchBar />
       </nav>
     </>
   )

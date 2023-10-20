@@ -1,10 +1,13 @@
 import Posts from "./components/Posts"
-type Props = {}
+import { getSortedPostsData } from "@/libs/posts";
+type Props = {
+}
 
-export default function page({}: Props) {
+export default function page({ }: Props) {
+  const blogs = getSortedPostsData('/public/blogs', 'md');
   return (
     <main>
-      <Posts readFolderUnderRoot="/public/blogs" fileType="md" dir={null} />
+      <Posts blogs={blogs} />
     </main>
   )
 }

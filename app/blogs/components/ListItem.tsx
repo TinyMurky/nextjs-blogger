@@ -21,8 +21,8 @@ export default function ListItem({ blog }: Props) {
     />
   ) : null
   return (
-    <li className="mt-4 text-2xl dark:text-white/90">
-      <div className="text-xl mt-1 flex flex-row items-center my-2 dark:text-gray-400">
+    <li className="mt-4 text-base lg:text-2xl dark:text-white/90">
+      <div className="lg:text-xl text-xs mt-1 flex flex-row items-center my-2 dark:text-gray-400">
         <div className="flex flex-row items-center me-4">
           <AiFillCalendar className="me-2"/>{formattedDate}
         </div>
@@ -38,7 +38,7 @@ export default function ListItem({ blog }: Props) {
 
       <Link
         href={`/blogs${category}/${id}`}
-        className="no-underline justify-between flex flex-row gap-6"
+        className="no-underline justify-between flex flex-row gap-4"
       >
         <div>
           <div className=" hover:text-black/70 dark:hover:text-white">

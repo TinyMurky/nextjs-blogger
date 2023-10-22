@@ -38,7 +38,7 @@ const skillBlock = (
 )
 export default function Skill({}: Props) {
   return (
-    <section className="my-4">
+    <section className="my-8">
       <h1 className="text-2xl mb-6 font-bold">技能</h1>
       {skillBlock}
     </section>

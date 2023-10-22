@@ -3,6 +3,7 @@
 import { useState, useMemo} from "react"
 import ListItem from "./ListItem"
 import SearchBar from "./SearchBar"
+
 interface Props {
   blogs: Blog[]
 }

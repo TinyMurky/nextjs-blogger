@@ -16,7 +16,7 @@ const skills: Array<{name: string, items:Array<string>}> = [
 ]
 
 const skillBlock = (
-  <div className="flex flex-row justify-between gap-8">
+  <div className="flex flex-col md:flex-row justify-between gap-8">
     {
       skills.map((skill) => {
         return (

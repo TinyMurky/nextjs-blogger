@@ -7,8 +7,8 @@ export default function Project({}: Props) {
     <section className="mt-16 mb-8">
       <h1 className="text-2xl mb-4 font-bold">專案</h1>
       <hr className="mt-2 mb-4 h-px border-0 dark:bg-gray-500"/>
-      <div className="mt-16 mb-8 grid grid-cols-12 gap-8 w-full">
-        <div className="col-span-5  overflow-clip object-fill  aspect-[4/3]">
+      <div className="lg:mt-16 lg:mb-8 mx-auto lg:grid lg:grid-cols-12 gap-8 w-full">
+        <div className="lg:col-span-5 mx-auto w-auto sm:w-96 lg:w-auto overflow-clip object-fill  aspect-[4/3]">
           <Image
             src='/images/resume/demo_simple_twitter.png'
             alt='simple-twitter'
@@ -16,17 +16,18 @@ export default function Project({}: Props) {
             height={800}
             style={{objectFit: "cover"}}
             loading="lazy"
+            className="mx-auto"
           />
         </div>
 
-        <div className="col-span-7">
+        <div className="lg:col-span-7">
           <h3 className="text-xl font-bold">Simple Twitter</h3>
           <div className="my-4 flex flexflow items-center gap-2 text-xl">
-            <Link className="hover:bg-gray-500 text-sky-300" href="http://simple-twitter-dev.ap-northeast-1.elasticbeanstalk.com/signin" target="_blank">網站連結</Link>
+            <Link className="hover:dark:bg-gray-500 dark:text-sky-300" href="http://simple-twitter-dev.ap-northeast-1.elasticbeanstalk.com/signin" target="_blank">網站連結</Link>
             |
-            <Link className="hover:bg-gray-500 text-sky-300" href="https://github.com/TinyMurky/simple-twitter" target="_blank">Github</Link>
+            <Link className="hover:dark:bg-gray-500 dark:text-sky-300" href="https://github.com/TinyMurky/simple-twitter" target="_blank">Github</Link>
             |
-            <Link className="hover:bg-gray-500 text-sky-300" href="/blogs/insight/Simple_Twitter" target="_blank">部落格</Link>
+            <Link className="hover:dark:bg-gray-500 dark:text-sky-300" href="/blogs/insight/Simple_Twitter" target="_blank">部落格</Link>
           </div>
           <div className="dark:text-white/70">
             <p className="mb-4">
@@ -55,8 +56,8 @@ export default function Project({}: Props) {
       </div>
 
       {/* --------------------------------------------------------------------------- */}
-      <div className="mt-16 mb-8 grid grid-cols-12 gap-8 w-full">
-        <div className="col-span-5  overflow-clip object-fill  aspect-[4/3]">
+      <div className="lg:mt-16 lg:mb-8 mx-auto lg:grid lg:grid-cols-12 gap-8 w-full">
+        <div className="lg:col-span-5  mx-auto w-auto sm:w-96 lg:w-auto  overflow-clip object-fill  aspect-[4/3]">
           <Image
             src='/images/resume/demo_expense_tracker.png'
             alt='simple-twitter'
@@ -64,17 +65,18 @@ export default function Project({}: Props) {
             height={800}
             style={{objectFit: "cover"}}
             loading="lazy"
+            className="mx-auto"
           />
         </div>
 
-        <div className="col-span-7">
+        <div className="lg:col-span-7">
           <h3 className="text-xl font-bold">記帳網站-我的私房錢</h3>
           <div className="my-4 flex flexflow items-center gap-2 text-xl">
-            <Link className="hover:bg-gray-500 text-sky-300" href="http://ec2-35-78-73-49.ap-northeast-1.compute.amazonaws.com/" target="_blank">網站連結</Link>
+            <Link className="hover:dark:bg-gray-500 dark:text-sky-300" href="http://ec2-35-78-73-49.ap-northeast-1.compute.amazonaws.com/" target="_blank">網站連結</Link>
             |
-            <Link className="hover:bg-gray-500 text-sky-300" href="https://github.com/TinyMurky/expense-tracker" target="_blank">Github</Link>
+            <Link className="hover:dark:bg-gray-500 dark:text-sky-300" href="https://github.com/TinyMurky/expense-tracker" target="_blank">Github</Link>
             |
-            <Link className="hover:bg-gray-500 text-sky-300" href="/blogs/insight/Expense_Tracker" target="_blank">部落格</Link>
+            <Link className="hover:dark:bg-gray-500 dark:text-sky-300" href="/blogs/insight/Expense_Tracker" target="_blank">部落格</Link>
           </div>
           <div className="dark:text-white/70">
             <p className="mb-4">

@@ -9,12 +9,12 @@ export default function Introduction({}: Props) {
     <section className="mb-16">
       <p className="text-base dark:text-gray-400 font-bold">後端工程師 Back-end Engineer</p>
       <h1 className="text-2xl my-4 font-bold">徐佳揚 (Hsu, Chia-Yang)</h1>
-      <div className=" text-lg mt-1 flex flex-row items-center my-2 ">
+      <div className=" text-lg mt-1 flex flex-col items-start sm:flex-row sm:items-center my-2 ">
         <div className="flex flex-row items-center me-4">
           <MdPhoneIphone className="me-2"/>0912927203
         </div>
-        |
-        <div className="flex flex-row items-center ms-4">
+        <span className="hidden sm:inline">|</span>
+        <div className="flex flex-row items-center sm:ms-4">
           <MdEmail className="me-2"/>murky0830@gmail.com
         </div>
       </div>

@@ -7,8 +7,8 @@ export default function License({}: Props) {
     <section className="mt-16 mb-8">
       <h1 className="text-2xl mb-4 font-bold">證照</h1>
       <hr className="mt-2 mb-8 h-px border-0 dark:bg-gray-500"/>
-      <div className="grid grid-cols-2">
-        <div className="col-span-1 grid grid-cols-6 gap-4">
+      <div className="md:grid md:grid-cols-2 flex flex-col gap-8">
+        <div className="md:col-span-1 grid grid-cols-6 gap-4">
           <div className="col-span-1">
             <Image
               src="/images/resume/考試院icon.jpeg"
@@ -32,7 +32,7 @@ export default function License({}: Props) {
             </p>
           </div>
         </div>
-        <div className="col-span-1 grid grid-cols-6 gap-4">
+        <div className="md:col-span-1 grid grid-cols-6 gap-4">
           <div className="col-span-1">
             <Image
               src="/images/resume/jlpt_icon.avif"

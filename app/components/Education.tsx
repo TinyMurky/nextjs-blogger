@@ -8,12 +8,12 @@ export default function Education({}: Props) {
       <h1 className="text-2xl mb-4 font-bold">學歷</h1>
       <hr className="mt-2 mb-4 h-px border-0 dark:bg-gray-500"/>
       <div className="outside-box w-full mt-12">
-        <div className="mx-auto relative w-11/12">
+        <div className="mx-auto relative w-full md:w-11/12">
           <ul className="w-full">
             <li 
-              className=" border-l-2 pb-12 relative grid grid-cols-12 gap-4 dark:border-gray-300 before:absolute before:left-[-7px] before:-top-1 before:content-[' '] before:rounded-full before:dark:bg-gray-300 before:w-3 before:h-3">
-              <div className="col-span-11 ps-16 w-full relative top-[-16px]">
-                <h3 className="text-xl font-bold">Associate, 風險管理部門</h3>
+              className=" border-l-2 pd-2 pb-12 relative md:grid md:grid-cols-12 gap-4 dark:border-gray-300 before:absolute before:left-[-7px] before:-top-1 before:content-[' '] before:rounded-full before:dark:bg-gray-300 before:w-3 before:h-3">
+              <div className="col-span-11  ps-4 lg:ps-16  w-full relative top-[-16px]">
+                <h3 className="text-xl font-bold">ALPHA Camp</h3>
                 <div className="my-4">
                   後端課程;
                   •
@@ -27,7 +27,7 @@ export default function Education({}: Props) {
                   </ul>
                 </div>
               </div>
-              <div className="col-span-1 relative">
+              <div className="hidden md:block col-span-1 relative">
                 <Image
                   src="/images/resume/alpha_camp_icon.png"
                   alt="Alpha Camp Icon"
@@ -39,8 +39,8 @@ export default function Education({}: Props) {
               </div>
             </li>
             <li 
-              className="border-l-2 pb-12 relative grid grid-cols-12 gap-4 dark:border-gray-300 before:absolute before:left-[-7px] before:-top-1 before:content-[' '] before:rounded-full before:dark:bg-gray-300 before:w-3 before:h-3">
-              <div className="col-span-11 ps-16 w-full relative top-[-16px]">
+              className="border-l-2 pb-12 relative md:grid md:grid-cols-12 gap-4 dark:border-gray-300 before:absolute before:left-[-7px] before:-top-1 before:content-[' '] before:rounded-full before:dark:bg-gray-300 before:w-3 before:h-3">
+              <div className="col-span-11 ps-4 lg:ps-16 w-full relative top-[-16px]">
                 <h3 className="text-xl font-bold">國立台灣大學</h3>
                 <div className="my-4">
                   會計學系研究所
@@ -68,7 +68,7 @@ export default function Education({}: Props) {
                   </ul>
                 </div>
               </div>
-              <div className="col-span-1 relative">
+              <div className="hidden md:block  col-span-1 relative">
                 <Image
                   src="/images/resume/ntu_icon.png"
                   alt="NTU Icon"
@@ -80,8 +80,8 @@ export default function Education({}: Props) {
               </div>
             </li>
             <li 
-              className=" relative grid grid-cols-12 gap-4 dark:border-gray-300 before:absolute before:left-[-5px] before:-top-2 before:content-[' '] before:rounded-full before:dark:bg-gray-300 before:w-3 before:h-3">
-              <div className="col-span-11 ps-16 w-full relative top-[-16px]">
+              className=" relative md:grid md:grid-cols-12 gap-4 dark:border-gray-300 before:absolute before:left-[-5px] before:-top-2 before:content-[' '] before:rounded-full before:dark:bg-gray-300 before:w-3 before:h-3">
+              <div className="col-span-11 ps-4 lg:ps-16 w-full relative top-[-16px]">
                 <h3 className="text-xl font-bold">國立政治大學</h3>
                 <div className="my-4">
                   會計學系
@@ -101,7 +101,7 @@ export default function Education({}: Props) {
                   </ul>
                 </div>
               </div>
-              <div className="col-span-1 relative">
+              <div className="hidden md:block col-span-1 relative">
                 <Image
                   src="/images/resume/nccu_icon.png"
                   alt="Nccu Icon"

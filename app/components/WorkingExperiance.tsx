@@ -16,7 +16,7 @@ export default function WorkingExperiance({}: Props) {
                 <h3 className="text-xl font-bold">Associate, 風險管理部門</h3>
                 <div className="my-4">
                 【
-                  <Link className="dark:hover:bg-gray-500 dark:text-sky-300" href="https://www.pwc.tw/zh.html">資誠聯合會計師事務所 (PwC Taiwan)</Link>
+                  <Link target='_blank' className="dark:hover:bg-gray-500 dark:text-sky-300" href="https://www.pwc.tw/zh.html">資誠聯合會計師事務所 (PwC Taiwan)</Link>
                   】
                   •
                   <span className="ms-3 dark:text-gray-300">
@@ -50,7 +50,7 @@ export default function WorkingExperiance({}: Props) {
                 <h3 className="text-xl font-bold">Intern, 一般審計部門</h3>
                 <div className="my-4">
                 【
-                  <Link className="dark:hover:bg-gray-500 dark:text-sky-300" href="https://www.pwc.tw/zh.html">資誠聯合會計師事務所 (PwC Taiwan)</Link>
+                  <Link target='_blank' className="dark:hover:bg-gray-500 dark:text-sky-300" href="https://www.pwc.tw/zh.html">資誠聯合會計師事務所 (PwC Taiwan)</Link>
                   】
                   •
                   <span className="ms-3 dark:text-gray-300">

@@ -2,6 +2,8 @@ import Introduction from "./components/Introduction"
 import Skill from "./components/Skill"
 import Project from "./components/Project"
 import WorkingExperiance from "./components/WorkingExperiance"
+import Education from "./components/Education"
+import License from "./components/License"
 
 export default function Home() {
   return (
@@ -10,6 +12,8 @@ export default function Home() {
       <Skill/>
       <Project />
       <WorkingExperiance />
+      <Education />
+      <License />
     </main>
   )
 }

@@ -10,20 +10,16 @@ type routerLink = {
 
 const routerLinks:routerLink[] = [
   {
-    path: '/',
-    name: 'About Me'
-  },
-  {
-    path: '/blogs',
-    name: 'All'
+    path: '/resume',
+    name: '我的履歷'
   },
   {
     path: '/blogs/tech',
-    name: 'Tech'
+    name: '技術文章'
   },
   {
     path: '/blogs/insight',
-    name: 'Insight'
+    name: '心得文章'
   }
 ]
 

@@ -7,7 +7,7 @@ export default function page({}: Props) {
   const blogs = getSortedPostsData('/public/blogs/insight', 'md');
   return (
     <main>
-      <Posts blogs={blogs} />
+      <Posts title="心得Blogs" blogs={blogs} />
     </main>
   )
 }

@@ -5,9 +5,10 @@ import ListItem from "./ListItem"
 import SearchBar from "./SearchBar"
 
 interface Props {
+  title: string,
   blogs: Blog[]
 }
-export default function Posts({ blogs }: Props) {
+export default function Posts({ title ,blogs }: Props) {
 
   const [search, setSearch] = useState('')
 
@@ -19,10 +20,10 @@ export default function Posts({ blogs }: Props) {
   }, [blogs, search, searchRegex])
 
   return (
-    <section className="mt-16 mx-auto lg:max-w-4xl max-w-xs">
+    <section className="mt-16 mx-auto lg:max-w-4xl sm:max-w-md max-w-xs px-8">
       <div className="mb-8 w-full flex flex-row items-center justify-between">
         <h2 className=" text-xl lg:text-4xl font-bold dark:text-white/90">
-          Blog
+          {title}
         </h2>
         <SearchBar search={search} setSearch={setSearch}  />
       </div>

@@ -1,23 +1,13 @@
-import Link from "next/link"
-import Introduction from "./components/Introduction"
-import Skill from "./components/Skill"
-import Project from "./components/Project"
-import WorkingExperiance from "./components/WorkingExperiance"
-import Education from "./components/Education"
-import License from "./components/License"
+import Posts from "./blogs/components/Posts"
+import { getSortedPostsData } from "@/libs/posts";
+type Props = {
+}
 
-export default function Home() {
+export default function page({ }: Props) {
+  const blogs = getSortedPostsData('/public/blogs', 'md');
   return (
-      <main className="px-8 lg:px-16 py-12 mt-20 mx-auto max-w-5xl dark:text-white/90 dark:bg-gray-600 dark:bg-opacity-50 rounded-lg">
-        <Link  target='_blank'  className="font-bold relative top-[-100px] dark:text-sky-300 hover:dark:bg-gray-500" href="https://www.cakeresume.com/TinyMurky">
-          CakeResume好讀版：點我
-        </Link>
-        <Introduction />
-        <Skill/>
-        <Project />
-        <WorkingExperiance />
-        <Education />
-        <License />
-      </main>
+    <main>
+      <Posts title="Blogs" blogs={blogs} />
+    </main>
   )
 }

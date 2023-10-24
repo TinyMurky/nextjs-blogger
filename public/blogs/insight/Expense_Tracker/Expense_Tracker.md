@@ -118,6 +118,7 @@ async/await 與mongoose使用上花費許多時間，主要是處理建立預設
 ![](./images/1__cbrPV__1pbKEj5NPs47Oyxg.gif)
 
 >使用Github登入
+
 ![](./images/1__jL1nnB9kjpv__ycuz1DwHmQ.gif)
 
 #### 註冊

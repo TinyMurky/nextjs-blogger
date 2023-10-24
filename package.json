@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@giscus/react": "^2.3.0",
     "gray-matter": "^4.0.3",
     "highlight.js": "^11.9.0",
     "next": "13.5.5",

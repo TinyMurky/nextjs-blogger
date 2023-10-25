@@ -7,11 +7,11 @@ const skills: Array<{name: string, items:Array<string>}> = [
   },
   {
     name:"前端技能(Front-end)",
-    items:["Next.js / React", "HTML5 / CSS3", "JavaScript", "Bootstrap"],
+    items:["Next.js / Tailwind", "HTML5 / CSS3", "JavaScript", "Bootstrap"],
   },
   {
     name:"其他技能",
-    items:["Heroku", "Vercil", "Git / Git Flow", "npm", "MVC Framework"]
+    items:["Heroku", "Git / Git Flow", "npm", "MVC Framework"]
   }
 ]
 

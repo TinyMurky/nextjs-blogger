@@ -60,7 +60,7 @@ export default function Education({}: Props) {
                     </li>
                     <li className="dark:text-white/70" >
                       機器學習課程(2019)，成績為A，3人
-                      <Link  target='_blank'  href="https://tdr.lib.ntu.edu.tw/bitstream/123456789/8399/1/U0001-1204202115134100.pdf">
+                      <Link  target='_blank'  className="dark:text-sky-300 hover:dark:bg-gray-500" href="https://github.com/TinyMurky/ML2019FALL/blob/master/final/Report.pdf">
                         期末專案
                       </Link>
                       使用DANN模型進行跨Domain圖片辨識，模型正確率排名班級第一

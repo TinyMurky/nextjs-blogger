@@ -11,9 +11,12 @@ export function removeCwdUrl(targetPath:string):string {
     return targetPath
 }
 
-export function replaceDotFolder(originPath:string, currentFolderPath:string) :string {
+export function replaceDotFolder(originPath:string, blogUrl:string) :string {
+  // only for List Blog
   if(originPath.startsWith('./')){
-    return removeCwdUrl(path.join(currentFolderPath, originPath.slice(1)))
+    const urlArray = blogUrl.split('/');
+    urlArray.pop();
+    return path.join('/', ...urlArray, originPath.slice(1))
   }else{
     return originPath
   }

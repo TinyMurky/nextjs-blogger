@@ -9,8 +9,8 @@ const disabledCss = {
 	'code::after': {
     'content':'None'
   },
-  'code:not(.hljs)':{
-    // 'color': '#7D9DD3'
+  'code:not(.code-highlight)':{
+    'color': '#7D9DD3'
   },
 
 }

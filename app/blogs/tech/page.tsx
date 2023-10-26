@@ -1,11 +1,14 @@
 import Posts from "../components/Posts"
-import { getSortedPostsData } from "@/libs/posts";
-import { allBlogs, Blog } from "@/libs/contentLayerAdapter";
+import path from "path"
+import { allBlogs } from "@/libs/contentLayerAdapter"
 type Props = {}
 
 export default function page({}: Props) {
-
-  const blogs = getSortedPostsData('/public/blogs/tech', 'md');
+  const cwd = path.join(process.cwd(), '.next/server/app')
+  const pathName = __dirname.substring(cwd.length)
+  const blogs = allBlogs.filter(blog => {
+    return blog.url.startsWith(pathName)
+  })
   return (
     <main>
       <Posts title="技術Blogs" blogs={blogs} />

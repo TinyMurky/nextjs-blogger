@@ -1,3 +1,5 @@
+//contantLayer
+
 import { Metadata } from "next"
 import BlogPost, {generateBlogPageMetadata, generateStaticBlogPageParams} from "../../components/BlogPage"
 interface Params {
@@ -9,17 +11,17 @@ interface Params {
 const routerName = 'tech'
 
 // 變成static
-export function generateStaticParams() {
-  return generateStaticBlogPageParams(routerName)
-}
+// export function generateStaticParams() {
+//   return generateStaticBlogPageParams()
+// }
 
 export function generateMetadata({ params: { blogId } }: Params):Metadata {
-  return generateBlogPageMetadata({routerName, blogId})
+  return generateBlogPageMetadata({blogId})
 }
 
 export default async function Post({ params: { blogId } }: Params) {
 
   return (
-    <BlogPost routerName={routerName} blogId={blogId}/>
+    <BlogPost blogId={blogId}/>
   )
 }

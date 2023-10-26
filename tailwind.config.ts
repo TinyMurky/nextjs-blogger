@@ -10,7 +10,7 @@ const disabledCss = {
     'content':'None'
   },
   'code:not(.hljs)':{
-    'color': '#7D9DD3'
+    // 'color': '#7D9DD3'
   },
 
 }

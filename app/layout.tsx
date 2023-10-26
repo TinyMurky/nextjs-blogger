@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import { Noto_Sans_TC} from 'next/font/google'
 import './globals.css'
-
+import './prism-plus.css'
+import './prism-vsc-dark-plus.css'
 // components
 import Navbar from './components/Navbar'
 

@@ -1,13 +1,17 @@
 import Posts from "./blogs/components/Posts"
-import { getSortedPostsData } from "@/libs/posts";
-type Props = {
-}
+import path from "path"
+import { allBlogs } from "@/libs/contentLayerAdapter"
+type Props = {}
 
-export default function page({ }: Props) {
-  const blogs = getSortedPostsData('/public/blogs', 'md');
+export default function page({}: Props) {
+  const cwd = path.join(process.cwd(), '.next/server/app')
+  const pathName = __dirname.substring(cwd.length)
+  const blogs = allBlogs.filter(blog => {
+    return blog.url.startsWith(pathName)
+  })
   return (
     <main>
-      <Posts title="Blogs" blogs={blogs} />
+      <Posts title="心得Blogs" blogs={blogs} />
     </main>
   )
 }

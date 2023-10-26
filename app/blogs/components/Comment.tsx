@@ -4,7 +4,7 @@ const Comment = () => {
   const repoId:string = process.env.NEXT_PUBLIC_GISCUS_REPO_ID
   const categoryId:string = process.env.NEXT_PUBLIC_GISCUS_CATEGORY_ID
   return (
-    <div id="comment" className="mx-auto max-w-prose py-6 dark:bg-gray-900 rounded-lg p-4">
+    <div id="comment" className="mx-auto my-12 max-w-prose py-12 px-4 dark:bg-gray-700 rounded-lg p-4">
       <Giscus
         repo="TinyMurky/nextjs-blogger"
         repoId={repoId}

@@ -5,14 +5,18 @@ import path from "path"
 export function removeCwdUrl(targetPath:string):string {
     const cwd = path.join(process.cwd(), 'public')
     if (targetPath.startsWith(cwd)) {
-        return targetPath.substring(cwd.length)
+        const targetDir = path.dirname(targetPath) //因為回傳path最後會接到一個奇怪的mdxfile所以先刪除
+        return targetDir.substring(cwd.length)
     }
     return targetPath
 }
 
-export function replaceDotFolder(originPath:string, currentFolderPath:string) :string {
+export function replaceDotFolder(originPath:string, blogUrl:string) :string {
+  // only for List Blog
   if(originPath.startsWith('./')){
-    return removeCwdUrl(path.join(currentFolderPath, originPath.slice(1)))
+    const urlArray = blogUrl.split('/');
+    urlArray.pop();
+    return path.join('/', ...urlArray, originPath.slice(1))
   }else{
     return originPath
   }

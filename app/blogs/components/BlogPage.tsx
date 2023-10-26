@@ -1,10 +1,7 @@
 import { format, parseISO } from "date-fns"
 import { allBlogs, Blog } from "@/libs/contentLayerAdapter"
-// import { allBlogs, Blog } from 'contentlayer/generated'
-// import { useMDXComponent } from "next-contentlayer/hooks"
 import { getMDXComponent } from 'next-contentlayer/hooks'
 
-import { getSortedPostsData, getPostData } from "@/libs/posts"
 import getFormattedDate from "@/libs/getFormattedDate"
 import { notFound } from "next/navigation"
 import { Metadata } from "next"

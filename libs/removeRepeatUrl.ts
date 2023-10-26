@@ -5,7 +5,8 @@ import path from "path"
 export function removeCwdUrl(targetPath:string):string {
     const cwd = path.join(process.cwd(), 'public')
     if (targetPath.startsWith(cwd)) {
-        return targetPath.substring(cwd.length)
+        const targetDir = path.dirname(targetPath) //因為回傳path最後會接到一個奇怪的mdxfile所以先刪除
+        return targetDir.substring(cwd.length)
     }
     return targetPath
 }

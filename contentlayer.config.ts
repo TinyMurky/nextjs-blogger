@@ -1,7 +1,10 @@
 import { defineDocumentType, makeSource } from 'contentlayer/source-files'
+import transformImgSrc from './libs/transform-img-src'
+// syntex hightlight
 
+import rehypePrism from "rehype-prism-plus";
 const Blog = defineDocumentType(() => ({
-  name: 'Insight',
+  name: 'Blog',
   filePathPattern: `**/*.mdx`,
   contentType: 'mdx',
   fields: {
@@ -53,4 +56,5 @@ export default makeSource({
   contentDirPath: 'public/blogs',
   contentDirInclude: ['insight', 'tech'],
   documentTypes: [Blog],
+  mdx: { rehypePlugins: [transformImgSrc, [rehypePrism, { ignoreMissing: true }]] },
 })

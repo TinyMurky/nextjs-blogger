@@ -1,13 +1,10 @@
-import { allBlogs, Blog } from 'contentlayer/generated';
-import {
-  defineDocumentType,
-  defineNestedType,
-  makeSource,
-} from 'contentlayer/source-files'
+import { allBlogs, Blog } from 'contentlayer/generated'
+
 import { compareDesc } from 'date-fns'
 
-export { allBlogs, defineDocumentType, defineNestedType, makeSource }
-    export type { Blog }
+export { allBlogs }
+
+export type { Blog }
 
 export const allPostsNewToOld =
   allBlogs?.sort((a, b) => {

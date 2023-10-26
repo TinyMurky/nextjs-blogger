@@ -1,3 +1,9 @@
+import { format, parseISO } from "date-fns"
+import { allBlogs, Blog } from "@/libs/contentLayerAdapter"
+// import { allBlogs, Blog } from 'contentlayer/generated'
+// import { useMDXComponent } from "next-contentlayer/hooks"
+import { getMDXComponent } from 'next-contentlayer/hooks'
+
 import { getSortedPostsData, getPostData } from "@/libs/posts"
 import getFormattedDate from "@/libs/getFormattedDate"
 import { notFound } from "next/navigation"
@@ -6,26 +12,27 @@ import Link from "next/link"
 import Comment from "./Comment"
 
 interface Props{
-  routerName:string
+  // routerName:string
   blogId:string
 }
 
 
 // 變成static
-export function generateStaticBlogPageParams( routerName: string ) {
-  const blogs:Blog[] = getSortedPostsData(`/public/blogs/${routerName}`, 'md')
-
-  return blogs.map(blog=>{
-    return {
-      blogId:blog.id
+export function generateStaticBlogPageParams(  ) {
+  return allBlogs.map((blog: Blog) => {
+    const urlArray = blog._raw.sourceFileDir.split('/')
+    return { 
+      blogId: urlArray[urlArray.length - 1]
     }
   })
 }
 
-export function generateBlogPageMetadata({ routerName, blogId }: Props):Metadata {
+export function generateBlogPageMetadata({ blogId }: Props):Metadata {
   // 以下這Posts component叫過了，會被dedupt
-  const blogs:Blog[] = getSortedPostsData(`/public/blogs/${routerName}`, 'md')
-  const blog = blogs.find(blog => blog.id === blogId)
+  const blog = allBlogs.find((blog:Blog) => {
+    const urlArray = blog._raw.sourceFileDir.split('/')
+    return urlArray[urlArray.length - 1] === blogId
+  })
   if ( !blog ) {
     return {
       title: "Not Found",
@@ -36,18 +43,20 @@ export function generateBlogPageMetadata({ routerName, blogId }: Props):Metadata
   }
 }
 
-export default async function BlogPost({ routerName, blogId }: Props) {
+export default async function BlogPost({ blogId }: Props) {
 
   // 以下這Posts component叫過了，會被dedupt
-  const blogs:Blog[] = getSortedPostsData(`/public/blogs/${routerName}`, 'md')
-  
-  const blog = blogs.find(blog => blog.id === blogId)
+  const blog = allBlogs.find((blog:Blog) => {
+    const urlArray = blog._raw.sourceFileDir.split('/')
+    return urlArray[urlArray.length - 1] === blogId
+  })
   if ( !blog ) {
     return notFound()
   }
-  const {category, title, date, contentHtml} = await getPostData(blog)
+  const {_raw, title, date, body} = blog
+  const MDXContent = getMDXComponent(body.code)
   const formattedDate:string = getFormattedDate(date)
-
+  const category = _raw.flattenedPath.split('/')[0]
   return (
     <div className="lg:relative w-full pt-24  lg:grid lg:grid-cols-4">
       <aside className="lg:col-span-1">
@@ -59,7 +68,8 @@ export default async function BlogPost({ routerName, blogId }: Props) {
         </p>
         <article>
           {/* 用 dangerouslySetInnerHTML 直接把處理好的markdown轉html直接放入section*/}
-          <section dangerouslySetInnerHTML={{__html:contentHtml}} />
+          {/* <section dangerouslySetInnerHTML={{__html:contentHtml}} /> */}
+          <MDXContent/>
           <p>
             <Link href={`/blogs${category}`}>⬅️ Go Back to {category.charAt(1).toUpperCase() + category.slice(2)}</Link>
           </p>

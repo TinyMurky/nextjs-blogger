@@ -5,7 +5,7 @@ import { remark } from "remark"
 // import remarkImages from 'remark-images'
 import transformImgSrc from "./transform-img-src"
 import remark2rehype from 'remark-rehype'
-import highlight from 'rehype-highlight'
+// import highlight from 'rehype-highlight'
 import stringify from 'rehype-stringify'
 
 import { replaceDotFolder } from "./removeRepeatUrl"
@@ -71,9 +71,9 @@ export async function getPostData(blog:Blog):Promise<BlogWithContent> {
 
   // markdown to html
   const processedContent= await remark()
-    .use(transformImgSrc(fileFolder))
+    // .use(transformImgSrc(fileFolder))
     .use(remark2rehype, {allowDangerousHtml: true}) //啟用inframe
-    .use(highlight)
+    // .use(highlight)
     .use(stringify, {allowDangerousHtml: true})
     .process(matterResult.content)
   const contentHtml = processedContent.toString()

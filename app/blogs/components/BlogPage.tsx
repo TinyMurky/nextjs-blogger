@@ -61,7 +61,7 @@ export default async function BlogPost({ blogId }: Props) {
     <div className="lg:relative w-full pt-24  lg:grid lg:grid-cols-4">
       <aside className="lg:col-span-1">
       </aside>
-      <main className="lg:col-span-2 px-6 prose md:prose-xl prose-base prose-gray dark:prose-invert mx-auto">
+      <main className="lg:col-span-2 px-6 pb-24 prose md:prose-xl prose-base prose-gray dark:prose-invert mx-auto">
         <h2 className="text-lg mt-4 mb-0">{title}</h2>
         <p className="mt-0">
           {formattedDate}
@@ -74,9 +74,9 @@ export default async function BlogPost({ blogId }: Props) {
             <Link href={`/blogs${category}`}>⬅️ Go Back to {category.charAt(1).toUpperCase() + category.slice(2)}</Link>
           </p>
         </article>
+        <Comment/>
       </main>
       <aside className="lg:col-span-1 w-fit h-screen">
-        <Comment/>
       </aside>
     </div>
   )

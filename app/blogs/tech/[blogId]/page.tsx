@@ -8,12 +8,10 @@ interface Params {
   }
 }
 
-const routerName = 'tech'
-
 // 變成static
-// export function generateStaticParams() {
-//   return generateStaticBlogPageParams()
-// }
+export function generateStaticParams() {
+  return generateStaticBlogPageParams()
+}
 
 export function generateMetadata({ params: { blogId } }: Params):Metadata {
   return generateBlogPageMetadata({blogId})

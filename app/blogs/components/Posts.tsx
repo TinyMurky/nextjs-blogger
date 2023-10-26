@@ -4,6 +4,7 @@ import { useState, useMemo} from "react"
 import ListItem from "./ListItem"
 import SearchBar from "./SearchBar"
 
+import { Blog } from "@/libs/contentLayerAdapter"
 interface Props {
   title: string,
   blogs: Blog[]
@@ -28,7 +29,7 @@ export default function Posts({ title ,blogs }: Props) {
         <SearchBar search={search} setSearch={setSearch}  />
       </div>
       <ul className="w-full">
-        {searchedBlogs.map(blog=> <ListItem blog={blog} key={blog.id}/>)}
+        {searchedBlogs.map(blog=> <ListItem blog={blog} key={blog._id}/>)}
       </ul>
     </section>
   )

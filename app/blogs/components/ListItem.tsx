@@ -1,18 +1,21 @@
 import getFormattedDate from "@/libs/getFormattedDate"
 import Link from "next/link"
 import Image from "next/image";
-import { AiFillCalendar, AiFillClockCircle } from "react-icons/ai";
-import { BsFillTagFill } from "react-icons/bs";
+import { AiFillCalendar, AiFillClockCircle } from "react-icons/ai"
+import { BsFillTagFill } from "react-icons/bs"
+import { Blog } from "@/libs/contentLayerAdapter"
+import { replaceDotFolder } from "@/libs/removeRepeatUrl"
 interface Props {
   blog: Blog
 }
 
 export default function ListItem({ blog }: Props) {
-  const {id, path, category, title, date, tag, readTime, cover, description} = blog
+  const {_id: id, url ,_raw: {sourceFileDir}, title, date, tag, readTime, cover, description} = blog
+  const coverPublicUrl = replaceDotFolder(cover, url)
   const formattedDate:string = getFormattedDate(date)
   const image = cover ? (
     <Image
-      src={cover}
+      src={coverPublicUrl}
       alt={title}
       width={600}
       height={800}
@@ -37,7 +40,7 @@ export default function ListItem({ blog }: Props) {
       </div>
 
       <Link
-        href={`/blogs${category}/${id}`}
+        href={`/blogs/${sourceFileDir}`}
         className="no-underline justify-between flex flex-row gap-4"
       >
         <div>

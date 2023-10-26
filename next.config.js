@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
 
-module.exports = nextConfig
+// for contentLayer
+const { withContentlayer } = require('next-contentlayer')
+
+module.exports = withContentlayer({}) // nextConfig直接丟到withContentlayer的{}裡

@@ -68,7 +68,7 @@ export default async function BlogPost({ blogId }: Props) {
           {/* <section dangerouslySetInnerHTML={{__html:contentHtml}} /> */}
           <MDXContent/>
           <p>
-            <Link href={`/blogs${category}`}>⬅️ Go Back to {category.charAt(1).toUpperCase() + category.slice(2)}</Link>
+            <Link href={`/blogs/${category}`}>⬅️ Go Back to {category.charAt(0).toUpperCase() + category.slice(1)}</Link>
           </p>
         </article>
         <Comment/>

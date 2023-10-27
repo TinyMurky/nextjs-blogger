@@ -7,6 +7,7 @@ type Props = React.ComponentPropsWithoutRef< 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 
 
 function HeadingWithAncherTag({Component, id ,className, children, ...otherProps}: Props) {
   return (
+    //  scroll-mt-20 讓連到anchor tag的時候會往下捲動一點，避免被navbar擋住
     <Component id={id} className={clsx('scroll-mt-20  group flex flex-row gap-3 items-center  justify-start', className)} {...otherProps}>
       <span className=''>{children}</span>
         <a

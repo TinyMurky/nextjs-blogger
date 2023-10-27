@@ -23,53 +23,53 @@ slug: >-
 HTML如下：
 
 ```html
-<div class\="card"\> <!--卡片最外層-->  
-  <div class\="flip-card-container"\><!--包裝卡片正反面的容器-->  
-    <div class\="front"\><!--卡片正面-->  
+<div class="card"> <!--卡片最外層-->  
+  <div class="flip-card-container"><!--包裝卡片正反面的容器-->  
+    <div class="front"><!--卡片正面-->  
       Front  
-    </div\>  
-    <div class\="back"\><!--卡片反面-->  
+    </div>  
+    <div class="back"><!--卡片反面-->  
       Back  
-    </div\>  
-  </div\>  
-</div\>
+    </div>  
+  </div>  
+</div>
 ```
 
 CSS如下(僅須設定每個div的height和width即可，其他設定是方便呈現)：
 
 ```css
 .card{  
-  /\*box-model\*/  
+  /*box-model*/  
   height: 200px;  
   width:200px;  
 }  
 .flip-card-container {  
-  /\*box-model\*/  
+  /*box-model*/  
   height:100%;  
   width: 100%;  
   box-sizing: border-box;  
-  /\*style\*/  
+  /*style*/  
   border: black solid 2px;  
 }  
   
 .front, .back{  
-  /\*display\*/  
+  /*display*/  
   display: flex;  
   justify-content: center;  
   align-items: center;  
-  /\*box-model\*/  
+  /*box-model*/  
   height:100%;  
   width:100%;  
 }  
 .front{  
-  /\*style\*/  
+  /*style*/  
   font-size: 40px;  
   background-color: #666666;  
   color: #dddddd;  
 }  
   
 .back{  
-  /\*style\*/  
+  /*style*/  
   background-color: #f27777;  
   font-size: 40px;  
   color: #f70707;  
@@ -90,19 +90,19 @@ CSS如下(僅須設定每個div的height和width即可，其他設定是方便�
 CSS如下（可以寫在原本的css項目裡，或是另外再寫一次也可以）：
 
 ```css
-/\*for flip card\*/  
+/*for flip card*/  
 .flip-card-container{  
-  /\*position\*/  
+  /*position*/  
   position: relative;  
 }  
   
 .front{  
-  /\*Position\*/  
+  /*Position*/  
   position: absolute;  
 }  
   
 .back{  
-  /\*Position\*/  
+  /*Position*/  
   position: absolute;  
 }
 ```
@@ -131,12 +131,12 @@ CSS如下（可以寫在原本的css項目裡，或是另外再寫一次也可�
 
 ```css
 .front{  
-  /\*Flip Card\*/  
+  /*Flip Card*/  
   backface-visibility: hidden;  
 }  
   
 .back{  
-  /\*Flip Card\*/  
+  /*Flip Card*/  
   backface-visibility: hidden;  
 }
 ```
@@ -161,7 +161,7 @@ CSS如下（可以寫在原本的css項目裡，或是另外再寫一次也可�
 ```css
 .flip-card-container{  
   
-  /\*flip card\*/  
+  /*flip card*/  
   transform-style: preserve-3d;  
 }
 ```
@@ -172,10 +172,10 @@ CSS如下（可以寫在原本的css項目裡，或是另外再寫一次也可�
 
 ```css
 .card {  
-  perspective: 1000px; /\* Remove this if you don't want the 3D effect \*/  
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */  
 }  
 .flip-card-container{  
-  /\*flip card\*/  
+  /*flip card*/  
   transition: transform 0.8s;  
 }
 ```
@@ -183,53 +183,54 @@ CSS如下（可以寫在原本的css項目裡，或是另外再寫一次也可�
 
 #### 全部的CSS
 
+
 ```css
 .card{  
-  /\*box-model\*/  
+  /*box-model*/  
   height: 200px;  
   width:200px;  
 }  
 .flip-card-container {  
-  /\*box-model\*/  
+  /*box-model*/  
   height:100%;  
   width: 100%;  
   box-sizing: border-box;  
-  /\*style\*/  
+  /*style*/  
   border: black solid 2px;  
 }  
   
 .front, .back{  
-  /\*display\*/  
+  /*display*/  
   display: flex;  
   justify-content: center;  
   align-items: center;  
-  /\*box-model\*/  
+  /*box-model*/  
   height:100%;  
   width:100%;  
 }  
 .front{  
-  /\*style\*/  
+  /*style*/  
   font-size: 40px;  
   background-color: #666666;  
   color: #dddddd;  
 }  
   
 .back{  
-  /\*style\*/  
+  /*style*/  
   background-color: #f27777;  
   font-size: 40px;  
   color: #f70707;  
 }  
   
   
-/\*for flip card\*/  
+/*for flip card*/  
 .card{  
-  perspective: 1000px; /\* Remove this if you don't want the 3D effect \*/  
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */  
 }  
 .flip-card-container{  
-  /\*position\*/  
+  /*position*/  
   position: relative;  
-  /\*flip card\*/  
+  /*flip card*/  
   transition: transform 0.8s;  
   transform-style: preserve-3d;  
 }  
@@ -237,16 +238,16 @@ CSS如下（可以寫在原本的css項目裡，或是另外再寫一次也可�
   transform: rotateY(180deg);  
 }  
 .front{  
-  /\*Position\*/  
+  /*Position*/  
   position: absolute;  
-  /\*Flip Card\*/  
+  /*Flip Card*/  
   backface-visibility: hidden;  
 }  
   
 .back{  
-  /\*Position\*/  
+  /*Position*/  
   position: absolute;  
-  /\*Flip Card\*/  
+  /*Flip Card*/  
   transform: rotateY(180deg);  
   backface-visibility: hidden;  
 }
@@ -280,7 +281,7 @@ function flipCard(event) {
   flipCardContainer.classList.toggle("flip-card")  
 }  
 const card = document.querySelector(".card")  
-card.addEventListener("click",event\=>flipCard(event))
+card.addEventListener("click",event=>flipCard(event))
 ```
 
 畫面呈現如下：

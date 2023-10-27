@@ -13,7 +13,7 @@ slug: >-
 
 ### 前言
 
-最近在撰寫可以將往只縮短成短網址的專案（[github:TinyMurky/URL\_shortener](https://github.com/TinyMurky/URL_shortener)）。其中MongoDB需要使用套件mongoose操作，而mongoose多數語法是由Promise組成，然而Promise寫法很容易變成Callback Hell，讓程式碼難以維護與使用。
+最近在撰寫可以將往只縮短成短網址的專案（[github:TinyMurky/URL_shortener](https://github.com/TinyMurky/URL_shortener)）。其中MongoDB需要使用套件mongoose操作，而mongoose多數語法是由Promise組成，然而Promise寫法很容易變成Callback Hell，讓程式碼難以維護與使用。
 
 ### Promise 撞牆經驗
 
@@ -24,20 +24,20 @@ slug: >-
 另外我嘗試想寫error handling，發現在Promise語法下，不僅要在個Promise物件後使用 `catch` ，在 `resolve()` 還需要外掛 `try and error` ，讓程式碼更長更難懂(結果我還是catch不到error)
 
 ```javascript
-export function createShortURL(origin\_URL) {  
+export function createShortURL(origin_URL) {  
   return new Promise((resolve, reject) => {  
     resolve(  
       shortURL  
-        .find({ origin\_URL: origin\_URL })  
+        .find({ origin_URL: origin_URL })  
         .lean()  
         .then((URL) => {  
           if (URL.length) {  
-            return URL\[0\]  
+            return URL[0]  
           } else {  
             return new Promise((resolve, reject) => {  
               resolve(  
                 randomID().then((newID) => {  
-                  const newURLConfig = { \_id: newID, origin\_URL: origin\_URL }  
+                  const newURLConfig = { _id: newID, origin_URL: origin_URL }  
                   const newShortURL = new shortURL(newURLConfig)  
                   newShortURL.save()  
                   return new Promise((resolve, reject) => {  
@@ -60,17 +60,17 @@ export function createShortURL(origin\_URL) {
 
 另外直接把function內的程式碼用 `try` 包起來就可以簡單catch到error。
 ```javascript
-export async function createShortURL(origin\_URL) {  
+export async function createShortURL(origin_URL) {  
   try {  
-    const urlArray = await shortURL.find({ origin\_URL })  
+    const urlArray = await shortURL.find({ origin_URL })  
     if (urlArray.length) {  
-      urlArray\[0\].set("updatedAt", new Date())  
-      return urlArray\[0\].save()  
+      urlArray[0].set("updatedAt", new Date())  
+      return urlArray[0].save()  
     } else {  
       const newID = await randomID()  
       const newURLConfig = {  
-        \_id: newID,  
-        origin\_URL: origin\_URL,  
+        _id: newID,  
+        origin_URL: origin_URL,  
       }  
       const newShortURL = new shortURL(newURLConfig)  
       return newShortURL.save()  

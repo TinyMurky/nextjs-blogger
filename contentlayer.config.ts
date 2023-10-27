@@ -1,5 +1,6 @@
 import { defineDocumentType, makeSource } from 'contentlayer/source-files'
 import transformImgSrc from './libs/transform-img-src'
+import rehypeSlug from 'rehype-slug'
 // syntex hightlight
 
 import rehypePrism from "rehype-prism-plus";
@@ -56,5 +57,9 @@ export default makeSource({
   contentDirPath: 'public/blogs',
   contentDirInclude: ['insight', 'tech'],
   documentTypes: [Blog],
-  mdx: { rehypePlugins: [transformImgSrc, [rehypePrism, { ignoreMissing: true }]] },
+  mdx: { rehypePlugins: [
+    transformImgSrc,
+    rehypeSlug, // add id to title
+    [rehypePrism, { ignoreMissing: true }]
+  ]},
 })

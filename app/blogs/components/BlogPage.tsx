@@ -1,12 +1,14 @@
 import { format, parseISO } from "date-fns"
-import { allBlogs, Blog } from "@/libs/contentLayerAdapter"
 import { getMDXComponent } from 'next-contentlayer/hooks'
-
-import getFormattedDate from "@/libs/getFormattedDate"
 import { notFound } from "next/navigation"
 import { Metadata } from "next"
 import Link from "next/link"
+
+import { allBlogs, Blog } from "@/libs/contentLayerAdapter"
+import getFormattedDate from "@/libs/getFormattedDate"
 import Comment from "./Comment"
+import mdxComponents from "@/libs/mdxComponents"
+import TableOfContents from "./TableOfContents"
 
 interface Props{
   // routerName:string
@@ -66,14 +68,15 @@ export default async function BlogPost({ blogId }: Props) {
         <article>
           {/* 用 dangerouslySetInnerHTML 直接把處理好的markdown轉html直接放入section*/}
           {/* <section dangerouslySetInnerHTML={{__html:contentHtml}} /> */}
-          <MDXContent/>
+          <MDXContent components={mdxComponents}/>
           <p>
             <Link href={`/blogs/${category}`}>⬅️ Go Back to {category.charAt(0).toUpperCase() + category.slice(1)}</Link>
           </p>
         </article>
         <Comment/>
       </main>
-      <aside className="lg:col-span-1 w-fit h-screen">
+      <aside className="lg:col-span-1 w-fit h-screen hidden lg:sticky lg:top-24 lg:block">
+        <TableOfContents rawBody={body.raw} />
       </aside>
     </div>
   )

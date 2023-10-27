@@ -42,8 +42,8 @@ export default function CopyCodePreButton({children, className, ...props}: Props
   return (
     <div className='group relative !mt-14 block'>
       <pre {...props} ref={preRef} className={clsx(className)}>
-        <div className='absolute w-full -top-8 right-0 dark:bg-gray-700 bg-opacity-50 text-base  py-2 ps-4 rounded-t-md'>
-          <span className='dark:text-gray-300'>{codeLanguage}</span>
+        <div className='absolute w-full -top-8 right-0 bg-gray-700 bg-opacity-50 text-base  py-2 ps-4 rounded-t-md'>
+          <span className='text-gray-300'>{codeLanguage}</span>
           <div className={
             clsx('absolute top-0 right-1 mt-1 flex gap-2 items-center ',
             {
@@ -61,11 +61,11 @@ export default function CopyCodePreButton({children, className, ...props}: Props
             <button onClick={handleClicked} className={clsx(
               "rounded-md border bg-transparent p-2 transition ease-in focus:outline-none flex items-center",
               {
-                "dark:hover:border-gray-400  dark:border-gray-700 ":!copied,
+                "hover:border-gray-400  border-gray-700 ":!copied,
                 "border-green-400": copied,
               }
             )}>
-              <GoCopy className={clsx('ease-in transition dark:text-gray-300',
+              <GoCopy className={clsx('ease-in transition text-gray-300',
                   {
                     "hidden": copied
                   }

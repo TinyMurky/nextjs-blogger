@@ -110,7 +110,7 @@ export default function TableOfContents({ rawBody }: Props) {
   useIntersectionObserver(setActiveId)
   return (
     <div className="mt-10">
-      <p className="mb-5 text-lg font-semibold  transition-colors dark:text-gray-100">
+      <p className="mb-5 text-lg font-semibold  transition-colors text-gray-100">
         目錄
       </p>
       <div className="flex flex-col items-start justify-start">
@@ -125,8 +125,8 @@ export default function TableOfContents({ rawBody }: Props) {
                 className={clsx(
                   padding,
                   heading.id === activeId
-                    ? "font-medium text-sky-400  dark:hover:text-sky-300"
-                    : "font-normal  dark:text-gray-400 dark:hover:text-gray-200",
+                    ? "font-medium text-sky-400  hover:text-sky-300"
+                    : "font-normal  text-gray-400 hover:text-gray-200",
                   "mb-3 text-left text-sm transition-colors hover:underline"
                 )}
                 onClick={(e) => {

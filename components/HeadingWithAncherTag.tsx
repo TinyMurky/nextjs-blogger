@@ -12,7 +12,7 @@ function HeadingWithAncherTag({Component, id ,className, children, ...otherProps
       <span className=''>{children}</span>
         <a
           href={id && `#${id}`} // 如果id有值的話走後面的 #id 沒有的話就是 id
-          className='hidden group-hover:inline-flex text-base   items-center w-8 h-8 dark:text-gray-400 dark:hover:text-gray-200  dark:hover:border-gray-400  dark:border-gray-700 rounded-md border bg-transparent focus:outline-none '
+          className='hidden group-hover:inline-flex text-base   items-center w-8 h-8 text-gray-400 hover:text-gray-200  hover:border-gray-400  border-gray-700 rounded-md border bg-transparent focus:outline-none '
           aria-label="Anchor"
         >
           <GoLink className='mx-auto'/>

@@ -11,7 +11,7 @@ export default function page({}: Props) {
   })
   return (
     <main>
-      <Posts title="心得Blogs" blogs={blogs} />
+      <Posts title="Blogs" blogs={blogs} />
     </main>
   )
 }

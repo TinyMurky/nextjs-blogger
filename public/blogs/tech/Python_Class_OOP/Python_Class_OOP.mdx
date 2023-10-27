@@ -20,22 +20,22 @@ slug: /@tinymurky/python-class-oop-%E7%AD%86%E8%A8%98-7298e9a06cf1
 ![](./images/1__JOoga42iuLkWxj__tKIzYYg.jpeg)
 
 目錄  
-1\. [Classes and Instances](#c05b)  
-2\. [Class Variables](#90c3)  
-3\. [Classmethods and Staticmethods](#0d9a)  
-4\. [Inheritance - Creating Subclasses](#8faa)  
-5\. [Special (Magic/Dunder) Methods 其他雙底線methods](#7a1c)  
-6\. [@property, getter, setter and deleter](#0fb1)
+1. [Classes and Instances](#c05b)  
+2. [Class Variables](#90c3)  
+3. [Classmethods and Staticmethods](#0d9a)  
+4. [Inheritance - Creating Subclasses](#8faa)  
+5. [Special (Magic/Dunder) Methods 其他雙底線methods](#7a1c)  
+6. [@property, getter, setter and deleter](#0fb1)
 
-### 1\. Classes and Instances
+### 1. Classes and Instances
 
 > 在class中：
 >
-> 1\. data叫作attribute
+> 1. data叫作attribute
 >
-> 2\. function叫作method
+> 2. function叫作method
 >
-> 3\. instance指用class去創造一個物件，也指被class狀造的物件
+> 3. instance指用class去創造一個物件，也指被class狀造的物件
 
 #### Instance
 
@@ -115,7 +115,7 @@ print(emp_1.fullname())        # 輸出 Tiny Murky
 print(Employee.fullname(emp_1))# 輸出 Tiny Murky
 ```
 
-### 2\. Class Variables
+### 2. Class Variables
 
 如果想要建立一個所有Instance共用的值，可以直接寫在整個class的最上方，instance要使用共用值時可以直接用self取出
 
@@ -131,7 +131,7 @@ class Employee:
   
   
     def apply_raise(self):  
-        self.pay = int(self.pay \* self.raise_amt)  # 使用self.raise_amt取出值  
+        self.pay = int(self.pay * self.raise_amt)  # 使用self.raise_amt取出值  
 ``` 
   
   
@@ -216,7 +216,7 @@ print(Employee.how_many_emplyee)         # 輸出：2
 ```
 
 
-### 3\. Classmethods and Staticmethods
+### 3. Classmethods and Staticmethods
 
 #### Classmethods
 
@@ -339,7 +339,7 @@ print(emp_1.isWeekend(6))     # 輸出 True
 ```
 
 
-### 4\. Inheritance — Creating Subclasses
+### 4. Inheritance — Creating Subclasses
 
 Inheritance（繼承）可以從一個parent class身上得到它所有的attribute和method，並另外加自己的attribute和method變成一個新的class，這樣子在管理上比較方便，不用重複寫很多一樣的code。
 
@@ -361,7 +361,7 @@ class Employee:
         return f"{self.first} {self.last}"  
   
     def apply_raise(self):  
-        self.pay = int(self.pay \* self.raise_amt)
+        self.pay = int(self.pay * self.raise_amt)
 ```
 
 接著建立一個class，在class的小括號裏面放上想要從哪個parent繼承。可以從下面的程式碼看到，Developer裏面沒有任何自己的參數，但是卻可以直接instance，這是因為argument會依照繼承鍊（稱為：method resolution order）向parent class 提供值，最後成功instance
@@ -494,7 +494,7 @@ print(
 ```
 
 
-### 5\. Special (Magic/Dunder) Methods 其他雙底線methods
+### 5. Special (Magic/Dunder) Methods 其他雙底線methods
 
 python class 除了__init__()以外還有許多有雙底線的methods，可以參考此[Python doc](https://docs.python.org/3/reference/datamodel.html#special-method-names)。
 
@@ -622,7 +622,7 @@ print("The length of 'Tiny Murky' is: ", len(emp_1))
 ```
 
 
-### 6\. @property, getter, setter and deleter
+### 6. @property, getter, setter and deleter
 
 假設我們有下列的程式碼，如果要取用emp_1的email就要使用emp_1.email這個寫法。但是如果今天想要保護email attribute不希望直接讓別人取用，就需要寫一個get_email(self) 讓別人用method的方法得到email的值。但是可能別的程式碼裏面都已經寫好使用emp_1.email寫法，如果要全部都改成get_email會是一件大工程。我們可以使用@property的寫法來避免大量更改。
 

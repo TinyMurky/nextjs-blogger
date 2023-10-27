@@ -24,7 +24,7 @@ export default function SearchBar({ search, setSearch }:Props) {
         type="text"
         value={search}
         onChange={event => setSearch(event.target.value.trim())}
-        className="bg-gray-600 focus:bg-opacity-50 outline-none dark:caret-white/90 dark:text-white/90 px-2 py-1 lg:p-2 w-40 lg:w-60 text-base lg:text-xl rounded-xl"
+        className="bg-gray-600 focus:bg-opacity-50 outline-none caret-white/90 text-white/90 px-2 py-1 lg:p-2 w-40 lg:w-60 text-base lg:text-xl rounded-xl"
         placeholder="Search by Title"
       />
       <button className="hidden lg:inline-flex p-2 text-xl rounded-xl bg-gray-500 bg-opacity-50 hover:bg-opacity-100 ml-2 font-bold">

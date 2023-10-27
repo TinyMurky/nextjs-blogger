@@ -21,12 +21,12 @@ const skillBlock = (
       skills.map((skill) => {
         return (
           <div className="w-full" key={skill.name}>
-            <h2 className="font-semibold text-xl dark:text-white/80">{skill.name}</h2>
-            <hr className="mt-2 mb-4 h-px border-0 dark:bg-gray-500"/>
+            <h2 className="font-semibold text-xl text-white/80">{skill.name}</h2>
+            <hr className="mt-2 mb-4 h-px border-0 bg-gray-500"/>
             <ul className="list-disc list-inside ">
             {
               skill.items.map(item => {
-                return <li className="dark:text-white/70" key={item}>{item}</li>
+                return <li className="text-white/70" key={item}>{item}</li>
               })
             }
             </ul>

@@ -37,7 +37,7 @@ let myNumber = 23
 let newVar = myNumber  
 myNumber += 1  
 let myString = "abcd"  
-let myArray = \[\]
+let myArray = []
 ```
 ![](./images/0__GxYlXJ5JQn1W6ptr.jpg)
 
@@ -49,7 +49,7 @@ Call Stack為一個儲存接下來要執行的程式碼的Stack，每個要執�
 
 ```javascript
 function multiply(x, y) {  
-    return x \* y;  
+    return x * y;  
 }  
   
 function printSquare(x) {  
@@ -146,7 +146,7 @@ while (queue.waitForMessage()) {
 如果使用Synchronous迴圈會導致畫面須等到迴圈結束才能渲染。而Asynchronous迴圈則可以讓畫面在每個Task dequeue的時候進行渲染。
 ```javascript
 // Synchronous  
-\[1, 2, 3, 4\].forEach(function (i) {  
+[1, 2, 3, 4].forEach(function (i) {  
   console.log(i)  
   delay()  
 })  
@@ -158,7 +158,7 @@ function asyncForEach(array, cb) {
   })  
 }  
   
-asyncForEach(\[1, 2, 3, 4\], function (i) {  
+asyncForEach([1, 2, 3, 4], function (i) {  
   console.log(i)  
   delay()  
 })
@@ -175,7 +175,7 @@ asyncForEach(\[1, 2, 3, 4\], function (i) {
 *   [What the heck is the event loop anyway?](https://www.youtube.com/watch?v=8aGhZQkoFbQ)
 *   [How JavaScript works: an overview of the engine, the runtime, and the call stack](https://medium.com/sessionstack-blog/how-does-javascript-actually-work-part-1-b0bacc073cf)
 *   [為了轉生而點技能-JavaScript，day7 (原始型態與物件型態在記憶體上的變化](https://ithelp.ithome.com.tw/articles/10282815)
-*   [\[筆記\] 理解 JavaScript 中的事件循環、堆疊、佇列和併發模式（Learn event loop, stack, queue, and concurrency mode of JavaScript in depth）](https://pjchender.blogspot.com/2017/08/javascript-learn-event-loop-stack-queue.html)
-*   [\[筆記\] 不同execution context的變項不會互相影響─瞭解function背後運作的邏輯](https://pjchender.blogspot.com/2015/12/execution-context.html)
-*   [\[筆記\] 認識同步與非同步 — Callback + Promise + Async/Await](https://medium.com/%E9%BA%A5%E5%85%8B%E7%9A%84%E5%8D%8A%E8%B7%AF%E5%87%BA%E5%AE%B6%E7%AD%86%E8%A8%98/%E5%BF%83%E5%BE%97-%E8%AA%8D%E8%AD%98%E5%90%8C%E6%AD%A5%E8%88%87%E9%9D%9E%E5%90%8C%E6%AD%A5-callback-promise-async-await-640ea491ea64)
+*   [[筆記] 理解 JavaScript 中的事件循環、堆疊、佇列和併發模式（Learn event loop, stack, queue, and concurrency mode of JavaScript in depth）](https://pjchender.blogspot.com/2017/08/javascript-learn-event-loop-stack-queue.html)
+*   [[筆記] 不同execution context的變項不會互相影響─瞭解function背後運作的邏輯](https://pjchender.blogspot.com/2015/12/execution-context.html)
+*   [[筆記] 認識同步與非同步 — Callback + Promise + Async/Await](https://medium.com/%E9%BA%A5%E5%85%8B%E7%9A%84%E5%8D%8A%E8%B7%AF%E5%87%BA%E5%AE%B6%E7%AD%86%E8%A8%98/%E5%BF%83%E5%BE%97-%E8%AA%8D%E8%AD%98%E5%90%8C%E6%AD%A5%E8%88%87%E9%9D%9E%E5%90%8C%E6%AD%A5-callback-promise-async-await-640ea491ea64)
 *   [mozilla.org：並行模型和事件循環](https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Event_loop)

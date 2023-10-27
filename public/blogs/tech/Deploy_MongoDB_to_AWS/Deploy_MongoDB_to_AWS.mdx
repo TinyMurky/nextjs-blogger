@@ -21,7 +21,7 @@ slug: >-
 
 ⊙ [本文的限制](#c2eb)  
 ⊙ [本次使用的專案](#b53d)  
-\-------------------------------  
+-------------------------------  
 ⊙ [註冊AWS帳號並前往EC2](#43d9)  
 ⊙ [建立EC2執行個體](#a4ab)  
 ⊙ [連線EC2](#e8ff)  
@@ -50,12 +50,12 @@ slug: >-
 本專案使用幾個環境變數放於專案根目錄的 `.env`檔案中，以下四個環境目錄是比較重要需要依照您的狀況設定的。
 
 ```shell
-MONGODB\_URL=mongodb://127.0.0.1:27017/expense-tracker  
+MONGODB_URL=mongodb://127.0.0.1:27017/expense-tracker  
 PORT=3000  
-GITHUB\_CALLBACK='http://ec2-35-78-73-49.ap-northeast-1.compute.amazonaws.com/auth/github/callback'  
-GOOGLE\_CALLBACK='http://ec2-35-78-73-49.ap-northeast-1.compute.amazonaws.com/auth/google/callback'
+GITHUB_CALLBACK='http://ec2-35-78-73-49.ap-northeast-1.compute.amazonaws.com/auth/github/callback'  
+GOOGLE_CALLBACK='http://ec2-35-78-73-49.ap-northeast-1.compute.amazonaws.com/auth/google/callback'
 ```
-1.  MONGODB\_URL:   
+1.  MONGODB_URL:   
     您的專案在尚未上傳前，請先確定MongoDB可以連線到你本地安裝的[MongoDB Community Server](https://www.mongodb.com/try/download/community)，也就是 `127.0.0.1:27017` 這個port，因為我是直接在AWS EC2裡面安裝MongoDB並直接由Node.js的Mongoose套件連線到MongoDB
 2.  PORT:  
     您的專案設定監聽的Port可以自由設定，我是設為 `3000` ，並從http的 `PORT 80`forward到 `PORT 3000`
@@ -251,11 +251,11 @@ nvm install 16.20.1
 不要安裝18版的原因是因為，18版之後會需要以下兩個套件 `GLIBC_2.27` 、 `GLIBC_2.28` ，AWS提供的快照沒有以上兩個套件，會出現以下錯誤。
 
 ```shell
-node: /lib64/libm.so.6: version \`GLIBC\_2.27' not found (required by node)  
-node: /lib64/libc.so.6: version \`GLIBC\_2.28' not found (required by node)
+node: /lib64/libm.so.6: version `GLIBC_2.27' not found (required by node)  
+node: /lib64/libc.so.6: version `GLIBC_2.28' not found (required by node)
 ```
 
-我們可以嘗試自己更新這兩個套件，可以參考文章：[node: /lib64/libm.so.6: version \`GLIBC\_2.27' not found](https://www.cnblogs.com/dingshaohua/p/17103654.html)
+我們可以嘗試自己更新這兩個套件，可以參考文章：[node: /lib64/libm.so.6: version `GLIBC_2.27' not found](https://www.cnblogs.com/dingshaohua/p/17103654.html)
 
 但由於更新需要更新版的 `GCC` 與 `make` 套件，我裝不起來，所以這邊就被我先跳過了。
 
@@ -284,7 +284,7 @@ sudo iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-ports 3000
 可以輸入以下指令後再全部從頭操作
 
 ```shell
-sudo rm -rf /etc/yum.repos.d/mongod\*  
+sudo rm -rf /etc/yum.repos.d/mongod*  
 sudo yum clean all
 ```
 
@@ -300,7 +300,7 @@ cd /etc/yum.repos.d
 sudo touch mongodb-org-6.0.repo
 ```
 
-接著前往\[[MongoDB的官網](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-amazon/)\]
+接著前往[[MongoDB的官網](https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-amazon/)]
 
 點選上面的Resources => Server
 
@@ -327,9 +327,9 @@ sudo vi mongodb-org-6.0.repo
 現在我們進到了`mongodb-org-6.0.repo` 裡面，把剛剛複製的文字都貼進去。
 
 ```shell
-\[mongodb-org-6.0\]  
+[mongodb-org-6.0]  
 name=MongoDB Repository  
-baseurl=https://repo.mongodb.org/yum/amazon/2/mongodb-org/6.0/x86\_64/  
+baseurl=https://repo.mongodb.org/yum/amazon/2/mongodb-org/6.0/x86_64/  
 gpgcheck=1  
 enabled=1  
 gpgkey=https://www.mongodb.org/static/pgp/server-6.0.asc

@@ -8,6 +8,7 @@ import { allBlogs, Blog } from "@/libs/contentLayerAdapter"
 import getFormattedDate from "@/libs/getFormattedDate"
 import Comment from "./Comment"
 import mdxComponents from "@/libs/mdxComponents"
+import TableOfContents from "./TableOfContents"
 
 interface Props{
   // routerName:string
@@ -74,7 +75,8 @@ export default async function BlogPost({ blogId }: Props) {
         </article>
         <Comment/>
       </main>
-      <aside className="lg:col-span-1 w-fit h-screen">
+      <aside className="lg:col-span-1 w-fit h-screen hidden lg:sticky lg:top-24 lg:block">
+        <TableOfContents rawBody={body.raw} />
       </aside>
     </div>
   )

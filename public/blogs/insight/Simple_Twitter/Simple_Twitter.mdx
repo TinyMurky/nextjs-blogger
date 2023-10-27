@@ -23,13 +23,13 @@ Github Repo： [TinyMurky/simple-twitter](https://github.com/TinyMurky/simple-tw
 體驗帳號：
 
 *   前台  
-    \- 帳號：user1 (user1~user10都可以登入，密碼都一樣)  
-    \- 密碼：12345678
+    - 帳號：user1 (user1~user10都可以登入，密碼都一樣)  
+    - 密碼：12345678
 *   後台：  
-    \- 帳號：root  
-    \- 密碼：12345678
+    - 帳號：root  
+    - 密碼：12345678
 
-Developer: [Iamcoolalan](https://medium.com/u/ef470ff3858f), [Tiny\_Murky](https://medium.com/u/8dbd3bcec408), 台灣杉
+Developer: [Iamcoolalan](https://medium.com/u/ef470ff3858f), [Tiny_Murky](https://medium.com/u/8dbd3bcec408), 台灣杉
 
 ### 前言
 
@@ -175,17 +175,17 @@ MySQL則是另外部署在RDS上而不是直接安裝於EC2，理由同樣也是
 
 這邊要先謝謝我們組的Mentor Oscar!!! Oscar很用心的看我們的code還提出很多的優化方向與建議。
 
-#### 1\. Clean Code 無瑕的程式碼
+#### 1. Clean Code 無瑕的程式碼
 
 Oscar提醒我們最好的程式碼其本身就是註解，程式碼要寫的可以直接閱讀，而不是每一行都要加一段註解。 在變數的命名上要有意義，並且一個function就做一件事情，如果程式邏輯太雜亂，比起加一堆註解，直接重新編寫會更好。
 
-#### 2\. 程式架構
+#### 2. 程式架構
 
 這次專案是使用MVC架構，但由於對該架構不熟悉，我都把function隨便放置，像是如果會重複使用的code我會開一個helpers資料夾把所有function都丟進去，寫到後來自己都找不到code放在哪裡。
 
 Oscar提醒說MVC架構下，Controller可以再向下拆出Service放商業邏輯，用Controller負責呼叫Model控制Database，將資料交給Service Function處理成我們要的型態後再交給View渲染。
 
-#### 3\. ORM優化
+#### 3. ORM優化
 
 在使用Sequelize時，[文件](https://sequelize.org/docs/v6/advanced-association-concepts/eager-loading/#required-eager-loading)中提到如果在find的時候設定require為true，就可以強迫使用inner join，才不會一次撈出一大堆資料。
 
@@ -204,16 +204,16 @@ User.findAll({
  followingUsersTweets: async (userId, { limit = 9, page = 0 } = {}) => {  
     const offset = pagiHelper.getOffset(limit, page)  
     const tweets = await Tweet.findAll({  
-      include: \[User\],  
+      include: [User],  
       attributes: {  
-        include: \[  
+        include: [  
           // 使用 sequelize.literal 創建一個 SQL 子查詢來計算帖子數量  
-          \[sequelize.literal('(SELECT COUNT(\*) FROM Likes WHERE Likes.tweet\_id = Tweet.id)'), 'likes'\],  
-          \[sequelize.literal('(SELECT COUNT(\*) FROM Replies WHERE Replies.tweet\_id = Tweet.id)'), 'replies'\],  
-          \[sequelize.literal(\`(SELECT COUNT(\*) FROM Likes WHERE Likes.tweet\_id = Tweet.id AND Likes.user\_id = ${userId})\`), 'isLiked'\]  
-        \]  
+          [sequelize.literal('(SELECT COUNT(*) FROM Likes WHERE Likes.tweet_id = Tweet.id)'), 'likes'],  
+          [sequelize.literal('(SELECT COUNT(*) FROM Replies WHERE Replies.tweet_id = Tweet.id)'), 'replies'],  
+          [sequelize.literal(`(SELECT COUNT(*) FROM Likes WHERE Likes.tweet_id = Tweet.id AND Likes.user_id = ${userId})`), 'isLiked']  
+        ]  
       },  
-      order: \[\['createdAt', 'DESC'\]\],  
+      order: [['createdAt', 'DESC']],  
       raw: true,  
       nest: true,  
       offset,  
@@ -224,11 +224,11 @@ User.findAll({
 Oscar提醒我們一定要小心 SQL injection攻擊，所有字元需要使用Sequelize預設的 `[sequelize.escape](https://stackoverflow.com/questions/58606137/sequelize-escape-string-in-a-literal-string)` [](https://stackoverflow.com/questions/58606137/sequelize-escape-string-in-a-literal-string) 來避免被攻擊，然而本專案尚未實做這部份。
 
 ```javascript
-const escapedSearch = sequelize.escape(\`%${myVar}%\`);  
-sequelize.literal(\`"foo".name ILIKE ${escapedSearch}\`);
+const escapedSearch = sequelize.escape(`%${myVar}%`);  
+sequelize.literal(`"foo".name ILIKE ${escapedSearch}`);
 ```
 
-#### 4\. Infinite Scroll無限捲軸
+#### 4. Infinite Scroll無限捲軸
 
 Oscar向我們建議為了減輕Database的負擔，應該實作Pagination 或是Infinite Scroll ，頁面載入時僅從Database查詢前幾筆資料，並在使用者於Scroll bar拉到底部時再由前端發送GET request 至後端要求更多資料並接在原本資料的後面。
 
@@ -253,7 +253,7 @@ Oscar向我們建議為了減輕Database的負擔，應該實作Pagination 或�
 
 ```javascript
 const container = document.querySelector('.scrollbar-hidden')  
-const TWEETS\_LIMIT = 8  
+const TWEETS_LIMIT = 8  
 let mainTweetsPage = 0  
   
 container.addEventListener('scroll', unlimitDraw)  

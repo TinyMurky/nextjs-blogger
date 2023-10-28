@@ -8,4 +8,8 @@ module.exports = withContentlayer({
     // your project has type errors.
     ignoreBuildErrors: true,
   },
+  images: {
+    // Enable modern image formats
+    formats: ["image/avif", "image/webp"],
+  },
 }) // nextConfig直接丟到withContentlayer的{}裡

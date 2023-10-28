@@ -110,7 +110,7 @@ export default function TableOfContents({ rawBody }: Props) {
   useIntersectionObserver(setActiveId)
   return (
     <div className="mt-10">
-      <p className="mb-5 text-lg font-semibold  transition-colors text-gray-100">
+      <p className="mb-5 text-lg font-semibold  transition-colors text-gray-200">
         目錄
       </p>
       <div className="flex flex-col items-start justify-start">
@@ -142,6 +142,24 @@ export default function TableOfContents({ rawBody }: Props) {
               </button>
             )
         })}
+
+        <button
+          type="button"
+          className={clsx(
+            "mt-2 text-left text-base font-semibold transition-colors text-gray-200  hover:text-gray-100  hover:underline"
+          )}
+          onClick={(e) => {
+            e.preventDefault()
+            document.querySelector(`#留言`)?.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+              inline: "nearest",
+            })
+          }}
+        >
+          前往留言區
+        </button>
+        
       </div>
     </div>
   )

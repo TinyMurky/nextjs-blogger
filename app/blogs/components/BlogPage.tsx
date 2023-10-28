@@ -9,7 +9,7 @@ import getFormattedDate from "@/libs/getFormattedDate"
 import Comment from "./Comment"
 import mdxComponents from "@/libs/mdxComponents"
 import TableOfContents from "./TableOfContents"
-
+import './iframe.css'
 interface Props{
   // routerName:string
   blogId:string
@@ -57,7 +57,7 @@ export default async function BlogPost({ blogId }: Props) {
   const formattedDate:string = getFormattedDate(date)
   const category = _raw.flattenedPath.split('/')[0]
   return (
-    <div className="lg:relative mx-auto max-w-6xl pt-24  lg:grid lg:grid-cols-5">
+    <div className="lg:relative mx-auto w-full lg:max-w-6xl pt-24  lg:grid lg:grid-cols-5">
       <main className="lg:col-span-4 px-6 pb-24 prose md:prose-xl prose-base prose-gray prose-invert mx-auto">
         <h2 className="text-lg mt-4 mb-0">{title}</h2>
         <p className="mt-0">

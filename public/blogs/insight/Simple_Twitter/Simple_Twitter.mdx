@@ -221,7 +221,7 @@ User.findAll({
     })
 ```
 
-Oscar提醒我們一定要小心 SQL injection攻擊，所有字元需要使用Sequelize預設的 `[sequelize.escape](https://stackoverflow.com/questions/58606137/sequelize-escape-string-in-a-literal-string)` [](https://stackoverflow.com/questions/58606137/sequelize-escape-string-in-a-literal-string) 來避免被攻擊，然而本專案尚未實做這部份。
+Oscar提醒我們一定要小心 SQL injection攻擊，所有字元需要使用Sequelize預設的 [sequelize.escape](https://stackoverflow.com/questions/58606137/sequelize-escape-string-in-a-literal-string) 來避免被攻擊，然而本專案尚未實做這部份。
 
 ```javascript
 const escapedSearch = sequelize.escape(`%${myVar}%`);  

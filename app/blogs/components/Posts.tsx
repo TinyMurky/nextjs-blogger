@@ -21,7 +21,7 @@ export default function Posts({ title ,blogs }: Props) {
   }, [blogs, search, searchRegex])
 
   return (
-    <section className="mt-16 mx-auto lg:max-w-4xl sm:max-w-md max-w-xs px-8">
+    <section className="mt-16 mx-auto lg:max-w-4xl sm:max-w-md max-w-sm px-4 lg:px-8">
       <div className="mb-8 w-full flex flex-row items-center justify-between">
         <h2 className=" text-xl lg:text-4xl font-bold text-white/90">
           {title}

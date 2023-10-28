@@ -67,9 +67,12 @@ export default async function BlogPost({ blogId }: Props) {
           {/* 用 dangerouslySetInnerHTML 直接把處理好的markdown轉html直接放入section*/}
           {/* <section dangerouslySetInnerHTML={{__html:contentHtml}} /> */}
           <MDXContent components={mdxComponents}/>
-          <p>
+          <div className='text-sm md:text-base flex flex-row justify-between'>
             <Link href={`/blogs/${category}`}>⬅️ Go Back to {category.charAt(0).toUpperCase() + category.slice(1)}</Link>
-          </p>
+            <Link href="#">
+              Go Back to Top ⬆️
+            </Link>
+          </div>
         </article>
         <Comment/>
       </main>

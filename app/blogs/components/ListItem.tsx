@@ -24,8 +24,8 @@ export default function ListItem({ blog }: Props) {
     />
   ) : null
   return (
-    <li className="mt-4 text-base lg:text-2xl text-white/90">
-      <div className="lg:text-xl text-xs mt-1 flex flex-row justify-between sm:justify-normal items-center my-2 text-gray-400">
+    <li className=" mt-4 text-base  lg:text-2xl text-white/90">
+      <div className="p-2 lg:p-4 lg:text-xl text-xs mt-1 flex flex-row justify-between sm:justify-normal items-center my-2 text-gray-400">
         <div className="flex flex-row items-center md:me-4">
           <AiFillCalendar className="sm:me-2 me-1"/>{formattedDate}
         </div>
@@ -41,7 +41,7 @@ export default function ListItem({ blog }: Props) {
 
       <Link
         href={`/blogs/${sourceFileDir}`}
-        className="no-underline justify-between flex flex-row gap-4"
+        className="no-underline p-2 lg:p-4  justify-between flex flex-row gap-4 rounded-md hover:bg-gray-600 hover:drop-shadow-2xl focus:bg-gray-600 focus:bg-opacity-50"
       >
         <div className="shrink">
           <div className="hover:text-black/70 hover:text-white">

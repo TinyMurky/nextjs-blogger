@@ -7,6 +7,7 @@ import {
   AncherTagH5,
   AncherTagH6
 } from "@/components/HeadingWithAncherTag"
+import ImageWithPlaceholder from "@/components/ImageWithPlaceholder"
 
 const mdxComponents = {
   h1: AncherTagH1,
@@ -15,7 +16,8 @@ const mdxComponents = {
   h4: AncherTagH4,
   h5: AncherTagH5,
   h6: AncherTagH6,
-  pre: CopyCodePreButton
+  pre: CopyCodePreButton,
+  img: ImageWithPlaceholder
 }
 
 export default mdxComponents

@@ -23,7 +23,6 @@ export default function ImageWithPlaceholder({
   }
   return (
     <Image 
-      layout="responsive"
       src={src}
       alt={alt}
       height={height}

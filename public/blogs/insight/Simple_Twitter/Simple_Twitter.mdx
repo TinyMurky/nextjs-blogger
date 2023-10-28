@@ -198,7 +198,7 @@ User.findAll({
 });
 ```
 
-此外Sequelize有提供直接寫SQL Script的查詢方法 [](https://sequelize.org/docs/v6/other-topics/sub-queries/) `[sequelize.literal](https://sequelize.org/docs/v6/other-topics/sub-queries/)`，如下是在搜尋所有tweets時使用的 `sequelize.literal` ，用來取一些特殊的小變數（ex:此推文是否已經被按過愛心)的時候很方便。
+此外Sequelize有提供直接寫SQL Script的查詢方法 [sequelize.literal](https://sequelize.org/docs/v6/other-topics/sub-queries/)，如下是在搜尋所有tweets時使用的 `sequelize.literal` ，用來取一些特殊的小變數（ex:此推文是否已經被按過愛心)的時候很方便。
 
 ```javascript
  followingUsersTweets: async (userId, { limit = 9, page = 0 } = {}) => {  

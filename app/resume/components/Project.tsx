@@ -7,14 +7,14 @@ export default function Project({}: Props) {
     <section className="mt-16 mb-8">
       <h1 className="text-2xl mb-4 font-bold">專案</h1>
       <hr className="mt-2 mb-4 h-px border-0 bg-gray-500"/>
-      <div className="lg:mt-16 lg:mb-8 mx-auto lg:grid lg:grid-cols-12 gap-8 w-full">
-        <div className="lg:col-span-5 mx-auto w-auto sm:w-96 lg:w-auto overflow-clip object-fill  aspect-[4/3]">
+      <div className="lg:mt-16 lg:mb-8 lg:grid lg:grid-cols-12 mx-auto  gap-8 w-full">
+        <div className="lg:col-span-5 mx-auto w-auto sm:w-96 lg:w-auto overflow-clip object-fill  ">
           <Image
             src='/images/resume/demo_simple_twitter.png'
             alt='simple-twitter'
-            width={600}
-            height={800}
-            style={{objectFit: "cover"}}
+            width={800}
+            height={600}
+            style={{objectFit: "contain"}}
             loading="lazy"
             className="mx-auto"
           />
@@ -56,8 +56,8 @@ export default function Project({}: Props) {
       </div>
 
       {/* --------------------------------------------------------------------------- */}
-      <div className="lg:mt-16 lg:mb-8 mx-auto lg:grid lg:grid-cols-12 gap-8 w-full">
-        <div className="lg:col-span-5  mx-auto w-auto sm:w-96 lg:w-auto  overflow-clip object-fill  aspect-[4/3]">
+      <div className="lg:mt-16 lg:mb-8 lg:grid lg:grid-cols-12  mx-auto gap-8 w-full">
+        <div className="lg:col-span-5  mx-auto w-auto sm:w-96 lg:w-auto  overflow-clip object-fill">
           <Image
             src='/images/resume/demo_expense_tracker.png'
             alt='simple-twitter'

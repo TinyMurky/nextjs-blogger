@@ -17,25 +17,26 @@ export default function ListItem({ blog }: Props) {
     <Image
       src={coverPublicUrl}
       alt={title}
-      width={600}
-      height={800}
-      style={{objectFit: "cover"}}
+      width={1920}
+      height={1080}
+      style={{objectFit:"cover"}}
       loading="lazy"
+      className=""
     />
   ) : null
   return (
     <li className="mt-4 text-base lg:text-2xl text-white/90">
-      <div className="lg:text-xl text-xs mt-1 flex flex-row items-center my-2 text-gray-400">
-        <div className="flex flex-row items-center me-4">
-          <AiFillCalendar className="me-2"/>{formattedDate}
+      <div className="lg:text-xl text-xs mt-1 flex flex-row justify-between sm:justify-normal items-center my-2 text-gray-400">
+        <div className="flex flex-row items-center md:me-4">
+          <AiFillCalendar className="sm:me-2 me-1"/>{formattedDate}
         </div>
         |
-        <div className="flex flex-row items-center mx-4">
-          <AiFillClockCircle className="me-2"/>{readTime} min
+        <div className="flex flex-row items-center md:mx-4">
+          <AiFillClockCircle className="sm:me-2 me-1"/>{readTime} min
         </div>
         |
-        <div className="flex flex-row items-center ms-4">
-          <BsFillTagFill className="me-2"/>{tag}
+        <div className="flex flex-row items-center md:ms-4">
+          <BsFillTagFill className="sm:me-2 me-1"/>{tag}
         </div>
       </div>
 
@@ -43,15 +44,15 @@ export default function ListItem({ blog }: Props) {
         href={`/blogs/${sourceFileDir}`}
         className="no-underline justify-between flex flex-row gap-4"
       >
-        <div>
-          <div className=" hover:text-black/70 hover:text-white">
+        <div className="shrink">
+          <div className="hover:text-black/70 hover:text-white">
             <h2 className="font-bold mb-2">{title}</h2>
             <p className="text-base">
               {description}
             </p>
           </div>
         </div>
-        <div className="hidden lg:inline-flex overflow-clip object-fill  aspect-[4/3] h-40 w-auto">
+        <div className="flex-none hidden lg:inline-flex overflow-clip object-fill aspect-[4/3] h-40 w-auto">
           {image}
         </div>
       </Link>

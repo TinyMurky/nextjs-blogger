@@ -83,6 +83,18 @@ type Props = {
   rawBody: string
 }
 
+export function escapeNumberHeadCssSelector(id:string) : string {
+
+  // 只有第一個是數字要跳
+  if (id.match(/^\d/)){
+    const char: string = id[0]
+    const unicode: string = char.charCodeAt(0).toString(16) // 轉換為十六進制
+    const escape:string = "\\" + unicode + " " // querySelector要1個/就好
+    id = escape + id.slice(1)
+  }
+  return id
+}
+
 export default function TableOfContents({ rawBody }: Props) {
   // 從Blog json的body. raw物件，藉由mark down 的 ## 來抓 內文標題
   // /^###*?\s/ 表示開頭要是 ##, 後面可以接上無限或0個# (#*的意思) 並延到尾部後，再接一個空白\s
@@ -98,10 +110,11 @@ export default function TableOfContents({ rawBody }: Props) {
     const level:number = raw.match(/(\s|\u3000)/)?.index || 2 //找到第一個空白
 
     const slugger = new GithubSlugger()
+
     return {
       text,
       level,
-      id: slugger.slug(text),
+      id: slugger.slug(text) 
     }
   })
 
@@ -131,11 +144,11 @@ export default function TableOfContents({ rawBody }: Props) {
                 )}
                 onClick={(e) => {
                   e.preventDefault()
-                  document.querySelector(`#${heading.id}`)?.scrollIntoView({
+                  document.querySelector(`#${escapeNumberHeadCssSelector(heading.id)}`)?.scrollIntoView({
                     behavior: "smooth",
                     block: "start",
                     inline: "nearest",
-                  });
+                  })
                 }}
               >
                 {heading.text}

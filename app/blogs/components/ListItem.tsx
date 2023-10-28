@@ -21,7 +21,6 @@ export default function ListItem({ blog }: Props) {
       height={1080}
       style={{objectFit:"cover"}}
       loading="lazy"
-      className=""
     />
   ) : null
   return (

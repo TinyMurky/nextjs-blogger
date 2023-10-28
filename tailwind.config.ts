@@ -28,6 +28,9 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      aspectRatio: {
+        '4/3': '4 / 3',
+      },
       typography: {
 				DEFAULT: { css: disabledCss },
 				sm: { css: disabledCss },

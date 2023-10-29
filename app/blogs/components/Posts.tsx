@@ -17,7 +17,7 @@ export default function Posts({ title ,blogs }: Props) {
 
   const searchedBlogs: Blog[] = useMemo(() => {
     // 找到title裡有包含相關字元的文章
-    return search ? blogs.filter(blog => searchRegex.test(blog.title)) : blogs;
+    return search ? blogs.filter(blog => searchRegex.test(blog.title) || searchRegex.test(blog.tag)) : blogs;
   }, [blogs, search, searchRegex])
 
   return (

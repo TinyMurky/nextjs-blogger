@@ -3,15 +3,14 @@
 
 ## Live Demo
 [Tiny_Murky's Bloggger 部署於Vercer](https://nextjs-blogger-tiny-murkys-projects.vercel.app/)
-這邊放demo gif
-
+![](./README/blog展示.gif)
 ## 目錄
 - [功能](#功能)
 - [安裝專案](#安裝專案)
 - [新增文章](#新增文章)
 - [使用工具](#使用工具)
-- [參考網站]
-- [功能展示]
+- [參考網站](#參考網站)
+- [功能展示](#功能展示)
 ## 功能
 - 部落格本文
     - 將markdown 部落格文章轉為html呈現
@@ -87,58 +86,58 @@
 ## 使用工具
 
 - next.js 13.5.5
+- react 18
+- react-dom 18
+- typescript 5
+- tailwindcss 3
+- tailwindcss/typography 0.5.10
 - vercel(部署網站)
 - next-contentlayer 0.3.4 （mdx轉rehype)
-- rehype 13.0.1 (將html套上plugin做加工)
-    "rehype-highlight": "^7.0.0",
-    "rehype-prism-plus": "^1.6.3",
-    "rehype-slug": "^6.0.0",
-    "@giscus/react": "^2.3.0",
-    "clsx": "^2.0.0",
-    "date-fns": "^2.30.0",
-    "github-slugger": "^2.0.0",
-    "image-size": "^1.0.2",
-    "": "^",
-    "plaiceholder": "^3.0.0",
-    "react": "^18",
-    "react-dom": "^18",
-    "react-icons": "^4.11.0",
-    "sharp": "^0.32.6",
-    "unist-util-visit": "^5.0.0"
+- rehype-prism-plus 1.6.3 (將code block上色)
+- rehype-slug 6.0.0 (幫各章節標題增加id)
+- github-slugger 2.0.0 (可獨立運算出與rehype-slug相同的id)
+- sharp 0.32.6 (將大圖片轉成網站用的小圖片)
+- unist-util-visit: 5.0.0
+- @giscus/react 2.3.0 (聊天室套件)
+- clsx 2.0.0 (合併className, 用於tailwind)
+- date-fns 2.30.0 (date format)
+- image-size 1.0.2 (抓取圖片的長寬)
+- plaiceholder 3.0.0 (製作圖片在如前的模糊圖片)
+- react-icons 4.11.0 (一些漂亮的圖案)
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## 參考網站
+謝謝Eason 和 David兩位大神提供的超強教學
+- [總結與回顧：一個炫砲技術部落格的誕生 - Modern Next.js Blog 系列 #30](https://easonchang.com/posts/modern-nextjs-blog-summary)
+- [Next.js Blog Website | How to Build a Blog App with Nextjs 13](https://www.youtube.com/watch?v=puIQhnjOfbc)
 
-## Getting Started
+## 功能展示
 
-First, run the development server:
+可於`/`、`/blogs/insigh`、`/blogs/tech`瀏覽所有部落格或分類
+![](./README/瀏覽部落格.gif)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+可於搜尋欄搜尋部落格標題與tag
+![](./README/搜尋.gif)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+部落格畫面展示
+![](./README/blog展示.gif)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+目錄會高亮螢幕中出現最上方的h3標題，也可以點擊滑到該標題
+![](./README/目錄展示.gif)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+可以使用gihub帳戶留言
+![](./README/留言.gif)
 
-## Learn More
+點選標題旁邊的anchor tag，url會增加`#+標題`，並將該標題至於最上方
+![](./README/anchorTag.gif)
 
-To learn more about Next.js, take a look at the following resources:
+code block可使用複製功能
+![](./README/copy.gif)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+另外有我的履歷頁面
+![](./README/履歷.gif)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+實做rwd，手機也可以輕鬆使用
+![](./README/rwd.gif)
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+所有頁面皆是static與SSG
+![](./README/ssg.png)

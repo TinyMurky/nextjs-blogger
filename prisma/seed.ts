@@ -1,8 +1,8 @@
 import { PrismaClient } from '@prisma/client'
-import { getBlogsData } from './getBlogs'
+import { getBlogsData } from './prisma-helper/getBlogs'
 const prisma = new PrismaClient()
 async function main() {
-  const blogs = getBlogsData('/public/blogs', 'mdx')
+  const blogs = await getBlogsData('/public/blogs', 'mdx')
 
   await prisma.user.upsert({
     where: { email: 'murky0830@gmail.com' },

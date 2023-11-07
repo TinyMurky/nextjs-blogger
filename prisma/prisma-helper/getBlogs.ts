@@ -1,7 +1,7 @@
 import path from "path"
 import fs from "fs"
 import { Category } from "@prisma/client"
-
+import processMdx from "./uploadImg"
 type blogData = {
   category: Category,
   published: boolean,
@@ -9,7 +9,6 @@ type blogData = {
 }
 
 function isCategory(value: string | null): value is Category {
-  console.log(value)
   if (!value){
     return false
   }
@@ -17,7 +16,7 @@ function isCategory(value: string | null): value is Category {
   return Object.values(Category).includes(value as Category)
 }
 
-export function getBlogsData(folderName:string, extension:string="mdx",  dir:string|null=null, category:string|null=null):blogData[] {
+export async function getBlogsData(folderName:string, extension:string="mdx",  dir:string|null=null, category:string|null=null):Promise<blogData[]> {
   // 把fileName整理成Blogblog type，不含文章內容
   // id是檔案名稱但不包含副檔名
 
@@ -39,27 +38,28 @@ export function getBlogsData(folderName:string, extension:string="mdx",  dir:str
   // 回傳所有folder
   const folderDirents:fs.Dirent[] = contentDirents.filter(dirent => dirent.isDirectory())
 
-  let allblogsData:blogData[] = fileDirents.map(fileDirent => {
+  let allblogsData:blogData[] = await Promise.all(fileDirents.map(async (fileDirent) => {
     const fullPath:string = path.join(blogFolder, fileDirent.name)
-    const fileContent:string = fs.readFileSync(fullPath, { encoding: 'utf8', flag: 'r' })
+    // 文章丟進processMdx裡將圖片上傳uploadthings後回傳儲存到mdxFile
+    const fileContent:string = await processMdx(fullPath)
 
     return {
       published:true,
       content:fileContent,
       category: isCategory(category) ? category : "edit"
     }
-  })
+  }))
 
   // recursive
-  folderDirents.forEach(folderDirent => {
+  for (const folderDirent of folderDirents ){
     let foldeblogsData:blogData[]
     if (!category) { //是第一層
-      foldeblogsData = getBlogsData(folderDirent.name, extension, blogFolder, folderDirent.name)
+      foldeblogsData = await getBlogsData(folderDirent.name, extension, blogFolder, folderDirent.name)
     } else { // blogs以外的層
-      foldeblogsData = getBlogsData(folderDirent.name, extension, blogFolder, category)
+      foldeblogsData = await getBlogsData(folderDirent.name, extension, blogFolder, category)
     }
     allblogsData = allblogsData.concat(foldeblogsData)
-  })
+  }
 
 
   return allblogsData

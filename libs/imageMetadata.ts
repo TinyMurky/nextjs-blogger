@@ -9,7 +9,7 @@ import type { Node } from "unist-util-visit"
 import { promisify } from "util"
 import fs from "node:fs/promises"
 import { removeCwdUrl } from './removeRepeatUrl'
-
+import https from 'https'
 //use promise
 const sizeOf = promisify(imageSize)
 
@@ -41,9 +41,6 @@ function isImageNode(node: Node): node is ImageNode {
 /**
  * Filters out non absolute paths from the public folder.
  */
-function filterAbsoluteImageNode(node: ImageNode): boolean {
-  return node.properties.src.startsWith("/")
-}
 
 /**
  * Filters only use relative paths start with './' from the public folder.
@@ -52,16 +49,39 @@ function filterRelativeImageNode(node: ImageNode): boolean {
   return node.properties.src.startsWith("./")
 }
 
+function downloadImage(url: string): Promise<Buffer> {
+  return new Promise((resolve, reject) => {
+    https.get(url, (res) => {
+      const chunks: Buffer[] = []
+      res.on('data', (chunk) => {
+        chunks.push(chunk)
+      })
+      res.on('end', () => {
+        const buffer = Buffer.concat(chunks)
+        resolve(buffer)
+      })
+    }).on('error', (err) => {
+      reject(err)
+    })
+  })
+}
+
 /**
  * Adds the image's `height` and `width` to it's properties.
  */
 async function addMetadata(node: ImageNode): Promise<void> {
 
-  const absoluteNodeSrc = path.join(process.cwd(), "public", node.properties.src)
+  let buffer: Buffer
+  if (node.properties.src.startsWith('http')){
+    buffer = await downloadImage(node.properties.src)
+
+  } else {
+    const absoluteNodeSrc = path.join(process.cwd(), "public", node.properties.src)
+    buffer = await fs.readFile(absoluteNodeSrc)
+  }
 
 
   try{
-    const buffer = await fs.readFile(absoluteNodeSrc)
     const { metadata: { height, width }, base64 } = await getPlaiceholder(buffer, { size: 10 })// 10 is to increase detail (default is 4)
 
 
@@ -80,13 +100,13 @@ export default function imageMetadata() {
 
     visit(tree, 'element', node => {
       if (isImageNode(node)){
-        if (filterAbsoluteImageNode(node)){
-          imgNodes.push(node)
-        }else if (filterRelativeImageNode(node)){
+        if (filterRelativeImageNode(node)){
           const src = node.properties.src as string
           const fileName = src.replace('./', '')
 
           node.properties.src = `${removeCwdUrl(file.path)}/${fileName}`
+          imgNodes.push(node)
+        } else {
           imgNodes.push(node)
         }
       }

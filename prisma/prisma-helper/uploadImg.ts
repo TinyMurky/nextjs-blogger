@@ -22,17 +22,18 @@ export default async function processMdx(mdxPath:string):Promise<string> {
 }
 
 // MDX文件圖片相對路徑
-const imageRegex = /!\[\]\((\.\/images\/[^)]+)\)/g
-
+const imageRegex = /(\.\/images\/[^'"\s)]+)/g
 // 圖片相對路徑替換成絕對路徑，然後上傳updatethings之後
 async function replaceImagePaths(mdxContent:string, mdxPath:string):Promise<string>{
   const matches = mdxContent.matchAll(imageRegex)
   
   for (const match of matches) {
-    const localPath = match[1]
+    const localPath = match[1] //0是整個路徑
     const fullPath = path.join(path.dirname(mdxPath), localPath);
-    const cloudUrl = await uploadFile(fullPath)
-    
+    let cloudUrl = await uploadFile(fullPath)
+    if (localPath.includes('1__PE2KZ6rDaffhIeIU1Khibw')) {
+      console.log(localPath, fullPath, cloudUrl)
+    }
     // 替换本地路径成cloudURL
     // 沒有成功就跳過
     if (!cloudUrl){
@@ -51,10 +52,12 @@ export async function uploadFile(filePath: string): Promise<string|undefined>{
 
   // file是File type 要 array [blob] + 名稱
   const files = getFileData(filePath)
-  const response = await utapi.uploadFiles(files)
+  let response = await utapi.uploadFiles(files)
 
   return response.data?.url
 }
+
+
 
 
 function getFileData(filePath: string): FileEsque{

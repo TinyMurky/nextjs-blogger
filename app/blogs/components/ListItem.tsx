@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default function ListItem({ blog }: Props) {
-  const {_id: id, url ,_raw: {sourceFileDir}, title, date, tag, readTime, cover, description} = blog
+  const {_id: id, url ,_raw: {flattenedPath}, title, date, tag, readTime, cover, description} = blog
   const coverPublicUrl = replaceDotFolder(cover, url)
   const formattedDate:string = getFormattedDate(date)
   const image = cover ? (
@@ -40,7 +40,7 @@ export default function ListItem({ blog }: Props) {
       </div>
 
       <Link
-        href={`/blogs/${sourceFileDir}`}
+        href={`/blogs/${flattenedPath}`}
         className="no-underline p-2 lg:p-4  justify-between flex flex-row gap-4 rounded-md hover:bg-gray-600 hover:drop-shadow-2xl focus:bg-gray-600 focus:bg-opacity-50"
       >
         <div className="shrink">

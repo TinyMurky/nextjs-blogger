@@ -11,5 +11,13 @@ module.exports = withContentlayer({
   images: {
     // Enable modern image formats
     formats: ["image/avif", "image/webp"],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'utfs.io',
+        port: '',
+        pathname: '/f/**'
+      }
+    ]
   },
 }) // nextConfig直接丟到withContentlayer的{}裡

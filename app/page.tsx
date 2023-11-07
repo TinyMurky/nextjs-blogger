@@ -1,6 +1,7 @@
 import Posts from "./blogs/components/Posts"
 import path from "path"
-import { allBlogs } from "@/libs/contentLayerAdapter"
+//import { allBlogs } from "@/libs/contentLayerAdapter"
+import { allBlogs } from 'contentlayer/generated'
 type Props = {}
 
 export default function page({}: Props) {

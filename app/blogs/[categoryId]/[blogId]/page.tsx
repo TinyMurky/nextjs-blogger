@@ -2,8 +2,9 @@
 
 import { Metadata } from "next"
 import BlogPost, {generateBlogPageMetadata, generateStaticBlogPageParams} from "../../components/BlogPage"
-interface Params {
+type Params = {
   params: {
+    categoryId: string,
     blogId: string // 從url拿進來的都是string
   }
 }

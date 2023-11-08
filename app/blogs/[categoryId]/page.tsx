@@ -2,8 +2,8 @@ import Posts from "../components/Posts"
 import path from "path"
 import { notFound } from "next/navigation"
 
-import { allBlogs } from 'contentlayer/generated'
-// import { allBlogs } from "@/libs/contentLayerAdapter"
+// import { allBlogs } from 'contentlayer/generated'
+import { allBlogs, Blog } from "@/libs/contentLayerAdapter"
 import { Metadata } from "next"
 type Params = {
   params: {
@@ -56,7 +56,7 @@ export default function page({ params:{ categoryId } }: Params) {
     return notFound()
   }
 
-  const blogs = allBlogs.filter(blog => {
+  const blogs = allBlogs.filter((blog:Blog) => {
     return blog.url.startsWith(`/blogs/${categoryId}`)
   })
   return (

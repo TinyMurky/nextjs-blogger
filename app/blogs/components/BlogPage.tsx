@@ -4,8 +4,8 @@ import { notFound } from "next/navigation"
 import { Metadata } from "next"
 import Link from "next/link"
 
-import { allBlogs, Blog } from 'contentlayer/generated'
-// import { allBlogs, Blog } from "@/libs/contentLayerAdapter"
+// import { allBlogs, Blog } from 'contentlayer/generated'
+import { allBlogs, Blog } from "@/libs/contentLayerAdapter"
 import getFormattedDate from "@/libs/getFormattedDate"
 import Comment from "./Comment"
 import mdxComponents from "@/libs/mdxComponents"

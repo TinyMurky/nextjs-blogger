@@ -1,6 +1,10 @@
 import { defineDocumentType } from 'contentlayer/source-files'
 import { makeSource } from 'contentlayer/source-remote-files'
 import { promises as fs } from 'fs'
+import { PrismaClient, Prisma } from '@prisma/client'
+const prisma = new PrismaClient()
+
+
 import path from 'path'
 import imageMetadata from './libs/imageMetadata';
 import rehypeSlug from 'rehype-slug'
@@ -58,23 +62,37 @@ const Blog = defineDocumentType(() => ({
 
 const syncContentFromApi = async (contentDir: string) => {
   // 邏輯要包在syncRun
-  console.log('L61')
   const syncRun = async () => {
-    console.log('L67: Request')
-    const res = await fetch('http://localhost:3000/api/blogs', {
-      method:'GET',
-      headers: {}
-    })
+    // 正常情況用fetch
+    //但是在build的時候因為url問題會fetch不成功，直接進資料庫拿資料
+    let blogs
+    try{
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blogs`, {
+        method:'GET',
+        headers: {}
+      })
 
-    // 請使用fetch時都要await json
-    if (!res.ok){
-      console.log("res fetch fail!!", res)
-      return
-    } 
+      // 請使用fetch時都要await json
+      if (!res.ok){
+        throw new Error ("res fetch fail!!")
+      } 
 
-    const blogs = await res.json()
+      blogs = await res.json()
+    } catch (error) {
+      // 失敗的話直接從資料庫取資料
+      blogs = await prisma.blog.findMany({
+        orderBy: {
+          createdAt: 'desc'
+        },
+        select: { // 回傳欄位
+          category: true,
+          content: true,
+          name: true
+        }
+      })
+    } finally {
 
-    if (!blogs) {
+    if (!blogs || blogs.length) {
       return
     }
 
@@ -95,6 +113,8 @@ const syncContentFromApi = async (contentDir: string) => {
       //     ${blog.content}
       //     `
       await fs.writeFile(filePath, blog.content, {encoding:"utf8"})
+    }
+
     }
   }
 
@@ -122,7 +142,8 @@ const syncContentFromApi = async (contentDir: string) => {
 }
 
 export default makeSource({
-  syncFiles: (contentDir) => syncContentFromApi(contentDir),
+  syncFiles: syncContentFromApi,
+  // syncFiles: (contentDir) => syncContentFromApi(contentDir),
   contentDirPath: './content/blogs',
   contentDirInclude: ['insight', 'tech'],
   documentTypes: [Blog],

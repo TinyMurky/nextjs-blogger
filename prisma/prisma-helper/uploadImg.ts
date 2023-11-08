@@ -31,9 +31,7 @@ async function replaceImagePaths(mdxContent:string, mdxPath:string):Promise<stri
     const localPath = match[1] //0是整個路徑
     const fullPath = path.join(path.dirname(mdxPath), localPath);
     let cloudUrl = await uploadFile(fullPath)
-    if (localPath.includes('1__PE2KZ6rDaffhIeIU1Khibw')) {
-      console.log(localPath, fullPath, cloudUrl)
-    }
+
     // 替换本地路径成cloudURL
     // 沒有成功就跳過
     if (!cloudUrl){

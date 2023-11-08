@@ -78,6 +78,10 @@ const syncContentFromApi = async (contentDir: string) => {
       } 
 
       blogs = await res.json()
+
+      if (!blogs || !blogs.length) {
+        throw new Error ("No blog fetched !")
+      }
     } catch (error) {
       // 失敗的話直接從資料庫取資料
       blogs = await prisma.blog.findMany({
@@ -92,7 +96,8 @@ const syncContentFromApi = async (contentDir: string) => {
       })
     } finally {
 
-    if (!blogs || blogs.length) {
+    if (!blogs || !blogs.length) {
+      console.log("No Blogs fetching")
       return
     }
 

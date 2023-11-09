@@ -16,10 +16,17 @@ CREATE TABLE `Blog` (
     `authorId` INTEGER NOT NULL,
     `published` BOOLEAN NOT NULL DEFAULT false,
     `category` ENUM('tech', 'insight', 'edit', 'playground') NOT NULL DEFAULT 'tech',
-    `content` TEXT NOT NULL,
+    `description` TEXT NULL,
+    `content` TEXT NULL,
+    `code` TEXT NOT NULL,
+    `tag` VARCHAR(191) NULL,
+    `readTime` INTEGER NULL,
+    `cover` VARCHAR(191) NULL,
+    `slug` VARCHAR(191) NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
+    UNIQUE INDEX `Blog_name_key`(`name`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 

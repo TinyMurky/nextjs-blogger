@@ -19,15 +19,21 @@ model User {
 }
 
 model Blog {
-  id        Int      @id @default(autoincrement())
-  name      String   @unique
-  author    User     @relation(fields: [authorId], references: [id])
-  authorId  Int
-  published Boolean  @default(false)
-  category  Category @default(tech)
-  content   String   @db.Text
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  author      User     @relation(fields: [authorId], references: [id])
+  authorId    Int
+  published   Boolean  @default(false)
+  category    Category @default(tech)
+  description String?  @db.Text
+  content     String?  @db.Text
+  code        String   @db.Text
+  tag         String?
+  readTime    Int?
+  cover       String?
+  slug        String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }
 
 enum Category {

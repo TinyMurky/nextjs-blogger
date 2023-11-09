@@ -1,6 +1,6 @@
 import {bundleMDX} from 'mdx-bundler'
 
-import rehypePlugins from "@/libs/rehype-plugin.config"
+import rehypePlugins from "./rehype-plugin.config"
 import { BundleResult } from '@/type'
 
 export async function mdx2Code( source: string): Promise<BundleResult>{

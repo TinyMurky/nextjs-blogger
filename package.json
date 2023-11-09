@@ -39,7 +39,6 @@
     "mdx-bundler": "^9.2.1",
     "mime-types": "^2.1.35",
     "next": "^14.0.1",
-    "next-contentlayer": "^0.3.4",
     "plaiceholder": "^3.0.0",
     "prisma": "^5.5.2",
     "react": "^18.2.0",

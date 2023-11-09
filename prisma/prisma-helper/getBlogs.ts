@@ -2,7 +2,7 @@ import path from "path"
 import fs from "fs"
 import { Category } from "@prisma/client"
 import processMdx from "./uploadImg"
-import { mdx2Code } from "@/libs/mdx2Code"
+import { mdx2Code } from "../../libs/mdx2Code"
 type blogData = {
   name: string,
   published: boolean,

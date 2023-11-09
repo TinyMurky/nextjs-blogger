@@ -13,6 +13,7 @@ CREATE TABLE `User` (
 CREATE TABLE `Blog` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `name` VARCHAR(191) NOT NULL,
+    `title` VARCHAR(191) NOT NULL DEFAULT 'title',
     `authorId` INTEGER NOT NULL,
     `published` BOOLEAN NOT NULL DEFAULT false,
     `category` ENUM('tech', 'insight', 'edit', 'playground') NOT NULL DEFAULT 'tech',

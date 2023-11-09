@@ -2,11 +2,20 @@ import path from "path"
 import fs from "fs"
 import { Category } from "@prisma/client"
 import processMdx from "./uploadImg"
+import { mdx2Code } from "./mdx2Code4Seeder"
+// import { mdx2Code } from "../../libs/mdx2Code"
 type blogData = {
-  category: Category,
+  name: string,
   published: boolean,
-  content: string,
-  name: string
+  category: Category,
+  description: string | null,
+  content: string | null,
+  code: string,
+  tag: string | null,
+  readTime: number | null,
+  cover: string | null,
+  slug: string | null,
+  createdAt: string | Date | undefined
 }
 
 function isCategory(value: string | null): value is Category {
@@ -43,12 +52,20 @@ export async function getBlogsData(folderName:string, extension:string="mdx",  d
     const fullPath:string = path.join(blogFolder, fileDirent.name)
     // 文章丟進processMdx裡將圖片上傳uploadthings後回傳儲存到mdxFile
     const fileContent:string = await processMdx(fullPath)
+    const {code, frontmatter} = await mdx2Code(fileContent)
 
     return {
+      name: path.parse(fileDirent.name).name,
       published:true,
-      content:fileContent,
       category: isCategory(category) ? category : "edit",
-      name: path.parse(fileDirent.name).name
+      description: frontmatter.description,
+      content:fileContent,
+      code: code,
+      tag: frontmatter.tag,
+      readTime: frontmatter.readTime,
+      cover: frontmatter.cover,
+      slug: frontmatter.slug,
+      createdAt:new Date(frontmatter.date)
     }
   }))
 

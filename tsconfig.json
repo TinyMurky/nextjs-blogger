@@ -26,9 +26,6 @@
     "paths": {
       "@/*": [
         "./*"
-      ],
-      "contentlayer/generated": [
-        "./.contentlayer/generated"
       ]
     }
   },
@@ -38,7 +35,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "env.d.ts",
-    ".contentlayer/generated",
+    "prisma/prisma-helper/rehype-plugin4Seeder.config.js",
+    "prisma/seedReadCodeMdx.ts"
   ],
   "exclude": [
     "node_modules"

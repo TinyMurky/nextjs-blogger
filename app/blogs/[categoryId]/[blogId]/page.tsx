@@ -15,7 +15,7 @@ export function generateStaticParams() {
 }
 
 export function generateMetadata({ params: { blogId } }: Params):Metadata {
-  return generateBlogPageMetadata({blogId})
+  return generateBlogPageMetadata({ blogId })
 }
 
 export default async function Post({ params: { blogId } }: Params) {

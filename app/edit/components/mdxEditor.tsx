@@ -10,31 +10,14 @@ import Preview from './preview'
 
 
 type Props = {
-    blogId: string
-
+    blogContent: string,
+    blogCode: string
 }
 
 
-export default function MdxEditor( { blogId }: Props) {
-  const [doc, setDoc] = useState<string>("")
-  
-  useEffect(() => {
-    async function fetchBlog(blogId: string) {
+export default function MdxEditor( { blogContent, blogCode }: Props) {
+  const [doc, setDoc] = useState<string>(blogContent)
 
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blogs/${blogId}`, {
-        method: 'GET',
-      })
-
-      if (!res.ok) {
-        console.log('L28', res)
-        return "error"
-      }
-      const { code, frontmatter } = await res.json()
-      setDoc(code)
-    }
-
-    fetchBlog(blogId)
-  }, [blogId])
 
   const handleDocChange = useCallback((newDoc: string) => {
     setDoc(newDoc)
@@ -46,7 +29,7 @@ export default function MdxEditor( { blogId }: Props) {
       <main className={` min-h-screen flex flex-col gap-2`}>
         <div className='flex flex-1 w-full gap-4'>
           <Editor initialDoc={doc} onChange={handleDocChange} />
-          <Preview doc={doc} />
+          <Preview doc={doc} blogInitCode={ blogCode } />
         </div>
       </main>
       {/* <Footer /> */}

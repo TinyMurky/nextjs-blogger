@@ -4,12 +4,12 @@ import { useState, useMemo} from "react"
 import ListItem from "./ListItem"
 import SearchBar from "./SearchBar"
 
-import { Blog } from "@/libs/contentLayerAdapter"
+import { Blog } from "@prisma/client"
 interface Props {
   title: string,
   blogs: Blog[]
 }
-export default function Posts({ title ,blogs }: Props) {
+export default function Posts({ title, blogs }: Props) {
 
   const [search, setSearch] = useState('')
 
@@ -17,7 +17,9 @@ export default function Posts({ title ,blogs }: Props) {
 
   const searchedBlogs: Blog[] = useMemo(() => {
     // 找到title裡有包含相關字元的文章
-    return search ? blogs.filter(blog => searchRegex.test(blog.title) || searchRegex.test(blog.tag)) : blogs;
+    return search ? blogs.filter(blog => {
+      return searchRegex.test(blog.title) || ( blog.tag && searchRegex.test(blog.tag))
+    }) : blogs
   }, [blogs, search, searchRegex])
 
   return (
@@ -29,7 +31,7 @@ export default function Posts({ title ,blogs }: Props) {
         <SearchBar search={search} setSearch={setSearch}  />
       </div>
       <ul className="w-full">
-        {searchedBlogs.map(blog=> <ListItem blog={blog} key={blog._id}/>)}
+        {searchedBlogs.map(blog=> <ListItem blog={blog} key={blog.name}/>)}
       </ul>
     </section>
   )

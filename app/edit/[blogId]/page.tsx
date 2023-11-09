@@ -23,6 +23,6 @@ export default async function Edit( { params: { blogId } }: Props) {
     return notFound()
   }
   return (
-    <MdxEditor blogContent={blog?.content ? blog.content : ""}/>
+    <MdxEditor blogContent={blog?.content ? blog.content : ""} blogCode={blog.code}/>
   )
 }

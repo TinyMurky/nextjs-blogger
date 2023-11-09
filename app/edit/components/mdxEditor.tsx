@@ -10,13 +10,13 @@ import Preview from './preview'
 
 
 type Props = {
-    blogContent: string
-
+    blogContent: string,
+    blogCode: string
 }
 
 
-export default function MdxEditor( { blogContent }: Props) {
-  const [doc, setDoc] = useState<string>("")
+export default function MdxEditor( { blogContent, blogCode }: Props) {
+  const [doc, setDoc] = useState<string>(blogContent)
 
 
   const handleDocChange = useCallback((newDoc: string) => {
@@ -29,7 +29,7 @@ export default function MdxEditor( { blogContent }: Props) {
       <main className={` min-h-screen flex flex-col gap-2`}>
         <div className='flex flex-1 w-full gap-4'>
           <Editor initialDoc={doc} onChange={handleDocChange} />
-          <Preview doc={doc} />
+          <Preview doc={doc} blogInitCode={ blogCode } />
         </div>
       </main>
       {/* <Footer /> */}

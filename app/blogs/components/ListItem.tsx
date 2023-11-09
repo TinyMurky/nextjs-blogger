@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default function ListItem({ blog }: Props) {
-  const {title, category, createdAt, tag, readTime, cover, description} = blog
+  const {name, title, category, createdAt, tag, readTime, cover, description} = blog
   const formattedDate:string = getFormattedDate(createdAt.toDateString())
   const image = cover ? (
     <Image
@@ -39,7 +39,7 @@ export default function ListItem({ blog }: Props) {
       </div>
 
       <Link
-        href={`/blogs/${category}`}
+        href={`/blogs/${category}/${name}`}
         className="no-underline p-2 lg:p-4  justify-between flex flex-row gap-4 rounded-md hover:bg-gray-600 hover:drop-shadow-2xl focus:bg-gray-600 focus:bg-opacity-50"
       >
         <div className="shrink">

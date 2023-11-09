@@ -5,14 +5,15 @@ import {getMDXComponent} from 'mdx-bundler/client'
 import { defaultCode } from './defaultCode'
 import mdxComponents from "@/libs/mdxComponents"
 import { BundleResult } from '@/type'
-
+import { mdx2Code } from "@/libs/mdx2Code"
 type Props = {
-  doc: string
+  doc: string,
+  blogInitCode: string
 }
 
-export default function Preview({ doc }: Props) {
+export default function Preview({ doc, blogInitCode }: Props) {
 
-  const [mdxCode, setMdxCode] = useState<string>(defaultCode)
+  const [mdxCode, setMdxCode] = useState<string>(blogInitCode)
   useEffect(() => {
     async function fetchMDX() {
       const res = await fetch('/api/mdx/preview', {
@@ -30,7 +31,6 @@ export default function Preview({ doc }: Props) {
         }
       }
     }
-
     fetchMDX()
   }, [doc])
   // console.log('preview L32', mdxCode)

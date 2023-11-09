@@ -9,7 +9,7 @@ import Comment from "./Comment"
 import mdxComponents from "@/libs/mdxComponents"
 import TableOfContents from "./TableOfContents"
 import './iframe.css'
-import { getBlogByName, buildStaticBlogs } from '@/libs/getBlogs'
+import { getBlogByName, buildStaticBlogs, getBlogs } from '@/libs/getBlogs'
 interface Props{
   // routerName:string
   blogId:string
@@ -19,10 +19,14 @@ interface Props{
 // 變成static
 export async function generateStaticBlogPageParams(  ) {
   const blogs = await buildStaticBlogs()
+  // const blogs = await getBlogs()
   return blogs.map((blog: Blog) => blog.name)
 }
 
 export async function generateBlogPageMetadata({ blogId }: Props):Metadata {
+  // const blogs = await buildStaticBlogs()
+  // const blogs = await getBlogs()
+  // const blog = blogs.find(blog => blog.name == blogId)
   const blog = await getBlogByName(blogId)
 
   if ( !blog ) {
@@ -36,6 +40,9 @@ export async function generateBlogPageMetadata({ blogId }: Props):Metadata {
 }
 
 export default async function BlogPost({ blogId }: Props) {
+  // const blogs = await buildStaticBlogs()
+  // const blogs = await getBlogs()
+  // const blog = blogs.find(blog => blog.name == blogId)
   const blog = await getBlogByName(blogId)
   if ( !blog ) {
     return notFound()

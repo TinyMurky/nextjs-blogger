@@ -2,7 +2,8 @@ import path from "path"
 import fs from "fs"
 import { Category } from "@prisma/client"
 import processMdx from "./uploadImg"
-import { mdx2Code } from "../../libs/mdx2Code"
+import { mdx2Code } from "./mdx2Code4Seeder"
+// import { mdx2Code } from "../../libs/mdx2Code"
 type blogData = {
   name: string,
   published: boolean,
@@ -14,7 +15,7 @@ type blogData = {
   readTime: number | null,
   cover: string | null,
   slug: string | null,
-  date: Date | null
+  createdAt: string | Date | undefined
 }
 
 function isCategory(value: string | null): value is Category {
@@ -64,7 +65,7 @@ export async function getBlogsData(folderName:string, extension:string="mdx",  d
       readTime: frontmatter.readTime,
       cover: frontmatter.cover,
       slug: frontmatter.slug,
-      date: new Date(frontmatter.date)
+      createdAt:new Date(frontmatter.date)
     }
   }))
 

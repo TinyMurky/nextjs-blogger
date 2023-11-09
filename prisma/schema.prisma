@@ -27,7 +27,7 @@ model Blog {
   category    Category @default(tech)
   description String?  @db.Text
   content     String?  @db.Text
-  code        String   @db.Text
+  code        String   @db.LongText
   tag         String?
   readTime    Int?
   cover       String?

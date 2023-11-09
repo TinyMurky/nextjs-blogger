@@ -56,6 +56,7 @@ export async function getBlogsData(folderName:string, extension:string="mdx",  d
 
     return {
       name: path.parse(fileDirent.name).name,
+      title: frontmatter.title,
       published:true,
       category: isCategory(category) ? category : "edit",
       description: frontmatter.description,

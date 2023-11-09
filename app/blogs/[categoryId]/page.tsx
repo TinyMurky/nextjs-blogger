@@ -1,16 +1,14 @@
 import Posts from "../components/Posts"
-import path from "path"
 import { notFound } from "next/navigation"
 
-// import { allBlogs } from 'contentlayer/generated'
-import { allBlogs, Blog } from "@/libs/contentLayerAdapter"
 import { Metadata } from "next"
 type Params = {
   params: {
     categoryId: string // 從url拿進來的都是string
   }
 }
-import { $Enums, Category } from "@prisma/client"
+import { Category } from "@prisma/client"
+import { getBlogs } from "@/libs/getBlogs"
 
 function isCategory(value: string | null): value is Category {
   if (!value){
@@ -51,14 +49,13 @@ export function generateMetadata({ params:{ categoryId } }: Params):Metadata {
 
 
 
-export default function page({ params:{ categoryId } }: Params) {
+export default async function page({ params:{ categoryId } }: Params) {
   if (!isCategory(categoryId)) {
     return notFound()
   }
 
-  const blogs = allBlogs.filter((blog:Blog) => {
-    return blog.url.startsWith(`/blogs/${categoryId}`)
-  })
+  const blogs = await getBlogs(categoryId)
+
   return (
     <main>
       <Posts title={blogTitle[categoryId]} blogs={blogs} />

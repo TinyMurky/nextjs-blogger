@@ -18,7 +18,7 @@ CREATE TABLE `Blog` (
     `category` ENUM('tech', 'insight', 'edit', 'playground') NOT NULL DEFAULT 'tech',
     `description` TEXT NULL,
     `content` TEXT NULL,
-    `code` TEXT NOT NULL,
+    `code` LONGTEXT NOT NULL,
     `tag` VARCHAR(191) NULL,
     `readTime` INTEGER NULL,
     `cover` VARCHAR(191) NULL,

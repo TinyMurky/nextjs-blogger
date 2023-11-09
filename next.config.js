@@ -1,8 +1,6 @@
 /** @type {import('next').NextConfig} */
 
-// for contentLayer
-const { withContentlayer } = require('next-contentlayer')
-module.exports = withContentlayer({
+module.exports ={
   typescript: {
     // Dangerously allow production builds to successfully complete even if
     // your project has type errors.
@@ -20,4 +18,4 @@ module.exports = withContentlayer({
       }
     ]
   },
-}) // nextConfig直接丟到withContentlayer的{}裡
+}

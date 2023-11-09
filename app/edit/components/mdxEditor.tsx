@@ -10,31 +10,14 @@ import Preview from './preview'
 
 
 type Props = {
-    blogId: string
+    blogContent: string
 
 }
 
 
-export default function MdxEditor( { blogId }: Props) {
+export default function MdxEditor( { blogContent }: Props) {
   const [doc, setDoc] = useState<string>("")
-  
-  useEffect(() => {
-    async function fetchBlog(blogId: string) {
 
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blogs/${blogId}`, {
-        method: 'GET',
-      })
-
-      if (!res.ok) {
-        console.log('L28', res)
-        return "error"
-      }
-      const { code, frontmatter } = await res.json()
-      setDoc(code)
-    }
-
-    fetchBlog(blogId)
-  }, [blogId])
 
   const handleDocChange = useCallback((newDoc: string) => {
     setDoc(newDoc)

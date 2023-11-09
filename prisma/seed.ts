@@ -15,10 +15,13 @@ async function main() {
       },
     },
   })
+  console.log('all blogs construct complete')
 }
 main()
   .then(async () => {
+    console.log('prisma disconnecting')
     await prisma.$disconnect()
+    console.log('prisma disconnected, seed is complete')
   })
   .catch(async (e) => {
     console.error(e)

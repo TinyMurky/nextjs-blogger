@@ -12,6 +12,7 @@ CREATE TABLE `User` (
 -- CreateTable
 CREATE TABLE `Blog` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `name` VARCHAR(191) NOT NULL,
     `authorId` INTEGER NOT NULL,
     `published` BOOLEAN NOT NULL DEFAULT false,
     `category` ENUM('tech', 'insight', 'edit', 'playground') NOT NULL DEFAULT 'tech',

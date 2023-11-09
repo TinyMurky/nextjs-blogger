@@ -4,6 +4,7 @@ import { notFound } from "next/navigation"
 import { Metadata } from "next"
 import Link from "next/link"
 
+// import { allBlogs, Blog } from 'contentlayer/generated'
 import { allBlogs, Blog } from "@/libs/contentLayerAdapter"
 import getFormattedDate from "@/libs/getFormattedDate"
 import Comment from "./Comment"
@@ -19,7 +20,7 @@ interface Props{
 // 變成static
 export function generateStaticBlogPageParams(  ) {
   return allBlogs.map((blog: Blog) => {
-    const urlArray = blog._raw.sourceFileDir.split('/')
+    const urlArray = blog._raw.flattenedPath.split('/')
     return { 
       blogId: urlArray[urlArray.length - 1]
     }
@@ -29,7 +30,7 @@ export function generateStaticBlogPageParams(  ) {
 export function generateBlogPageMetadata({ blogId }: Props):Metadata {
   // 以下這Posts component叫過了，會被dedupt
   const blog = allBlogs.find((blog:Blog) => {
-    const urlArray = blog._raw.sourceFileDir.split('/')
+    const urlArray = blog._raw.flattenedPath.split('/')
     return urlArray[urlArray.length - 1] === blogId
   })
   if ( !blog ) {
@@ -46,7 +47,7 @@ export default async function BlogPost({ blogId }: Props) {
 
   // 以下這Posts component叫過了，會被dedupt
   const blog = allBlogs.find((blog:Blog) => {
-    const urlArray = blog._raw.sourceFileDir.split('/')
+    const urlArray = blog._raw.flattenedPath.split('/')
     return urlArray[urlArray.length - 1] === blogId
   })
   if ( !blog ) {

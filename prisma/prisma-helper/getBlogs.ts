@@ -6,6 +6,7 @@ type blogData = {
   category: Category,
   published: boolean,
   content: string,
+  name: string
 }
 
 function isCategory(value: string | null): value is Category {
@@ -46,7 +47,8 @@ export async function getBlogsData(folderName:string, extension:string="mdx",  d
     return {
       published:true,
       content:fileContent,
-      category: isCategory(category) ? category : "edit"
+      category: isCategory(category) ? category : "edit",
+      name: path.parse(fileDirent.name).name
     }
   }))
 

@@ -47,16 +47,19 @@ export default async function BlogPost({ blogId }: Props) {
   if ( !blog ) {
     return notFound()
   }
-  const {category, title, createdAt, content, code} = blog
+  const {name, category, title, createdAt, content, code} = blog
   const MDXContent = getMDXComponent(code)
   const formattedDate:string = getFormattedDate(createdAt.toDateString())
   return (
     <div className="lg:relative mx-auto w-full lg:max-w-6xl pt-24  lg:grid lg:grid-cols-5">
       <main className="lg:col-span-4 px-6 pb-24 prose md:prose-xl prose-base prose-gray prose-invert mx-auto">
         <h2 className="text-lg mt-4 mb-0">{title}</h2>
-        <p className="mt-0">
-          {formattedDate}
-        </p>
+        <div className='p-0 mt-0 flex flex-row justify-between items-center'>
+          <p className="">
+            {formattedDate}
+          </p>
+          <Link href={`/edit/${name}`} className='px-6 py-1 rounded-xl bg-slate-700 hover:bg-slate-500 focus:shadow-xl no-underline'>Edit</Link>
+        </div>
         <article>
           {/* 用 dangerouslySetInnerHTML 直接把處理好的markdown轉html直接放入section*/}
           {/* <section dangerouslySetInnerHTML={{__html:contentHtml}} /> */}

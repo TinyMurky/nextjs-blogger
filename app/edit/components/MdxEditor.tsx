@@ -5,6 +5,7 @@ import Preview from './Preview'
 import ControlPannel from './ControlPannel'
 import { Blog } from '@prisma/client'
 import type { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
+
 type Props = {
   blog: Blog
 }
@@ -27,6 +28,7 @@ async function saveBlogOnClicked(blogName: string, doc: string, router:AppRouter
   window.alert(message)
 
   if (router && redirectHref) {
+    router.prefetch(redirectHref)
     router.push(redirectHref)
   }
   return

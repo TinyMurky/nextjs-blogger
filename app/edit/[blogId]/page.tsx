@@ -8,7 +8,7 @@ type Props = {
   }
 }
 
-export const revalidate = process.env.NEXT_PUBLIC_REVALIDATE_TIME || 86400
+export const revalidate = Number(process.env.NEXT_PUBLIC_REVALIDATE_TIME) || 86400
 
 export async function generateStaticParams() {
   const blogs = await getBlogs()

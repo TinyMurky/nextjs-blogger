@@ -18,7 +18,7 @@ type Params = {
   }
 }
 
-export const revalidate = process.env.NEXT_PUBLIC_REVALIDATE_TIME || 86400
+export const revalidate = Number(process.env.NEXT_PUBLIC_REVALIDATE_TIME) || 86400
 
 // 變成static
 
@@ -64,7 +64,7 @@ export default async function Post({ params: { blogId } }: Params) {
           <p className="">
             {formattedDate}
           </p>
-          <Link href={`/edit/${name}`} className='px-6 py-1 rounded-xl bg-slate-700 hover:bg-slate-500 focus:shadow-xl no-underline'>Edit</Link>
+          <Link href={`/edit/${name}`} prefetch={true} className='px-6 py-1 rounded-xl bg-slate-700 hover:bg-slate-500 focus:shadow-xl no-underline'>Edit</Link>
         </div>
         <article>
           {/* 用 dangerouslySetInnerHTML 直接把處理好的markdown轉html直接放入section*/}

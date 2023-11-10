@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
-import { PrismaClient, Prisma } from '@prisma/client'
+import prisma from "@/libs/db"
 import { mdx2Code } from "@/libs/mdx2Code"
 import { revalidatePath } from 'next/cache'
-const prisma = new PrismaClient()
 
 
 type Props = {
@@ -77,9 +76,10 @@ export async function POST(request: NextRequest, { params }: Props) {
       })
     }
 
-    revalidatePath('/', 'page')
-    revalidatePath(`/blogs/${updatedBlog.category}`, 'page')
-    revalidatePath(`/blogs/${updatedBlog.category}/${updatedBlog.name}`, 'page')
+    revalidatePath('/', 'layout')
+    // revalidatePath(`/blogs/${updatedBlog.category}`, 'page')
+    // revalidatePath(`/blogs/${updatedBlog.category}/${updatedBlog.name}`, 'page')
+    // revalidatePath(`/edit/${updatedBlog.name}`, 'page')
 
     return NextResponse.json({ message: 'Blog saved!' }, {
       status: 200,

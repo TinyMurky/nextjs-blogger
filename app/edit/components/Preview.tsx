@@ -1,5 +1,6 @@
 "use client"
 import type React from 'react'
+import { mdx2CodeAction } from '@/app/actions/mdx2CodeAction'
 import { useState, useMemo, useEffect, useCallback } from 'react'
 import {getMDXComponent} from 'mdx-bundler/client'
 import mdxComponents from "@/libs/mdxComponents"
@@ -42,22 +43,12 @@ export default function Preview({ doc, blogCode, blogMatter }: Props) {
 
   // fetchMDX要先金過debounce才可以傳入useEffect
   const fetchMDX= useCallback(async (doc: string) => {
-    const res = await fetch('/api/mdx/preview', {
-      method: 'POST',
-      body: JSON.stringify(doc),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-
-    if (res.ok) {
-      const {code, frontmatter}: BundleResult = await res.json()
+      const {code, frontmatter}: BundleResult = await mdx2CodeAction(doc)
       setMdxCode(code)
       setMdxMatter(m => ({
         ...m,
         title: frontmatter.title
       }))
-    }
   }, [])
 
   const debouncedFetchMDX = useCallback(debounce(fetchMDX, 1000), [fetchMDX])

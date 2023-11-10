@@ -1,8 +1,5 @@
 import { NextRequest, NextResponse } from "next/server"
-import { PrismaClient, Prisma } from '@prisma/client'
-
-const prisma = new PrismaClient()
-
+import prisma from "@/libs/db"
 
 export async function GET() {
   const blog = await prisma.blog.findMany({

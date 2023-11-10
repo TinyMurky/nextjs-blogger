@@ -1,6 +1,5 @@
-import { PrismaClient } from '@prisma/client'
+import prisma from "@/libs/db"
 import { getBlogsData } from './prisma-helper/getBlogs'
-const prisma = new PrismaClient()
 async function main() {
   const blogs = await getBlogsData('/public/blogs', 'mdx')
 

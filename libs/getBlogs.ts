@@ -1,7 +1,6 @@
-import { PrismaClient } from "@prisma/client"
+import prisma from "@/libs/db"
 import type { Blog } from "@prisma/client"
 import { mdx2Code } from "./mdx2Code"
-const prisma = new PrismaClient()
 
 
 export async function buildStaticBlogs (): Promise<Blog[]> {

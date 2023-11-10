@@ -26,6 +26,8 @@ const blogTitle: { [key in Category]: string} = {
   [Category.playground]: "Playground"
 }
 
+export const revalidate = Number(process.env.NEXT_PUBLIC_REVALIDATE_TIME) || 86400
+
 export function generateStaticParams(  ) {
   return Object.keys(Category).map((categoryId: string) => {
     return { 

@@ -1,13 +1,20 @@
 "use client"
 import type React from 'react'
+import { mdx2CodeAction } from '@/app/actions/mdx2CodeAction'
 import { useState, useMemo, useEffect, useCallback } from 'react'
 import {getMDXComponent} from 'mdx-bundler/client'
-import { defaultCode } from './defaultCode'
 import mdxComponents from "@/libs/mdxComponents"
 import { BundleResult } from '@/type'
+import { Blog } from '@prisma/client'
+import Link from 'next/link'
+
+type ExcludeCodeAndContent = Pick<Blog, Exclude<keyof Blog, 'content' | 'code'>>
+
+type blogMatter = ExcludeCodeAndContent
 type Props = {
   doc: string,
-  blogInitCode: string
+  blogCode: string,
+  blogMatter: blogMatter
 }
 
 function debounce<F extends (...args: any[]) => any>(func: F, wait: number): (...args: Parameters<F>) => void {
@@ -30,29 +37,21 @@ function debounce<F extends (...args: any[]) => any>(func: F, wait: number): (..
 
 
 
-export default function Preview({ doc, blogInitCode }: Props) {
-
-  const [mdxCode, setMdxCode] = useState<string>(blogInitCode)
+export default function Preview({ doc, blogCode, blogMatter }: Props) {
+  const [mdxCode, setMdxCode] = useState<string>(blogCode)
+  const [mdxMatter, setMdxMatter] = useState<blogMatter>(blogMatter)
 
   // fetchMDX要先金過debounce才可以傳入useEffect
   const fetchMDX= useCallback(async (doc: string) => {
-    const res = await fetch('/api/mdx/preview', {
-      method: 'POST',
-      body: JSON.stringify(doc),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-
-    if (res.ok) {
-      const data: BundleResult = await res.json()
-      if (data.code){
-        setMdxCode(data.code)
-      }
-    }
+      const {code, frontmatter}: BundleResult = await mdx2CodeAction(doc)
+      setMdxCode(code)
+      setMdxMatter(m => ({
+        ...m,
+        title: frontmatter.title
+      }))
   }, [])
 
-  const debouncedFetchMDX = useCallback(debounce(fetchMDX, 2000), [fetchMDX])
+  const debouncedFetchMDX = useCallback(debounce(fetchMDX, 1000), [fetchMDX])
 
   useEffect(() => {
     debouncedFetchMDX(doc)
@@ -63,8 +62,11 @@ export default function Preview({ doc, blogInitCode }: Props) {
 
   return (
     <div className='w-1/2 preview markdown-body'>
-      <main className='prose md:prose-xl prose-base prose-gray prose-invert mx-auto'>
-        <MDXContent components={mdxComponents}/>
+      <main className='prose md:prose-xl prose-base prose-gray prose-invert mx-auto pt-8'>
+        <h2 className="text-lg mt-4 mb-0">{mdxMatter.title}</h2>
+        <article>
+          <MDXContent components={mdxComponents}/>
+        </article>
       </main>
     </div>
   )

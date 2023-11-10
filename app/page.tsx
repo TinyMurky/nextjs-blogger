@@ -3,6 +3,8 @@ import Posts from "./blogs/components/Posts"
 import path from "path"
 type Props = {}
 
+export const revalidate = Number(process.env.NEXT_PUBLIC_REVALIDATE_TIME) || 86400
+
 export default async function page({}: Props) {
   const cwd = path.join(process.cwd(), '.next/server/app')
   const pathName = __dirname.substring(cwd.length)

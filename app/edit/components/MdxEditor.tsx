@@ -24,10 +24,14 @@ export default function MdxEditor( { blog }: Props) {
   return (
     // <div className={styles.container}>
     <div className="">
-      <main className={` min-h-screen flex flex-col gap-2`}>
-        <div className='flex flex-1 w-full gap-4'>
-          <Editor initialDoc={doc} onChange={handleDocChange} uploadImgUrl={uploadImgUrl}/>
-          <Preview doc={doc} blogCode={ code } blogMatter={blogMatter} />
+      <main className={`flex flex-col gap-2`}>
+        <div className='flex max-h-[92vh] w-full gap-24'>
+          <div className="flex-1  overflow-auto">
+            <Editor initialDoc={doc} onChange={handleDocChange} uploadImgUrl={uploadImgUrl}/>
+          </div>
+          <div className="flex-1 w-full overflow-auto">
+            <Preview doc={doc} blogCode={ code } blogMatter={blogMatter} />
+          </div>
         </div>
       </main>
       <ControlPannel setUploadImgUrl={setUploadImgUrl} saveBlogOnClicked={saveBlogOnClicked} blogCategory={blog.category} blogName={blog.name} doc={doc} />

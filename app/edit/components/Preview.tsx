@@ -42,7 +42,7 @@ export default function Preview({ doc, blogCode, blogMatter }: Props) {
   const MDXContent = useMemo(() => getMDXComponent(mdxCode), [mdxCode])
 
   return (
-    <div className='w-1/2 preview markdown-body'>
+    <div className='w-full preview markdown-body'>
       <main className='prose md:prose-xl prose-base prose-gray prose-invert mx-auto pt-8'>
         <h2 className="text-lg mt-4 mb-0">{mdxMatter.title}</h2>
         <article>

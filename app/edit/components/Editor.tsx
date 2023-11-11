@@ -36,6 +36,6 @@ export default function Editor({ initialDoc, onChange, uploadImgUrl }: Props) {
     }
   }, [editorView])
 
-  return <div className='w-1/2 h-full flex-grow-0 flex-shrink-0' ref={refContainer}></div>
+  return <div className='w-full h-full flex-grow-0 flex-shrink-0' ref={refContainer}></div>
 }
 

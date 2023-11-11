@@ -1,5 +1,5 @@
 import type { Config } from 'tailwindcss'
-
+import { withUt } from "uploadthing/tw"
 // https://www.skcript.com/blog/disable-tailwind-prose-code
 // 去除煩人的``
 const disabledCss = {
@@ -44,4 +44,4 @@ const config: Config = {
     require('@tailwindcss/typography'),
   ],
 }
-export default config
+export default withUt(config)

@@ -1,6 +1,6 @@
 'use client'
 import type React from 'react'
-import { useEffect, useState, useRef } from 'react'
+import { useEffect, useState, useRef, useCallback } from 'react'
 import { basicSetup } from 'codemirror'
 import { EditorState } from '@codemirror/state'
 import { EditorView, keymap } from '@codemirror/view'
@@ -17,20 +17,11 @@ interface Props {
 
 const useCodeMirror = <T extends Element>(
   props: Props
-): [React.MutableRefObject<T | null>, EditorView?] => {
+): [React.MutableRefObject<T | null>, (text: string) => void,EditorView?,] => {
   const refContainer = useRef<T>(null)
   const [editorView, setEditorView] = useState<EditorView>()
   const { onChange } = props
-  // useEffect(() => {
-  //   if (editorView && props.initialDoc !== editorView.state.doc.toString()) {
-  //     // 如果初始文档发生变化，更新 CodeMirror 文档
-  //     editorView.dispatch({
-  //       changes: { from: 0, to: editorView.state.doc.length, insert: props.initialDoc }
-  //     })
-  //   }
-  // }, [props.initialDoc, editorView])
 
-  // console.log("Fuck you", props.initialDoc)
   useEffect(() => {
     if (!refContainer.current) return
 
@@ -56,7 +47,7 @@ const useCodeMirror = <T extends Element>(
 
     const view = new EditorView({
       state: startState,
-      parent: refContainer.current
+      parent: refContainer.current // codemirror要放在哪個div裡
     })
     setEditorView(view)
 
@@ -66,8 +57,17 @@ const useCodeMirror = <T extends Element>(
     }
   }, [refContainer])
 
+  // 用於插入img url
+  const insertTextAtCursor = useCallback((text: string) => {
+      if (editorView) {
+        const transaction = editorView.state.update({
+          changes: { from: editorView.state.selection.main.from, insert: `\n\n![](${text})\n\n` }
+        })
+        editorView.dispatch(transaction);
+      }
+    }, [ editorView ])
 
-  return [refContainer, editorView]
-}
+    return [refContainer, insertTextAtCursor, editorView]
+  }
 
 export default useCodeMirror

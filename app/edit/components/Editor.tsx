@@ -5,18 +5,27 @@ import useCodeMirror from './use-codemirror'
 
 type Props = {
   initialDoc: string,
-  onChange: (doc: string) => void
+  onChange: (doc: string) => void,
+  uploadImgUrl: string
 }
 
-export default function Editor({ initialDoc, onChange }: Props) {
+export default function Editor({ initialDoc, onChange, uploadImgUrl }: Props) {
   const handleChange = useCallback(
     (state: EditorState) => onChange(state.doc.toString()),
     [onChange]
   )
-  const [refContainer, editorView] = useCodeMirror<HTMLDivElement>({
+  const [refContainer, insertTextAtCursor ,editorView] = useCodeMirror<HTMLDivElement>({
     initialDoc: initialDoc,
     onChange: handleChange
   })
+
+  // 插入圖片
+  useEffect(() => {
+    if (uploadImgUrl) {
+      insertTextAtCursor(uploadImgUrl)
+    }
+  }, [uploadImgUrl, insertTextAtCursor])
+
 
   useEffect(() => {
     if (editorView) {

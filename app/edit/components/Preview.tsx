@@ -6,6 +6,7 @@ import {getMDXComponent} from 'mdx-bundler/client'
 import mdxComponents from "@/libs/mdxComponents"
 import { BundleResult } from '@/type'
 import { Blog } from '@prisma/client'
+import { debounce } from './editor-helpers'
 import Link from 'next/link'
 
 type ExcludeCodeAndContent = Pick<Blog, Exclude<keyof Blog, 'content' | 'code'>>
@@ -16,26 +17,6 @@ type Props = {
   blogCode: string,
   blogMatter: blogMatter
 }
-
-function debounce<F extends (...args: any[]) => any>(func: F, wait: number): (...args: Parameters<F>) => void {
-  let timeoutId: ReturnType<typeof setTimeout> | null = null
-
-  return function(this: ThisParameterType<F>, ...args: Parameters<F>) {
-    const context = this
-    const later = () => {
-      timeoutId = null;
-      func.apply(context, args)
-    }
-
-    if (timeoutId !== null) {
-      clearTimeout(timeoutId)
-    }
-
-    timeoutId = setTimeout(later, wait)
-  } as F
-}
-
-
 
 export default function Preview({ doc, blogCode, blogMatter }: Props) {
   const [mdxCode, setMdxCode] = useState<string>(blogCode)

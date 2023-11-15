@@ -20,6 +20,10 @@ const routerLinks:routerLink[] = [
   {
     path: '/blogs/insight',
     name: '心得文章'
+  },
+  {
+    path: '/blogs/edit',
+    name: '編輯中'
   }
 ]
 

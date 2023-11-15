@@ -60,7 +60,7 @@ export default async function page({ params:{ categoryId } }: Params) {
 
   return (
     <main>
-      <Posts title={blogTitle[categoryId]} blogs={blogs} />
+      <Posts title={blogTitle[categoryId]} category={categoryId} blogs={blogs} />
     </main>
   )
 }

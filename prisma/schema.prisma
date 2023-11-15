@@ -25,7 +25,7 @@ model Blog {
   author      User     @relation(fields: [authorId], references: [id])
   authorId    Int
   published   Boolean  @default(false)
-  category    Category @default(tech)
+  category    Category @default(edit)
   description String?  @db.Text
   content     String?  @db.Text
   code        String   @db.LongText

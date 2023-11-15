@@ -26,7 +26,7 @@ export default function ControlPannel({setUploadImgUrl, saveBlogOnClicked ,blogC
     return () => {
       window.removeEventListener('mousemove', checkMousePosition)
     }
-  }, [])
+  }, [checkMousePosition])
 
   return (
     <div className={`px-4 py-3 flex flex-row justify-around gap-4 items-center m-0 controlPannel fixed ${showControlPanel ? 'inline-flex opacity-100' : 'hidden opacity-0'} bottom-16  left-12 transition-all ease-in rounded bg-gray-600 bg-opacity-50 backdrop-blur-md`}>

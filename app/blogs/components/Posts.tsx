@@ -10,7 +10,7 @@ import { Blog } from "@prisma/client"
 
 interface Props {
   title: string,
-  category: Category,
+  category: Category | null,
   blogs: Blog[]
 }
 
@@ -31,8 +31,9 @@ export default function Posts({ title, category, blogs }: Props) {
   }, [blogs, search, searchRegex])
 
 
-  const newPostButton =  allowedNewPostCategory.includes(category) ?
+  const newPostButton =  category ? allowedNewPostCategory.includes(category) ?
     <button className="text-xl rounded-xl text-gray-200 bg-gray-500 bg-opacity-50 hover:bg-opacity-100 px-4 pt-1 pb-2 font-bold" onClick={() => setShowModal(true)}>New Blog</button>
+    : null
     : null
 
   return (

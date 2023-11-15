@@ -28,7 +28,7 @@ export async function saveBlogOnClicked(blogName: string, doc: string, router:Ap
   })
 
   if (!res.ok){
-    window.alert('Blog saving has failed!aaaaa')
+    window.alert('Blog saving has failed!')
     return
   }
 

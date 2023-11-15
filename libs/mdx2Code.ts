@@ -8,12 +8,13 @@ export async function mdx2Code( source: string, useRyhypePlugins: boolean = true
     source: source,
     mdxOptions(options, frontmatter) {
       // options.remarkPlugins = [...(options.remarkPlugins ?? []), myRemarkPlugin]
-      if (useRyhypePlugins) {
-        options.rehypePlugins = [...(options.rehypePlugins ?? []), ...rehypePlugins]
-      }
+      options.rehypePlugins = useRyhypePlugins
+        ?
+        [...(options.rehypePlugins ?? []), ...rehypePlugins]
+        :
+        [...(options.rehypePlugins ?? [])]
       return options
     }
   })
-
   return result
 }

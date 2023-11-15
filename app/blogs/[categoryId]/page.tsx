@@ -1,6 +1,6 @@
 import Posts from "../components/Posts"
 import { notFound } from "next/navigation"
-
+import { isCategory } from "@/libs/db"
 import { Metadata } from "next"
 type Params = {
   params: {
@@ -9,15 +9,6 @@ type Params = {
 }
 import { Category } from "@prisma/client"
 import { getBlogs } from "@/libs/getBlogs"
-
-function isCategory(value: string | null): value is Category {
-  if (!value){
-    return false
-  }
-  // enum 才可以這樣寫
-  return Object.values(Category).includes(value as Category)
-}
-
 
 const blogTitle: { [key in Category]: string} = {
   [Category.insight]: "心情Blog",

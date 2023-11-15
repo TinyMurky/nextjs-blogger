@@ -55,6 +55,7 @@ const useCodeMirror = <T extends Element>(
     return () => {
       view.destroy()
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [refContainer])
 
   // 用於插入img url

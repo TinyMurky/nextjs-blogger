@@ -3,6 +3,7 @@ import fs from "fs"
 import { Category } from "@prisma/client"
 import processMdx from "./uploadImg"
 import { mdx2Code } from "./mdx2Code4Seeder"
+import { isCategory } from "@/libs/db"
 // import { mdx2Code } from "../../libs/mdx2Code"
 type blogData = {
   name: string,
@@ -16,14 +17,6 @@ type blogData = {
   cover: string | null,
   slug: string | null,
   createdAt: string | Date | undefined
-}
-
-function isCategory(value: string | null): value is Category {
-  if (!value){
-    return false
-  }
-  // enum 才可以這樣寫
-  return Object.values(Category).includes(value as Category)
 }
 
 export async function getBlogsData(folderName:string, extension:string="mdx",  dir:string|null=null, category:string|null=null):Promise<blogData[]> {
@@ -52,7 +45,7 @@ export async function getBlogsData(folderName:string, extension:string="mdx",  d
     const fullPath:string = path.join(blogFolder, fileDirent.name)
     // 文章丟進processMdx裡將圖片上傳uploadthings後回傳儲存到mdxFile
     const fileContent:string = await processMdx(fullPath)
-    const {code, frontmatter} = await mdx2Code(fileContent)
+    const { code, frontmatter } = await mdx2Code(fileContent)
 
     return {
       name: path.parse(fileDirent.name).name,

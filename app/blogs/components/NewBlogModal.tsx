@@ -8,7 +8,7 @@ import isBlogNameExisted from '@/app/actions/checkNameExist'
 type Props = {
   showModal: boolean,
   setShowModal: Dispatch<SetStateAction<boolean>>
-  category: Category,
+  category: Category | null,
   allowedNewPostCategory: Category[],
 }
 
@@ -68,7 +68,8 @@ export default function NewBlogModal({ showModal, setShowModal, category, allowe
     }
     const data = {
       name: blogName,
-      title: blogTitle
+      title: blogTitle,
+      category
     }
     const res = await fetch('/api/blogs', {
       method:'POST',
@@ -81,7 +82,7 @@ export default function NewBlogModal({ showModal, setShowModal, category, allowe
     // fetch要await 等回來也要await
     // 後端也回傳json, 用json打開
     if (!res.ok) {
-      window.alert('Create new post failed')
+      setErrMsg(res.statusText)
       return
     }
 
@@ -89,7 +90,7 @@ export default function NewBlogModal({ showModal, setShowModal, category, allowe
   }
 
   // 只有edit和playground有新增
-  if (!allowedNewPostCategory.includes(category)){
+  if (!category || !allowedNewPostCategory.includes(category)){
     return null
   }
 

@@ -32,6 +32,7 @@ export default function Preview({ doc, blogCode, blogMatter }: Props) {
       }))
   }, [])
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const debouncedFetchMDX = useCallback(debounce(fetchMDX, 1000), [fetchMDX])
 
   useEffect(() => {

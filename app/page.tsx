@@ -6,12 +6,12 @@ type Props = {}
 export const revalidate = Number(process.env.NEXT_PUBLIC_REVALIDATE_TIME) || 86400
 
 export default async function page({}: Props) {
-  const cwd = path.join(process.cwd(), '.next/server/app')
-  const pathName = __dirname.substring(cwd.length)
   const blogs = await getBlogs()
+  const publishedBlogs = blogs.filter(blog => blog.published)
+
   return (
     <main>
-      <Posts title="Blogs" blogs={blogs} />
+      <Posts title="Blogs" category={null} blogs={publishedBlogs} />
     </main>
   )
 }

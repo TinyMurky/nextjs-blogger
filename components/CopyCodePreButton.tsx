@@ -42,7 +42,7 @@ export default function CopyCodePreButton({children, className, ...props}: Props
   return (
     <div className='group relative !mt-14 block'>
       <pre {...props} ref={preRef} className={clsx(className)}>
-        <div className='absolute w-full -top-8 right-0 bg-gray-700 bg-opacity-50 text-base  py-2 ps-4 rounded-t-md'>
+        <div className='absolute w-full -top-8 right-0 bg-gray-700 text-base  py-2 ps-4 rounded-t-md'>
           <span className='text-gray-300'>{codeLanguage}</span>
           <div className={
             clsx('absolute top-0 right-1 mt-1 flex gap-2 items-center ',

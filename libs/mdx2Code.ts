@@ -12,7 +12,7 @@ export async function mdx2Code( source: string, useRyhypePlugins: boolean = true
         ?
         [...(options.rehypePlugins ?? []), ...rehypePlugins]
         :
-        [...(options.rehypePlugins ?? [])]
+        [...(options.rehypePlugins ?? []), rehypePlugins[rehypePlugins.length - 1]]
       return options
     }
   })

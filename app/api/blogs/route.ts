@@ -87,6 +87,13 @@ slug:
 請於此開始撰寫文章
 
 mdx上方的欄位請務必於冒號後增加空格再更改內容，此外請不要打太短的內容，會影響畫面顯示
+
+程式碼請用下列方法呈現
+
+\`\`\`javascript
+console.log('Hello World')
+\`\`\`
+
 `
   return mdx
 }

@@ -20,7 +20,7 @@ export function createCheckMousePosition (setter:(value: React.SetStateAction<bo
 
 export async function saveBlogOnClicked(blogName: string, doc: string, router:AppRouterInstance | null = null,redirectHref: string | null = null) {
   const res = await fetch(`/api/blogs/${blogName}`, {
-    method: 'POST',
+    method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
     },

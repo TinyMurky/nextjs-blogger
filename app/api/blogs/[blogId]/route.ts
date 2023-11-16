@@ -45,7 +45,7 @@ export async function GET(request: NextRequest, { params }: Props) {
   }
 }
 
-export async function POST(request: NextRequest, { params }: Props) {
+export async function PUT(request: NextRequest, { params }: Props) {
   const { blogId } = params
   const content = await request.json()
 

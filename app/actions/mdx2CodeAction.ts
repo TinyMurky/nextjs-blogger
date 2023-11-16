@@ -1,9 +1,9 @@
 'use server'
 import { BundleResult } from '@/type'
 import { mdx2Code } from '@/libs/mdx2Code'
-export async function mdx2CodeAction( source: string ): Promise<BundleResult>{
+export async function mdx2CodeAction( source: string ): Promise<Omit<BundleResult, "matter">>{
 
-  const result = await mdx2Code(source, false)
+  const {code, frontmatter, errors} = await mdx2Code(source, false)
 
-  return result
+  return {code, frontmatter, errors}
 }

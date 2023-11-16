@@ -24,7 +24,7 @@ export default function Preview({ doc, blogCode, blogMatter }: Props) {
 
   // fetchMDX要先金過debounce才可以傳入useEffect
   const fetchMDX= useCallback(async (doc: string) => {
-      const {code, frontmatter}: BundleResult = await mdx2CodeAction(doc)
+      const {code, frontmatter}: Omit<BundleResult, "matter"> = await mdx2CodeAction(doc)
       setMdxCode(code)
       setMdxMatter(m => ({
         ...m,

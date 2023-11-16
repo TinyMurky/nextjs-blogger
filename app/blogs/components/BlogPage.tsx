@@ -54,7 +54,7 @@ export default async function BlogPost({ blogId }: Props) {
     <div className="lg:relative mx-auto w-full lg:max-w-6xl  pt-24  lg:grid lg:grid-cols-5">
       <main className="lg:col-span-4  px-6 pb-24  prose md:prose-xl prose-base prose-gray prose-invert">
         <h2 className="text-lg mt-4 mb-0">{title}</h2>
-        <div className='p-0 mt-0 flex flex-row justify-between items-center'>
+        <div className='p-0 mt-0 flex flex-col lg:flex-row items-start gap-4 lg:justify-between lg:items-center'>
           <p className="">
             {formattedDate}
           </p>

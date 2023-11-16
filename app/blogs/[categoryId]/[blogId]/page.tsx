@@ -9,7 +9,7 @@ import { getBlogByName, buildStaticBlogs } from '@/libs/getBlogs'
 
 import '../../components/iframe.css'
 import Comment from '../../components/Comment'
-import EditAndPublishBtn from '../../components/EditAndPublishBtn'
+import EditPublishDeleteBtn from '../../components/EditPublishDeleteBtn'
 import mdxComponents from "@/libs/mdxComponents"
 import TableOfContents from '../../components/TableOfContents'
 
@@ -66,7 +66,7 @@ export default async function Post({ params: {categoryId, blogId } }: Params) {
           <p className="">
             {formattedDate}
           </p>
-          <EditAndPublishBtn categoryId={categoryId} blogId={blogId}/>
+          <EditPublishDeleteBtn categoryId={categoryId} blogId={blogId}/>
         </div>
         <article>
           {/* 用 dangerouslySetInnerHTML 直接把處理好的markdown轉html直接放入section*/}

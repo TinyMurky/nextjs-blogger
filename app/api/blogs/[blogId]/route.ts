@@ -10,6 +10,8 @@ type Props = {
   }
 }
 
+const auth = (req: Request) => ({ id: "1", email: "murky0830@gmail.com" })
+
 export async function GET(request: NextRequest, { params }: Props) {
   const { blogId } = params
   try{
@@ -86,6 +88,53 @@ export async function PUT(request: NextRequest, { params }: Props) {
       statusText: 'OK',
     })
 
+  } catch(error) {
+    console.log(error)
+    return NextResponse.json(error, {
+      status: 500,
+      statusText: 'Internal Sever Error',
+    })
+  }
+}
+
+export async function DELETE(request: NextRequest, { params }: Props) {
+  try{
+    const { blogId } = params
+
+    const userData = await auth(request)
+
+    const user = await prisma.user.findUnique({
+      where: {
+        email: userData.email
+      }
+    })
+
+    if (!user) {
+      return NextResponse.json({ message: 'Unauthorized Delete' }, {
+        status: 401,
+        statusText: 'Unauthorized',
+      })
+    }
+
+    const deleteUser = await prisma.blog.delete({
+      where: {
+        name: blogId,
+      }
+    })
+
+    if (!deleteUser) {
+      return NextResponse.json({message: "Delete failed, blog not found"}, {
+        status: 404,
+        statusText: 'Not Found',
+      })
+    }
+
+    revalidatePath('/', 'layout')
+
+    return NextResponse.json({message: "Delete successed!"}, {
+      status: 200,
+      statusText: 'ok',
+    })
   } catch(error) {
     console.log(error)
     return NextResponse.json(error, {

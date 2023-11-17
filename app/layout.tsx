@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Noto_Sans_TC} from 'next/font/google'
+import AuthProvider from './context/AuthProvider'
 import './globals.css'
 import './prism-plus.css'
 import './prism-vsc-dark-plus.css'
@@ -21,8 +22,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={` bg-gray-800`}>
-        <Navbar />
-        {children}
+        {/* for auth */}
+        <AuthProvider>
+          <Navbar />
+          {children}
+        </AuthProvider>
       </body>
     </html>
   )

@@ -2,7 +2,8 @@ import NextAuth from "next-auth"
 import GithubProvider from "next-auth/providers/github"
 import prisma from "@/libs/db"
 
-export default NextAuth( {
+
+const handler =  NextAuth( {
   // Configure one or more authentication providers
   providers: [
     GithubProvider({
@@ -11,29 +12,27 @@ export default NextAuth( {
     }),
   ],
   callbacks: {
-    async jwt({token, user}) {
+    async jwt({token}) {
+      const dbUser = await prisma.user.findUnique({
+        where: {
+          email: token.email
+        }
+      })
 
-      if (user?.email) {
-        token.user.email = user.email
-        const dbUser = await prisma.user.findUnique({
-          where: {
-            email: user.email
-          }
-        })
-
-        token.user.id = dbUser?.id
-        token.user.name = dbUser?.name
-      }
-      
+      token.id = dbUser?.id
+      token.name = dbUser?.name || token.name
+      delete token.picture
+      delete token.sub
       return token
     },
   
     async session({session, token}) {
-      session.user.id = token.user.id
-      session.user.email = token.user.email
-      session.user.name = token.user.name
-      
+      session.user.id = token.id
+      session.user.email = token.email
+      session.user.name = token.name
       return session
     }
   }
 })
+
+export { handler as GET, handler as POST }

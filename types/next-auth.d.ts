@@ -8,8 +8,8 @@ declare module "next-auth" {
     user: {
       /** The user's postal address. */
       id?: number
-      email?: string
-      name?: string
+      email: string
+      name: string
     } & DefaultSession["user"]
   }
 }
@@ -18,10 +18,10 @@ declare module "next-auth/jwt" {
   /** Returned by the `jwt` callback and `getToken`, when using JWT sessions */
   interface JWT {
     /** OpenID ID Token */
-    user: {
-      id?: number
-      email?: string
-      name?: string
-    }
+    id?: number
+    name: string
+    email: string
+    picture?: string
+    sub?: string
   }
 }

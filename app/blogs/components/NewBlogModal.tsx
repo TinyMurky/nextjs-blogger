@@ -5,6 +5,7 @@ import { FaCheck, FaTimes, FaInfoCircle } from "react-icons/fa"
 import clsx from 'clsx'
 import { Category } from "@prisma/client"
 import isBlogNameExisted from '@/app/actions/checkNameExist'
+import { useSession } from 'next-auth/react'
 type Props = {
   showModal: boolean,
   setShowModal: Dispatch<SetStateAction<boolean>>
@@ -13,8 +14,11 @@ type Props = {
 }
 
 const blogNameRegex = /^[a-zA-Z0-9-_]{3,}$/
+const blogTitleRegex = /\D+/
 
 export default function NewBlogModal({ showModal, setShowModal, category, allowedNewPostCategory }: Props) {
+  // 登入session
+  const { data:session } = useSession()
   // 必填： name, title, author(用關聯的)
 
   // const userRef = useRef()
@@ -32,7 +36,6 @@ export default function NewBlogModal({ showModal, setShowModal, category, allowe
   const [blogTitleFocus, setBlogTitleFocus] = useState(false)
 
   const [errMsg, setErrMsg] = useState('')
-  const [success, setSuccess] = useState(false)
 
   useEffect(() => {
     setBlogNameFocus(true)
@@ -44,7 +47,7 @@ export default function NewBlogModal({ showModal, setShowModal, category, allowe
   }, [blogName])
 
   useEffect(() => {
-    const atLeastOneWord = blogTitle.length > 0
+    const atLeastOneWord = blogTitleRegex.test(blogTitle)
     setValidBlogTitle(atLeastOneWord)
   }, [blogTitle])
 
@@ -56,7 +59,7 @@ export default function NewBlogModal({ showModal, setShowModal, category, allowe
     e.preventDefault()
 
     //最終確認避免失效
-    if (!blogNameRegex.test(blogName) || !(blogTitle.length > 0)){
+    if (!blogNameRegex.test(blogName) || !(blogTitleRegex.test(blogTitle))){
       setErrMsg('Invalid Input')
       return
     }
@@ -66,10 +69,11 @@ export default function NewBlogModal({ showModal, setShowModal, category, allowe
       return
 
     }
+
     const data = {
       name: blogName,
       title: blogTitle,
-      category
+      category,
     }
     const res = await fetch('/api/blogs', {
       method:'POST',
@@ -208,7 +212,7 @@ export default function NewBlogModal({ showModal, setShowModal, category, allowe
             >
               <FaInfoCircle/>
               <div>
-                At least 1 word.
+                At least 1 character.
               </div>
             </div>
           </div>

@@ -9,8 +9,13 @@ import { authOptions } from "@/libs/authOptions"
 const PLAYGROUND_AUTHOR_ID = -1
 // new blog
 export async function POST(request: NextRequest) {
-  const isPlayground = request.nextUrl.basePath === "playground"
-  console.log(request.nextUrl.basePath)
+  let isPlayground = false
+  const sourcePage = request.headers.get('X-Source-Page')
+
+  if (sourcePage) {
+    const sourceUrlArray = sourcePage.split('/')
+    isPlayground = sourceUrlArray[sourceUrlArray.length -1] === 'playground'
+  }
   // 登入的session
   const session = await getServerSession(authOptions)
 

@@ -79,6 +79,7 @@ export default function NewBlogModal({ showModal, setShowModal, category, allowe
       method:'POST',
       headers: {
         'Content-Type': 'application/json',
+        'X-Source-Page': `/edit/${category}`
       },
       body: JSON.stringify(data) // json送出去
     })

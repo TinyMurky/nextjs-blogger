@@ -1,7 +1,6 @@
 import type { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime'
 // import type { EditorView } from 'codemirror'
-import { EditorView } from 'codemirror'
-import type { Transaction } from '@codemirror/state'
+import Swal from 'sweetalert2'
 export function createCheckMousePosition (setter:(value: React.SetStateAction<boolean>) => void) {
   return (e: MouseEvent) => {
       const { clientX, clientY } = e
@@ -28,12 +27,20 @@ export async function saveBlogOnClicked(blogName: string, doc: string, router:Ap
   })
 
   if (!res.ok){
-    window.alert('Blog saving has failed!')
+    Swal.fire({
+      title: 'Blog saving has failed!',
+      icon: 'error',
+      confirmButtonText: 'So Sadge :('
+    })
     return
   }
 
   const { message } = await res.json()
-  window.alert(message)
+  Swal.fire({
+    title: message,
+    icon: 'info',
+    confirmButtonText: 'OK'
+  })
 
   if (router && redirectHref) {
     router.prefetch(redirectHref)
@@ -60,25 +67,4 @@ export function debounce<F extends (...args: any[]) => any>(func: F, wait: numbe
   } as F
 }
 
-// function handleInsertImg (view: EditorView, from: number, to: number, text: string, insert: () => Transaction) {
-//   // ref: https://codemirror.net/docs/ref/#view.EditorView^inputHandler
-//   console.log({ view, from, to, insert })
-//   if (insert === ']') {
-//     console.log('] found')
-//     if (view.state.doc.sliceString(from - 1, to) === '[') {
-//       const tr = view.state.update({
-//         changes: [
-//           { from, insert: ' ] ' }
-//         ]
-//       }, {
-//         scrollIntoView: true
-//       })
-//       view.dispatch(tr)
-//       return true
-//     }
-//     return false
-//   } else {
-//     return false
-//   }
-// }
 

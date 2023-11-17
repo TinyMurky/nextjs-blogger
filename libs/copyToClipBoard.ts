@@ -1,9 +1,14 @@
+import Swal from 'sweetalert2'
 export default async function copyToClipBoard(text: string) {
   // https://philstainer.io/blog/copy-code-button-markdown
   // https://easonchang.com/posts/code-copy-button
   try{
     if (!navigator?.clipboard){
-      window.alert('您的瀏覽器不支援剪貼簿')
+      Swal.fire({
+        title: 'Blog saving has failed!',
+        icon: 'error',
+        confirmButtonText: 'So Sadge'
+      })
     }
     // 寫進clipboard, navigator.clipboard是一個promise
     text = removeDuplicateNewLine(text)

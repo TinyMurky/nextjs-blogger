@@ -18,9 +18,16 @@ export async function PUT(request: NextRequest, { params }: Props) {
   const content = await request.json()
   const {code, frontmatter} = await mdx2Code(content)
 
-  const urlArray = request.url.split('/')
-  const playgroundPositionInUrl = urlArray.length -2
-  const isPlayground = urlArray[playgroundPositionInUrl] === "playground"
+  const targetBlog = await prisma.blog.findUnique({
+    where: {
+      name: blogId
+    },
+    select: {
+      category: true
+    }
+  })
+
+  const isPlayground = targetBlog?.category === "playground"
   // 登入的session
   const session = await getServerSession(authOptions)
 
@@ -74,12 +81,18 @@ export async function DELETE(request: NextRequest, { params }: Props) {
     // 登入的session
     const session = await getServerSession(authOptions)
 
-    const urlArray = request.url.split('/')
-    const playgroundPositionInUrl = urlArray.length -2
-    const isPlayground = urlArray[playgroundPositionInUrl] === "playground"
-
     const { blogId } = params
 
+    const targetBlog = await prisma.blog.findUnique({
+      where: {
+        name: blogId
+      },
+      select: {
+        category: true
+      }
+    })
+
+    const isPlayground = targetBlog?.category === "playground"
 
     const deleteBlog = await prisma.blog.delete({
       where: {

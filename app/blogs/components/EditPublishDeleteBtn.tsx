@@ -6,7 +6,7 @@ import Link from 'next/link'
 import PublishDropdown from './PublishDropdown'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
-import { allowedNonLoginEditCategory, allowedNonLoginDeleteCategory, allowedPublishCategory } from '@/libs/allowList'
+import { allowedNonLoginUsePanelCategory, allowedNonLoginEditCategory, allowedNonLoginDeleteCategory, allowedPublishCategory } from '@/libs/allowList'
 type Props = {
   categoryId: string,
   blogId: string
@@ -26,7 +26,7 @@ export default function EditPublishDeleteBtn({ categoryId, blogId }: Props) {
 
   if (!isCategory(categoryId)) return null
 
-  if (!session && !allowedNonLoginEditCategory.includes(categoryId)) return null
+  if (!session && !allowedNonLoginUsePanelCategory.includes(categoryId)) return null
 
   const handleDeleteOnclick = async () => {
     const res = await fetch(`/api/blogs/${blogId}`, {

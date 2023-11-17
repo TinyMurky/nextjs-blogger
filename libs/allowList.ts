@@ -4,6 +4,7 @@ import { Category } from "@prisma/client"
 export const allowPublishedToCategory: Category[] = [Category.insight, Category.tech]
 
 // edit publish delete btn
+export  const allowedNonLoginUsePanelCategory: Category[] = [ Category.playground ]
 export  const allowedNonLoginEditCategory: Category[] = [ Category.playground ]
 export  const allowedNonLoginDeleteCategory: Category[] = [ Category.playground ]
 export const allowedPublishCategory: Category[] = [ Category.edit ]

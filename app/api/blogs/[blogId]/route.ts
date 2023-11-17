@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from "next/server"
 import prisma from "@/libs/db"
 import { mdx2Code } from "@/libs/mdx2Code"
 import { revalidatePath } from 'next/cache'
-
+import { getServerSession } from 'next-auth'
+import { authOptions } from "@/libs/authOptions"
 
 type Props = {
   params: {
@@ -12,51 +13,21 @@ type Props = {
 
 const auth = (req: Request) => ({ id: "1", email: "murky0830@gmail.com" })
 
-export async function GET(request: NextRequest, { params }: Props) {
-  const { blogId } = params
-  try{
-    const blog = await prisma.blog.findUnique({
-      where: {
-        name: blogId,
-      }
-    })
-
-    if (!blog) {
-      return new NextResponse(null, {
-        status: 404,
-        statusText: 'Not Found',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      })
-    }
-
-    return new NextResponse(JSON.stringify(blog), {
-      status: 200,
-      statusText: 'OK',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-  } catch(error) {
-    console.log(error)
-    return NextResponse.json(error, {
-      status: 500,
-      statusText: 'Internal Sever Error',
-    })
-  }
-}
 
 export async function PUT(request: NextRequest, { params }: Props) {
   const { blogId } = params
   const content = await request.json()
-
   const {code, frontmatter} = await mdx2Code(content)
+  const urlArray = request.url.split('/')
+  const isPlayground = urlArray[urlArray.length -2] === "playground"
+  // 登入的session
+  const session = await getServerSession(authOptions)
 
   try{
     const updatedBlog = await prisma.blog.update({
       where: {
         name: blogId,
+        authorId: isPlayground ? -1 : session?.user?.id ? session.user.id : -1 // 沒有session就只能刪playground的
       },
       data:  {
         title: frontmatter.title,
@@ -99,30 +70,23 @@ export async function PUT(request: NextRequest, { params }: Props) {
 
 export async function DELETE(request: NextRequest, { params }: Props) {
   try{
+    // 登入的session
+    const session = await getServerSession(authOptions)
+    const urlArray = request.url.split('/')
+    const isPlayground = urlArray[urlArray.length -2] === "playground"
+
     const { blogId } = params
 
     const userData = await auth(request)
 
-    const user = await prisma.user.findUnique({
-      where: {
-        email: userData.email
-      }
-    })
-
-    if (!user) {
-      return NextResponse.json({ message: 'Unauthorized Delete' }, {
-        status: 401,
-        statusText: 'Unauthorized',
-      })
-    }
-
-    const deleteUser = await prisma.blog.delete({
+    const deleteBlog = await prisma.blog.delete({
       where: {
         name: blogId,
+        authorId: isPlayground ? -1 : session?.user?.id ? session.user.id : -1 // 沒有session就只能刪playground的
       }
     })
 
-    if (!deleteUser) {
+    if (!deleteBlog) {
       return NextResponse.json({message: "Delete failed, blog not found"}, {
         status: 404,
         statusText: 'Not Found',

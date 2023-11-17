@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from "next/server"
 import prisma, { isCategory } from "@/libs/db"
 import { revalidatePath } from "next/cache"
 import { allowPublishedToCategory } from "@/libs/allowList"
-
+import { getServerSession } from 'next-auth'
+import { authOptions } from "@/libs/authOptions"
 
 type Props = {
   params: {
@@ -13,17 +14,15 @@ type Props = {
 const auth = (req: Request) => ({ id: "1", email: "murky0830@gmail.com" })
 
 export async function POST(request: NextRequest, { params }: Props) {
+  const session = await getServerSession(authOptions)
+
   const { blogId } = params
   const { category } = await request.json()
   const userData = await auth(request)
 
-  const user = await prisma.user.findUnique({
-    where: {
-      email: userData.email
-    }
-  })
 
-  if (!user) {
+
+  if (!session) {
     return NextResponse.json({ message: 'Unauthorized Publish' }, {
       status: 401,
       statusText: 'Unauthorized',
@@ -40,7 +39,7 @@ export async function POST(request: NextRequest, { params }: Props) {
   try{
     const updatedBlog = await prisma.blog.update({
       where: {
-        authorId: user.id,
+        authorId: session.user.id,
         name: blogId,
       },
       data:  {

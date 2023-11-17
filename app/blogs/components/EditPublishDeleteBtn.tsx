@@ -7,6 +7,7 @@ import PublishDropdown from './PublishDropdown'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
 import { allowedNonLoginUsePanelCategory, allowedNonLoginEditCategory, allowedNonLoginDeleteCategory, allowedPublishCategory } from '@/libs/allowList'
+import Swal from 'sweetalert2'
 type Props = {
   categoryId: string,
   blogId: string
@@ -31,15 +32,24 @@ export default function EditPublishDeleteBtn({ categoryId, blogId }: Props) {
   const handleDeleteOnclick = async () => {
     const res = await fetch(`/api/blogs/${blogId}`, {
       method: 'DELETE',
-      headers: {}
+      headers: {
+        // 'X-Source-Page': `/blogs/${categoryId}/${blogId}` // 發送讓後端知道是誰發起請求
+      }
     })
 
     if (!res.ok) {
-      window.alert(`Delete failed: ${res.status} ${res.statusText}`)
+      Swal.fire({
+        title: `Delete failed: ${res.status} ${res.statusText}`,
+        icon: 'error',
+        confirmButtonText: 'So Sadge :('
+      })
     }
 
-
-    window.alert('Delete Successed')
+    Swal.fire({
+      title: 'Delete Successed',
+      icon: 'success',
+      confirmButtonText: "Let's Go"
+    })
     router.push(`/blogs/${categoryId}`)
   }
 

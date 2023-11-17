@@ -2,6 +2,7 @@
 import React, {useState} from 'react'
 
 import { useRouter } from 'next/navigation'
+import Swal from 'sweetalert2'
 type Props = {
   blogId: string
 }
@@ -23,11 +24,18 @@ export default function PublishDropdown({ blogId }: Props) {
     })
 
     if(!res.ok) {
-      window.alert(`Publish failed : ${res.status} ${res.statusText}`)
+      Swal.fire({
+        title: `Publish failed : ${res.status} ${res.statusText}`,
+        icon: 'error',
+        confirmButtonText: 'So Sadge :('
+      })
       return
     }
-
-      window.alert(`Publish successed!`)
+    Swal.fire({
+      title: `Publish successed!`,
+      icon: 'success',
+      confirmButtonText: "Let's Go"
+    })
     router.push(`/blogs/${category}/${blogId}`)
   } 
 

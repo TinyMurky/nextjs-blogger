@@ -86,7 +86,7 @@ export default function NewBlogModal({ showModal, setShowModal, category, allowe
       return
     }
 
-    router.push(`/edit/${blogName}`)
+    router.push(`/edit/${category}/${blogName}`)
   }
 
   // 只有edit和playground有新增

@@ -5,6 +5,7 @@ import ListItem from "./ListItem"
 import SearchBar from "./SearchBar"
 import NewBlogModal from "./NewBlogModal"
 import { Category } from "@prisma/client"
+import { allowedNewPostCategory } from "@/libs/allowList"
 
 import { Blog } from "@prisma/client"
 
@@ -14,7 +15,6 @@ interface Props {
   blogs: Blog[]
 }
 
-const allowedNewPostCategory: Category[] = [ Category.edit, Category.playground ]
 
 export default function Posts({ title, category, blogs }: Props) {
 

@@ -34,9 +34,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
+    "types/**/*.ts",
     "env.d.ts",
-    "prisma/prisma-helper/rehype-plugin4Seeder.config.js",
-    "prisma/seedReadCodeMdx.ts"
   ],
   "exclude": [
     "node_modules"

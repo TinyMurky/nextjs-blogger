@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import prisma, { isCategory } from "@/libs/db"
 import { revalidatePath } from "next/cache"
-import { Category } from "@prisma/client"
+import { allowPublishedToCategory } from "@/libs/allowList"
 
 
 type Props = {
@@ -11,7 +11,6 @@ type Props = {
 }
 
 const auth = (req: Request) => ({ id: "1", email: "murky0830@gmail.com" })
-const allowPublishedCategory: Category[] = [Category.insight, Category.tech]
 
 export async function POST(request: NextRequest, { params }: Props) {
   const { blogId } = params
@@ -31,7 +30,7 @@ export async function POST(request: NextRequest, { params }: Props) {
     })
   }
 
-  if (!(isCategory(category) && allowPublishedCategory.includes(category))) {
+  if (!(isCategory(category) && allowPublishedToCategory.includes(category))) {
     return NextResponse.json({ message: 'Category does not exist' }, {
       status: 400,
       statusText: 'Bad Request',

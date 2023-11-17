@@ -6,8 +6,11 @@ import { revalidatePath } from "next/cache"
 import { getServerSession } from 'next-auth'
 import { authOptions } from "@/libs/authOptions"
 
+const PLAYGROUND_AUTHOR_ID = -1
 // new blog
 export async function POST(request: NextRequest) {
+  const isPlayground = request.nextUrl.basePath === "playground"
+  console.log(request.nextUrl.basePath)
   // 登入的session
   const session = await getServerSession(authOptions)
 
@@ -27,7 +30,7 @@ export async function POST(request: NextRequest) {
   const newBlog = await prisma.blog.create({
     data: {
       name: name,
-      authorId: session?.user?.id ? session.user.id : -1,
+      authorId: isPlayground ?  PLAYGROUND_AUTHOR_ID : session?.user?.id ? session.user.id :  PLAYGROUND_AUTHOR_ID, // 沒有session就只能刪playground的
       title: frontmatter.title,
       published: false,
       category: isCategory(category) ? category : "edit",
@@ -59,13 +62,14 @@ export async function POST(request: NextRequest) {
 
 function defaultMdx(title: string): string {
   const date:string = format(new Date(), 'yyyy-MM-dd')
+  const demoImgUrl = process.env.DEFAULT_NEWBLOG_IMG
   const mdx = `---
 title: ${title}
 description: 
 date: ${date}
-tag: 
-readTime: 
-cover: 
+tag: editing
+readTime: 5
+cover: ${demoImgUrl ? demoImgUrl : ""}
 slug: 
 ---
 
@@ -77,7 +81,7 @@ mdx上方的欄位請務必於冒號後增加空格再更改內容，此外請�
 
 mdx 上方的 "cover"是封面圖， 請使用add image上傳後，保留url的部份 刪除 驚嘆號、中括號與小括號
 
-# Markdown 基本語法介紹
+# Markdown 語法介紹
 
 ## 標題
 
@@ -126,6 +130,7 @@ mdx 上方的 "cover"是封面圖， 請使用add image上傳後，保留url的�
 
 ## 圖片
 目前圖片需要使用右下角的add image上傳
+${demoImgUrl ? `![](${demoImgUrl})` : ""}
 
 ## 引用
 

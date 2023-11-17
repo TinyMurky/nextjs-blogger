@@ -11,15 +11,16 @@ type Props = {
   }
 }
 
-const auth = (req: Request) => ({ id: "1", email: "murky0830@gmail.com" })
-
+const PLAYGROUND_AUTHOR_ID = -1
 
 export async function PUT(request: NextRequest, { params }: Props) {
   const { blogId } = params
   const content = await request.json()
   const {code, frontmatter} = await mdx2Code(content)
+
   const urlArray = request.url.split('/')
-  const isPlayground = urlArray[urlArray.length -2] === "playground"
+  const playgroundPositionInUrl = urlArray.length -2
+  const isPlayground = urlArray[playgroundPositionInUrl] === "playground"
   // 登入的session
   const session = await getServerSession(authOptions)
 
@@ -27,7 +28,7 @@ export async function PUT(request: NextRequest, { params }: Props) {
     const updatedBlog = await prisma.blog.update({
       where: {
         name: blogId,
-        authorId: isPlayground ? -1 : session?.user?.id ? session.user.id : -1 // 沒有session就只能刪playground的
+        authorId: isPlayground ?  PLAYGROUND_AUTHOR_ID : session?.user?.id ? session.user.id :  PLAYGROUND_AUTHOR_ID // 沒有session就只能刪playground的
       },
       data:  {
         title: frontmatter.title,
@@ -72,17 +73,18 @@ export async function DELETE(request: NextRequest, { params }: Props) {
   try{
     // 登入的session
     const session = await getServerSession(authOptions)
+
     const urlArray = request.url.split('/')
-    const isPlayground = urlArray[urlArray.length -2] === "playground"
+    const playgroundPositionInUrl = urlArray.length -2
+    const isPlayground = urlArray[playgroundPositionInUrl] === "playground"
 
     const { blogId } = params
 
-    const userData = await auth(request)
 
     const deleteBlog = await prisma.blog.delete({
       where: {
         name: blogId,
-        authorId: isPlayground ? -1 : session?.user?.id ? session.user.id : -1 // 沒有session就只能刪playground的
+        authorId: isPlayground ?  PLAYGROUND_AUTHOR_ID : session?.user?.id ? session.user.id :  PLAYGROUND_AUTHOR_ID // 沒有session就只能刪playground的
       }
     })
 

@@ -32,7 +32,7 @@ export default function Posts({ title, category, blogs }: Props) {
 
 
   const newPostButton =  category ? allowedNewPostCategory.includes(category) ?
-    <button className="text-xl rounded-xl text-gray-200 bg-gray-500 bg-opacity-50 hover:bg-opacity-100 px-4 pt-1 pb-2 font-bold" onClick={() => setShowModal(true)}>New Blog</button>
+    <button className="text-sm lg:text-xl rounded-xl text-gray-200 bg-gray-500 bg-opacity-50 hover:bg-opacity-100 px-2 py-1 lg:px-4 lg:pt-1 lg:pb-2 font-bold" onClick={() => setShowModal(true)}>New</button>
     : null
     : null
 
@@ -40,7 +40,7 @@ export default function Posts({ title, category, blogs }: Props) {
     <>
       <section className="mt-16 mx-auto lg:max-w-4xl sm:max-w-md max-w-sm px-4 lg:px-8">
         <div className="mb-8 w-full flex flex-row items-center justify-between">
-          <div className="flex flex-row items-center justify-start gap-4">
+          <div className="flex flex-row items-center justify-start gap-2 lg:gap-4">
             <h2 className=" text-xl lg:text-4xl font-bold text-white/90">
               {title}
             </h2>

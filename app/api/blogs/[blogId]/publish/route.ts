@@ -11,14 +11,12 @@ type Props = {
   }
 }
 
-const auth = (req: Request) => ({ id: "1", email: "murky0830@gmail.com" })
 
 export async function POST(request: NextRequest, { params }: Props) {
   const session = await getServerSession(authOptions)
 
   const { blogId } = params
   const { category } = await request.json()
-  const userData = await auth(request)
 
 
 

@@ -17,8 +17,10 @@ export async function PUT(request: NextRequest, { params }: Props) {
   const { blogId } = params
   const content = await request.json()
   const {code, frontmatter} = await mdx2Code(content)
+
   const urlArray = request.url.split('/')
-  const isPlayground = urlArray[urlArray.length -2] === "playground"
+  const playgroundPositionInUrl = urlArray.length -2
+  const isPlayground = urlArray[playgroundPositionInUrl] === "playground"
   // 登入的session
   const session = await getServerSession(authOptions)
 
@@ -71,6 +73,7 @@ export async function DELETE(request: NextRequest, { params }: Props) {
   try{
     // 登入的session
     const session = await getServerSession(authOptions)
+
     const urlArray = request.url.split('/')
     const playgroundPositionInUrl = urlArray.length -2
     const isPlayground = urlArray[playgroundPositionInUrl] === "playground"

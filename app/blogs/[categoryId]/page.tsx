@@ -14,7 +14,7 @@ const blogTitle: { [key in Category]: string} = {
   [Category.insight]: "心情Blog",
   [Category.tech]: "技術Blog",
   [Category.edit]: "編輯中",
-  [Category.playground]: "Playground"
+  [Category.playground]: "請體驗網站功能"
 }
 
 export const revalidate = Number(process.env.NEXT_PUBLIC_REVALIDATE_TIME) || 86400

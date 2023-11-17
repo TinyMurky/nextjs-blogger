@@ -25,6 +25,10 @@ const routerLinks:routerLink[] = [
   {
     path: '/blogs/edit',
     name: '編輯中'
+  },
+  {
+    path: '/blogs/playground',
+    name: '遊樂場'
   }
 ]
 

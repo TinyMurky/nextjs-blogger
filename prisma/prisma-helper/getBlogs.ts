@@ -3,7 +3,6 @@ import fs from "fs"
 import { Category } from "@prisma/client"
 import processMdx from "./uploadImg"
 import { mdx2Code } from "./mdx2Code4Seeder"
-import { isCategory } from "@/libs/db"
 // import { mdx2Code } from "../../libs/mdx2Code"
 type blogData = {
   name: string,
@@ -18,6 +17,15 @@ type blogData = {
   slug: string | null,
   createdAt: string | Date | undefined
 }
+
+function isCategory(value: string | null): value is Category {
+  if (!value){
+    return false
+  }
+  // enum 才可以這樣寫
+  return Object.values(Category).includes(value as Category)
+}
+
 
 export async function getBlogsData(folderName:string, extension:string="mdx",  dir:string|null=null, category:string|null=null):Promise<blogData[]> {
   // 把fileName整理成Blogblog type，不含文章內容

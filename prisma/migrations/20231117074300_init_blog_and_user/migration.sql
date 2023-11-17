@@ -16,7 +16,7 @@ CREATE TABLE `Blog` (
     `title` VARCHAR(191) NOT NULL DEFAULT 'title',
     `authorId` INTEGER NOT NULL,
     `published` BOOLEAN NOT NULL DEFAULT false,
-    `category` ENUM('tech', 'insight', 'edit', 'playground') NOT NULL DEFAULT 'tech',
+    `category` ENUM('tech', 'insight', 'edit', 'playground') NOT NULL DEFAULT 'edit',
     `description` TEXT NULL,
     `content` TEXT NULL,
     `code` LONGTEXT NOT NULL,

@@ -42,7 +42,7 @@ export default function EditPublishDeleteBtn({ categoryId, blogId }: Props) {
 
   if (user){
 
-    const editLink = <Link href={`/edit/${blogId}`} prefetch={true} className='text-gray-200/80 px-6 py-1 rounded-xl bg-slate-700 hover:bg-slate-500 focus:shadow-xl no-underline'>Edit</Link>
+    const editLink = <Link href={`/edit/${categoryId}/${blogId}`} prefetch={true} className='text-gray-200/80 px-6 py-1 rounded-xl bg-slate-700 hover:bg-slate-500 focus:shadow-xl no-underline'>Edit</Link>
 
     const deleteBtn = <button  onClick={handleDeleteOnclick} className='px-6 py-1 rounded-xl bg-red-700 hover:bg-red-500 focus:shadow-xl no-underline'>Delete</button>
 
@@ -62,7 +62,7 @@ export default function EditPublishDeleteBtn({ categoryId, blogId }: Props) {
 
     const editLink = allowedNonLoginEditCategory.includes(categoryId)
     ?
-    <Link href={`/edit/${blogId}`} prefetch={true} className='text-gray-200/90 px-6 py-1 rounded-xl bg-slate-700 hover:bg-slate-500 focus:shadow-xl no-underline'>Edit</Link>
+    <Link href={`/edit/${categoryId}/${blogId}`} prefetch={true} className='text-gray-200/90 px-6 py-1 rounded-xl bg-slate-700 hover:bg-slate-500 focus:shadow-xl no-underline'>Edit</Link>
     : null
 
     const deleteBtn = allowedNonLoginDeleteCategory.includes(categoryId)

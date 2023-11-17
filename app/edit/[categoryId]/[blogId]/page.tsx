@@ -1,9 +1,10 @@
 import { Category } from "@prisma/client"
 import { notFound } from "next/navigation"
-import MdxEditor from "../components/MdxEditor"
+import MdxEditor from "../../components/MdxEditor"
 import { buildStaticBlogs, getBlogByName, getBlogs } from "@/libs/getBlogs"
 type Props = {
   params: {
+    categoryId: string,
     blogId: string
   }
 }

@@ -17,6 +17,9 @@ const inter = Noto_Sans_TC({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Tiny_Murky\' Blogger',
   description: 'Blogger Created by Tiny_Murky',
+  icons: {
+    icon: '/favicon.ico', // 放在/public path
+  },
 }
 
 export default function RootLayout({

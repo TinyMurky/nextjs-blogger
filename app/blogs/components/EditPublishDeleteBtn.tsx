@@ -52,9 +52,7 @@ export default function EditPublishDeleteBtn({ categoryId, blogId }: Props) {
     }
     const res = await fetch(`/api/blogs/${blogId}`, {
       method: 'DELETE',
-      headers: {
-        // 'X-Source-Page': `/blogs/${categoryId}/${blogId}` // 發送讓後端知道是誰發起請求
-      }
+      headers: {}
     })
 
     if (!res.ok) {

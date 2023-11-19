@@ -16,7 +16,7 @@ export async function GET(request: NextRequest, { params }: Props) {
     return new NextResponse(zipBuffer, {
       headers: {
         'Content-Type': 'application/zip',
-        'Content-Disposition': 'attachment; filename=archive.zip'
+        'Content-Disposition': `attachment; filename=${blogId}.zip`
       }
     })
   } catch(error) {

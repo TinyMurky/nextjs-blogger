@@ -36,6 +36,11 @@ export default function DownloadMdxBtn({ blogId }: Props) {
     }
 
     try{
+
+      Toast.fire({
+        icon: "success",
+        title: "Download started"
+      })
       const zipBlob = await res.blob()
 
       // 創造一個<a>裡面放zip的連結，點擊之後再刪除
@@ -46,10 +51,6 @@ export default function DownloadMdxBtn({ blogId }: Props) {
       document.body.appendChild(a) // 加到body裡，才可以點擊
       a.click()
 
-      Toast.fire({
-        icon: "success",
-        title: "Download started"
-      })
 
       // 刪掉a和url
       document.body.removeChild(a)

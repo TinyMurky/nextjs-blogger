@@ -419,7 +419,7 @@ class Developer(Employee)
 ```Python
 class Developer(Employee):  
     def __init__(self, first, last, pay, program_language):  
-        su9per(Developer, self).__init__(first, last, pay)  
+        super(Developer, self).__init__(first, last, pay)  
         # super().__init__(first, last, pay) 也可以  
         # Employee.__init__(self, first, last, pay) 也可以  
         self.program_language = program_language  

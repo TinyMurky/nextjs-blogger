@@ -1,8 +1,9 @@
 'use client'
 import Link from "next/link"
-import { useState } from "react";
-import { usePathname } from "next/navigation";
-
+import { useState } from "react"
+import { usePathname } from "next/navigation"
+import { useSession, signIn, signOut } from "next-auth/react"
+import { PiSignInBold, PiSignOutBold } from "react-icons/pi"
 type routerLink = {
   path: string,
   name: string
@@ -20,12 +21,20 @@ const routerLinks:routerLink[] = [
   {
     path: '/blogs/insight',
     name: '心得文章'
+  },
+  {
+    path: '/blogs/edit',
+    name: '編輯中'
+  },
+  {
+    path: '/blogs/playground',
+    name: '遊樂場'
   }
 ]
 
 
 export default function HamburgerButton() {
-
+  const { data: session } = useSession()
   const pathname = usePathname();
   const [active, setActive] = useState(false)
 
@@ -36,7 +45,9 @@ export default function HamburgerButton() {
     setActive(false) // auto close hambergur after click link
   }
   const linkTags = routerLinks.map(routerLink => {
-
+    if (!session && routerLink.path === '/blogs/edit') {
+      return null
+    }
     return (
       <Link 
         key={routerLink.path}
@@ -74,6 +85,12 @@ export default function HamburgerButton() {
         } w-full absolute top-full left-0 py-2 bg-gray-600 bg-opacity-50 lg:bg-opacity-0 lg:relative lg:top-auto lg:left-auto lg:py-0  lg:inline-flex lg:flex-grow lg:w-auto `}>
         <div className='lg:inline-flex lg:flex-row lg:ml-auto lg:w-auto w-full lg:items-center items-start  flex flex-col lg:h-auto'>
           {linkTags}
+          {
+            session ?
+              <button onClick={() => signOut()} className="lg:inline-flex lg:w-auto w-full px-5 py-2 rounded text-white/90 font-bold items-center justify-start hover:underline  hover:decoration-2 hover:text-white cursor-pointer flex flex-row gap-1"><PiSignOutBold className="text-xl "/><span>Sign Out</span></button>
+              :
+              <button onClick={() => signIn('github')} className="lg:inline-flex lg:w-auto w-full px-5 py-2 rounded text-white/90 font-bold items-center justify-start hover:underline  hover:decoration-2 hover:text-white cursor-pointer flex flex-row gap-1"><PiSignInBold className="text-xl"/><span>Login</span></button>
+          }
         </div>
       </div>
     </div>

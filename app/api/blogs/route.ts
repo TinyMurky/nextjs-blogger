@@ -10,7 +10,7 @@ const PLAYGROUND_AUTHOR_ID = -1
 // new blog
 export async function POST(request: NextRequest) {
   const session = await getServerSession(authOptions)
-
+  const allowedOrigin = request.headers.get("origin")
   const { name, title, category }: {name: string, title: string, category: string, userId:number} = await request.json()
 
   if (!name || !title || !category) {
@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
       status: 400,
       statusText: 'Bad Request',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       }
     })
   }
@@ -45,7 +45,7 @@ export async function POST(request: NextRequest) {
       status: 500,
       statusText: 'Internal Server Error',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       }
     })
   }
@@ -55,7 +55,7 @@ export async function POST(request: NextRequest) {
       status: 200,
       statusText: 'ok',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       }
     })
 }

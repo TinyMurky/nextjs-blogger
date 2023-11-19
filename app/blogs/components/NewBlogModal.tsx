@@ -140,7 +140,7 @@ export default function NewBlogModal({ showModal, setShowModal, category, allowe
             </p>
           <div className='flex flex-col items-start'>
             <label htmlFor="blogName" className='text-gray-200 flex flex-row gap-2 items-center mb-2'>
-              Enter Blog Name:
+              Enter Blog Id (for url):
               <span className={
                 clsx('text-green-500 text-xl',
                 {

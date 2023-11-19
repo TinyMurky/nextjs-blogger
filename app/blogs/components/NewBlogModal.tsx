@@ -5,7 +5,8 @@ import { FaCheck, FaTimes, FaInfoCircle } from "react-icons/fa"
 import clsx from 'clsx'
 import { Category } from "@prisma/client"
 import isBlogNameExisted from '@/app/actions/checkNameExist'
-import { useSession } from 'next-auth/react'
+import Swal from 'sweetalert2'
+
 type Props = {
   showModal: boolean,
   setShowModal: Dispatch<SetStateAction<boolean>>
@@ -15,10 +16,19 @@ type Props = {
 
 const blogNameRegex = /^[a-zA-Z0-9-_]{3,}$/
 const blogTitleRegex = /\D+/
-
+const Toast = Swal.mixin({
+  toast: true,
+  position: "top-end",
+  showConfirmButton: false,
+  timer: 5000,
+  timerProgressBar: true,
+  didOpen: (toast) => {
+    toast.onmouseenter = Swal.stopTimer;
+    toast.onmouseleave = Swal.resumeTimer;
+  }
+})
 export default function NewBlogModal({ showModal, setShowModal, category, allowedNewPostCategory }: Props) {
-  // 登入session
-  const { data:session } = useSession()
+
   // 必填： name, title, author(用關聯的)
 
   // const userRef = useRef()
@@ -55,6 +65,7 @@ export default function NewBlogModal({ showModal, setShowModal, category, allowe
   useEffect(() => {
     setErrMsg('')
   }, [blogName, blogTitle])
+
   const handleSumit =async (e:FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
@@ -63,11 +74,11 @@ export default function NewBlogModal({ showModal, setShowModal, category, allowe
       setErrMsg('Invalid Input')
       return
     }
+
     const isBlogNameUsed = await isBlogNameExisted(blogName)
     if (isBlogNameUsed) {
       setErrMsg('Blog name already been used!')
       return
-
     }
 
     const data = {
@@ -75,11 +86,16 @@ export default function NewBlogModal({ showModal, setShowModal, category, allowe
       title: blogTitle,
       category,
     }
+
+    Toast.fire({
+      icon: "info",
+      title: "Creating New Blog"
+    })
+
     const res = await fetch('/api/blogs', {
       method:'POST',
       headers: {
         'Content-Type': 'application/json',
-        'X-Source-Page': `/edit/${category}`
       },
       body: JSON.stringify(data) // json送出去
     })

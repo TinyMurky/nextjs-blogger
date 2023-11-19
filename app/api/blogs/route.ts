@@ -9,17 +9,10 @@ import { authOptions } from "@/libs/authOptions"
 const PLAYGROUND_AUTHOR_ID = -1
 // new blog
 export async function POST(request: NextRequest) {
-  let isPlayground = false
-  const sourcePage = request.headers.get('X-Source-Page')
-
-  if (sourcePage) {
-    const sourceUrlArray = sourcePage.split('/')
-    isPlayground = sourceUrlArray[sourceUrlArray.length -1] === 'playground'
-  }
-  // 登入的session
   const session = await getServerSession(authOptions)
 
   const { name, title, category }: {name: string, title: string, category: string, userId:number} = await request.json()
+
   if (!name || !title || !category) {
     return new NextResponse(JSON.stringify({message: "Invalid name or title or category"}), {
       status: 400,
@@ -29,6 +22,8 @@ export async function POST(request: NextRequest) {
       }
     })
   }
+
+  const isPlayground = category === 'playground'
 
   const mdx = defaultMdx(title)
   const { code, frontmatter } = await mdx2Code(mdx)

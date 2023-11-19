@@ -55,7 +55,11 @@ export async function POST(request: NextRequest) {
       status: 200,
       statusText: 'ok',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        // "Access-Control-Allow-Credentials": "true" ,
+        // "Access-Control-Allow-Origin": "https://nextjs-blogger-production.up.railway.app, http://localhost",
+        // "Access-Control-Allow-Methods": "GET,DELETE,PATCH,POST,PUT",
+        // "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
       }
     })
 }

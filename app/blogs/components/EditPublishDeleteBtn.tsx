@@ -76,9 +76,9 @@ export default function EditPublishDeleteBtn({ categoryId, blogId }: Props) {
   let output: React.JSX.Element
   if (user){
 
-    const editLink = <Link href={`/edit/${categoryId}/${blogId}`} prefetch={true} className='text-gray-200/80 px-6 py-1 rounded-xl bg-slate-700 hover:bg-slate-500 focus:shadow-xl no-underline'>Edit</Link>
+    const editLink = <Link href={`/edit/${categoryId}/${blogId}`} prefetch={true} className='text-gray-200/80 text-sm md:text-base px-2 md:px-4 py-1 rounded-xl bg-slate-700 hover:bg-slate-500 focus:shadow-xl no-underline'>Edit</Link>
 
-    const deleteBtn = <button  onClick={handleDeleteOnclick} className='px-6 py-1 rounded-xl bg-red-700 hover:bg-red-500 focus:shadow-xl no-underline'>Delete</button>
+    const deleteBtn = <button  onClick={handleDeleteOnclick} className=' text-sm md:text-base px-2  md:px-4 py-1 rounded-xl bg-red-700 hover:bg-red-500 focus:shadow-xl no-underline'>Delete</button>
 
     const publishLink = allowedPublishCategory.includes(categoryId)
     ?
@@ -96,12 +96,12 @@ export default function EditPublishDeleteBtn({ categoryId, blogId }: Props) {
 
     const editLink = allowedNonLoginEditCategory.includes(categoryId)
     ?
-    <Link href={`/edit/${categoryId}/${blogId}`} prefetch={true} className='text-gray-200/90 px-6 py-1 rounded-xl bg-slate-700 hover:bg-slate-500 focus:shadow-xl no-underline'>Edit</Link>
+    <Link href={`/edit/${categoryId}/${blogId}`} prefetch={true} className='text-gray-200/90 text-sm md:text-base px-2 md:px-4 py-1 rounded-xl bg-slate-700 hover:bg-slate-500 focus:shadow-xl no-underline'>Edit</Link>
     : null
 
     const deleteBtn = allowedNonLoginDeleteCategory.includes(categoryId)
     ?
-    <button  onClick={handleDeleteOnclick} className='px-6 py-1 rounded-xl  bg-red-700 hover:bg-red-500 focus:shadow-xl no-underline'>Edit</button>
+    <button  onClick={handleDeleteOnclick} className='text-sm md:text-base px-2 md:px-4 py-1 rounded-xl  bg-red-700 hover:bg-red-500 focus:shadow-xl no-underline'>Edit</button>
     : null
 
     output = (
@@ -114,7 +114,7 @@ export default function EditPublishDeleteBtn({ categoryId, blogId }: Props) {
 
 
   return (
-    <div className='flex flex-row items-center justify-center gap-4'>
+    <div className='flex flex-col md:flex-row items-start md:items-center justify-center gap-2 md:gap-4'>
       <DownloadMdxBtn blogId={blogId} />
       {output}
     </div>

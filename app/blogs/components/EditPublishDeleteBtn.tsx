@@ -1,13 +1,16 @@
 'use client'
-import React, {useState} from 'react'
-import { isCategory } from '@/libs/db'
-import { Category } from '@prisma/client'
-import Link from 'next/link'
-import PublishDropdown from './PublishDropdown'
+import React from 'react'
 import { useRouter } from 'next/navigation'
 import { useSession } from 'next-auth/react'
-import { allowedNonLoginUsePanelCategory, allowedNonLoginEditCategory, allowedNonLoginDeleteCategory, allowedPublishCategory } from '@/libs/allowList'
 import Swal from 'sweetalert2'
+import Link from 'next/link'
+
+import { isCategory } from '@/libs/db'
+import PublishDropdown from './PublishDropdown'
+import { allowedNonLoginUsePanelCategory, allowedNonLoginEditCategory, allowedNonLoginDeleteCategory, allowedPublishCategory } from '@/libs/allowList'
+
+import DownloadMdxBtn from './DownloadMdxBtn'
+
 type Props = {
   categoryId: string,
   blogId: string
@@ -27,7 +30,13 @@ export default function EditPublishDeleteBtn({ categoryId, blogId }: Props) {
 
   if (!isCategory(categoryId)) return null
 
-  if (!session && !allowedNonLoginUsePanelCategory.includes(categoryId)) return null
+  if (!session && !allowedNonLoginUsePanelCategory.includes(categoryId)) {
+    return (
+      <div className='flex flex-row items-center justify-center gap-4'>
+        <DownloadMdxBtn blogId={blogId} />
+      </div>
+    )
+  }
 
   const handleDeleteOnclick = async () => {
     const swalResult = await Swal.fire({
@@ -106,6 +115,7 @@ export default function EditPublishDeleteBtn({ categoryId, blogId }: Props) {
 
   return (
     <div className='flex flex-row items-center justify-center gap-4'>
+      <DownloadMdxBtn blogId={blogId} />
       {output}
     </div>
   )

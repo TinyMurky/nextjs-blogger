@@ -65,6 +65,6 @@ export default function DownloadMdxBtn({ blogId }: Props) {
     }
   }
   return (
-    <button  onClick={handleDownloadMdxOnclick} className='px-6 py-1 rounded-xl bg-slate-700 hover:bg-slate-500 focus:shadow-xl no-underline'>download</button>
+    <button  onClick={handleDownloadMdxOnclick} className='text-sm md:text-base px-2 md:px-4 py-1 rounded-xl bg-slate-700 hover:bg-slate-500 focus:shadow-xl no-underline'>download</button>
   )
 }

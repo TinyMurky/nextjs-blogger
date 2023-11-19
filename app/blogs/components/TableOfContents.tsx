@@ -19,9 +19,9 @@ const useIntersectionObserver:UseIntersectionObserverType = (setActiveId) => {
   // 所以是call一次一直執行
   useEffect(()=>{
 
-    // 抓出所有的h2 h3 h4標題
+    // 抓出所有的h2 h3標題
     const headingElements = Array.from(
-      document.querySelectorAll("article h2, h3")
+      document.querySelectorAll("article h1, h2, h3")
     )
 
     // IntersectionObserver 會將觀察element轉成 IntersectionObserverEntry[]放入以下callbac處理
@@ -70,7 +70,7 @@ const useIntersectionObserver:UseIntersectionObserverType = (setActiveId) => {
 
     // 建立新的observer
     const observer = new IntersectionObserver(callbackForObserver, {
-      rootMargin: "0px 0px -70% 0px",
+      rootMargin: "0px 0px -85% 0px",
     })
 
     headingElements.forEach((element) => observer.observe(element))// 全部丟進去observe
@@ -101,10 +101,10 @@ export default function TableOfContents({ rawBody }: Props) {
   // 所以是 ## 開始，也就是h2
   const headingLines = rawBody
     .split("\n")
-    .filter((line) => line.match(/^###*?\s/))
+    .filter((line) => line.match(/^##*?\s/))
   
   const headings = headingLines.map((raw) => {
-    const text = raw.replace(/^###*\s/, "") // 去除前面的井號與空白
+    const text = raw.replace(/^##*\s/, "") // 去除前面的井號與空白
 
     // 用第一個空白找出是多少level
     const level:number = raw.match(/(\s|\u3000)/)?.index || 2 //找到第一個空白
@@ -126,11 +126,11 @@ export default function TableOfContents({ rawBody }: Props) {
       <p className="mb-5 text-lg font-semibold  transition-colors text-gray-200">
         目錄
       </p>
-      <div className="flex flex-col items-start justify-start">
+      <div className="flex flex-col justify-start">
         {headings
           .filter(heading => heading.level <= 3)
           .map((heading, index) => {
-            const padding = `pl-${(heading.level-2)* 4}`
+            const padding = `ps-${(heading.level-1)* 4}`
             return (
               <button
                 key={index}

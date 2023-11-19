@@ -10,7 +10,7 @@ const PLAYGROUND_AUTHOR_ID = -1
 // new blog
 export async function POST(request: NextRequest) {
   const session = await getServerSession(authOptions)
-
+  const allowedOrigin = request.headers.get("origin")
   const { name, title, category }: {name: string, title: string, category: string, userId:number} = await request.json()
 
   if (!name || !title || !category) {
@@ -19,10 +19,11 @@ export async function POST(request: NextRequest) {
       statusText: 'Bad Request',
       headers: {
         'Content-Type': 'application/json',
-        "Access-Control-Allow-Credentials": "true" ,
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,DELETE,PATCH,POST,PUT",
-        "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+        "Access-Control-Allow-Origin": allowedOrigin || "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers":
+          "Content-Type, Authorization, X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Date, X-Api-Version",
+        "Access-Control-Max-Age": "86400",
       }
     })
   }
@@ -50,10 +51,11 @@ export async function POST(request: NextRequest) {
       statusText: 'Internal Server Error',
       headers: {
         'Content-Type': 'application/json',
-        "Access-Control-Allow-Credentials": "true" ,
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,DELETE,PATCH,POST,PUT",
-        "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+        "Access-Control-Allow-Origin": allowedOrigin || "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers":
+          "Content-Type, Authorization, X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Date, X-Api-Version",
+        "Access-Control-Max-Age": "86400",
       }
     })
   }
@@ -64,10 +66,11 @@ export async function POST(request: NextRequest) {
       statusText: 'ok',
       headers: {
         'Content-Type': 'application/json',
-        "Access-Control-Allow-Credentials": "true" ,
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods": "GET,DELETE,PATCH,POST,PUT",
-        "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version",
+        "Access-Control-Allow-Origin": allowedOrigin || "*",
+        "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers":
+          "Content-Type, Authorization, X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Date, X-Api-Version",
+        "Access-Control-Max-Age": "86400",
       }
     })
 }

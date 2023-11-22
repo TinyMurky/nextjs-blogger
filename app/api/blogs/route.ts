@@ -26,7 +26,7 @@ export async function POST(request: NextRequest) {
   const isPlayground = category === 'playground'
 
   const mdx = defaultMdx(title)
-  const { code, frontmatter } = await mdx2Code(mdx)
+  const { code, frontmatter } = await mdx2Code(mdx, true)
   const newBlog = await prisma.blog.create({
     data: {
       name: name,
@@ -49,8 +49,10 @@ export async function POST(request: NextRequest) {
       }
     })
   }
-  revalidatePath(`/blogs/${category}/${name}`, 'page')
-  revalidatePath(`/edit/${name}`, 'page')
+  // revalidatePath(`/blogs/${category}`, 'layout')
+  // revalidatePath(`/blogs/${category}/${name}`, 'page')
+  // revalidatePath(`/edit/${name}`, 'page')
+  revalidatePath(`/`, 'layout')
   return new NextResponse(JSON.stringify({message: "Create blog successed"}), {
       status: 200,
       statusText: 'ok',
@@ -151,6 +153,19 @@ ${demoImgUrl ? `![](${demoImgUrl})` : ""}
 console.log('Hello World')
 \`\`\`
 
+## 表格
+
+| Tables   |      Are      |  Cool |
+|----------|:-------------:|------:|
+| col 1 is |  left-aligned | $1600 |
+| col 2 is |    centered   |   $12 |
+| col 3 is | right-aligned |    $1 |
+
+## 影片
+
+從Youtube嵌入複製後，要記得刪掉width和height才能套用模板寬度(Finish後才會轉換)
+<iframe src="https://www.youtube.com/embed/8aGhZQkoFbQ?si=2-_Ixy18e-xbAmAC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+</iframe>
 
 ## 水平線
 

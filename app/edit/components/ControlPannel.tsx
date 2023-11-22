@@ -29,7 +29,7 @@ export default function ControlPannel({setUploadImgUrl, saveBlogOnClicked ,blogC
   }, [checkMousePosition])
 
   return (
-    <div className={`px-4 py-3 flex flex-row justify-around gap-4 items-center m-0 controlPannel fixed ${showControlPanel ? 'inline-flex opacity-100' : 'hidden opacity-0'} bottom-16  left-12 transition-all ease-in rounded bg-gray-600 bg-opacity-50 backdrop-blur-md`}>
+    <div className={`px-4 py-3 flex flex-row justify-around gap-4 items-center m-0 controlPannel fixed ${showControlPanel ? 'inline-flex opacity-100' : 'hidden opacity-0'} bottom-16  right-12 transition-all ease-in rounded bg-gray-600 bg-opacity-50 backdrop-blur-md`}>
       <button className='bg-slate-600 hover:bg-slate-500 text-gray-300 px-4 py-2 m-0 rounded-xl' onClick={() => saveBlogOnClicked(blogName, doc, null, null)}>Save</button>
       <button className='bg-slate-600 hover:bg-slate-500 text-gray-300 px-4 py-2 m-0 rounded-xl' onClick={() => saveBlogOnClicked(blogName, doc, router, `/blogs/${blogCategory}/${blogName}`)}>Finish</button>
       <UploadButton

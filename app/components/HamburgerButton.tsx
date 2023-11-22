@@ -49,14 +49,14 @@ export default function HamburgerButton() {
       return null
     }
     return (
-      <Link 
+      <a 
         key={routerLink.path}
         href={routerLink.path}
         className={`${pathname === routerLink.path ? "underline " : ""}lg:inline-flex lg:w-auto w-full px-5 py-2 rounded text-white/90 font-bold items-center justify-center hover:underline  hover:decoration-2 hover:text-white cursor-pointer`}
         onClick={handleLinkClick}
       >
         {routerLink.name}
-      </Link>)
+      </a>)
   })
   return (
     <div className="ml-auto">

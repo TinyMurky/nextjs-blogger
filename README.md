@@ -9,6 +9,7 @@
 ## 目錄
 - [功能](#功能)
 - [安裝專案](#安裝專案)
+    - [設定`.env.local`](#設定envlocal)
 - [新增文章](#新增文章)
 - [使用工具](#使用工具)
 - [參考網站](#參考網站)
@@ -33,7 +34,7 @@
 - CRUD功能
     - 於`/blogs/edit`(編輯中，須登入)、`/blogs/playground`（MD線上編輯）route中有`new`按鈕可以新增一篇新的部落格
     - 於登入後每篇文章皆可編輯，點選部落格本文的`edit`按鈕進入`/edit/[categoryId]/[blogId]`route。直接使用`markdown`格式編輯文章。
-    - 編輯頁面左下角的control pannel有以下三個按鍵
+    - 編輯頁面右下角的control pannel有以下三個按鍵
         - `Save`：儲存部落格的更改
         - `Finish`：儲存部落格更改，並離開頁面回到`/blogs/[categoryId]/[blogId]`
         - `Add Image`：將圖片上傳到雲端平台[uploadthing](https://uploadthing.com/)，並將url直接插入`markdown`檔
@@ -203,8 +204,28 @@ code block可使用複製功能
 
 ### CRUD功能展示
 在`/blogs/edit`與`/blogs/playground`可以按`new`按鈕新增文章
+![](./README/新增文章.gif)
 
+可直接用`markdown`語法編輯
+![](./README/markdown編輯.gif)
 
+按`Add Image`可以新增圖片
+![](./README/新增圖片.gif)
+
+按`Save`保存，按`Finish`結束編輯
+![](./README/儲存文章.gif)
+
+按`edit`回到編輯頁面
+![](./README/回到edit.gif)
+
+按`download`可以把文章與圖片全部下載下來
+![](./README/下載文章.gif)
+
+按`delete`可以刪除文章
+![](./README/刪除文章.gif)
+
+`/blogs/edit`的文章可以public到技術文章或心得文章，此結果不可逆
+![](./README/publish文章.gif)
 
 ### 其他功能展示
 另外有我的履歷頁面

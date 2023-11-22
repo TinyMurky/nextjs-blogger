@@ -5,7 +5,7 @@ export function createCheckMousePosition (setter:(value: React.SetStateAction<bo
   return (e: MouseEvent) => {
       const { clientX, clientY } = e
       const thresholdY = 400 
-      const thresholdX = 1000 
+      const thresholdX = 3000 
       const nearBottom = window.innerHeight - clientY < thresholdY;
       const nearLeft = clientX < thresholdX
       

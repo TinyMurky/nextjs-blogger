@@ -126,17 +126,16 @@ export default function TableOfContents({ rawBody }: Props) {
       <p className="mb-5 text-lg font-semibold  transition-colors text-gray-200">
         目錄
       </p>
-      <div className="flex flex-col justify-start">
+      <div className="flex flex-col">
         {headings
           .filter(heading => heading.level <= 3)
           .map((heading, index) => {
-            const padding = `ps-${(heading.level-1)* 4}`
             return (
               <button
                 key={index}
                 type="button"
                 className={clsx(
-                  padding,
+                  `ps-${(heading.level-1)* 2}`,
                   heading.id === activeId
                     ? "font-medium text-sky-400  hover:text-sky-300"
                     : "font-normal  text-gray-400 hover:text-gray-200",

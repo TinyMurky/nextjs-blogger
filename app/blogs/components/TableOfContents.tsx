@@ -135,12 +135,13 @@ export default function TableOfContents({ rawBody }: Props) {
                 key={index}
                 type="button"
                 className={clsx(
-                  `ps-${(heading.level-1)* 2}`,
+                `ps-${(heading.level-1)* 2}`,
                   heading.id === activeId
                     ? "font-medium text-sky-400  hover:text-sky-300"
                     : "font-normal  text-gray-400 hover:text-gray-200",
                   "mb-3 text-left text-sm transition-colors hover:underline"
                 )}
+                style={{paddingLeft: `${8 * (heading.level - 1)}px`}}
                 onClick={(e) => {
                   e.preventDefault()
                   document.querySelector(`#${escapeNumberHeadCssSelector(heading.id)}`)?.scrollIntoView({

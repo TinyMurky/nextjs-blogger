@@ -19,6 +19,7 @@ export default function Error({
       <div className='bg-gray-700 rounded-xl p-10 flex flex-col justify-center items-center'>
 
       <h1 className='text-2xl mb-4 text-white/90'>Something went Wrong !</h1>
+      <h2 className='text-xl mb-4 text-white/90'>Please Don't Write JSX Or Script Without Code Block Syntex</h2>
       <button
         className='text-white/90 rounded-xl px-4 py-2 bg-red-500'
         onClick={

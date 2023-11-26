@@ -7,7 +7,8 @@ import mdxComponents from "@/libs/mdxComponents"
 import { BundleResult } from '@/type'
 import { Blog } from '@prisma/client'
 import { debounce } from './editor-helpers'
-import Link from 'next/link'
+
+import  DOMPurify from 'dompurify' // 防止xss
 
 type ExcludeCodeAndContent = Pick<Blog, Exclude<keyof Blog, 'content' | 'code'>>
 
@@ -24,7 +25,8 @@ export default function Preview({ doc, blogCode, blogMatter }: Props) {
 
   // fetchMDX要先金過debounce才可以傳入useEffect
   const fetchMDX= useCallback(async (doc: string) => {
-      const {code, frontmatter}: Omit<BundleResult, "matter"> = await mdx2CodeAction(doc)
+      const cleanDoc = DOMPurify.sanitize(doc, { ADD_TAGS: ["iframe"], ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling'] }) // 清理xss
+      const {code, frontmatter}: Omit<BundleResult, "matter"> = await mdx2CodeAction(cleanDoc)
       setMdxCode(code)
       setMdxMatter(m => ({
         ...m,

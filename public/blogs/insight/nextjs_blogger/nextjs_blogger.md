@@ -17,7 +17,7 @@ slug:
 
 目前登入功能暫不開放不好意思@@但是所有功能都可在MD 線上編輯頁面使用。
 
-專案部署網址：railway(你現在正在看的這個頁面)
+專案部署網址：Railway (您現在正在看的這個網頁)
 
 Github Repo：[nextjs-blogger](https://github.com/TinyMurky/nextjs-blogger)
 
@@ -181,6 +181,10 @@ contentlayer套件本身需要使用local端的md檔，也就是說如果我若�
 - **Server Action** 我不確定這項對效能有沒有影響，使用server-action可以不用使用fetch就能將資料傳給後端，後端也不用建立Api Endpoint就可以獲得資料，少去一些步驟，希望可以讓整個過程更快一點。
 
 ![](./images/fb33aae5-2db1-474b-ab36-a8cb4ee6e93c-gh5vb4.gif)
+
+### XSS攻擊
+
+開放一般使用者可以隨意更改`mdx` file其實超危險的，隨時都可能被注入奇怪的 `jsx` ，然後我寫完整個專案才發現這個問題。目前的解法是所有前端的 `mdx` 黨要compile成 bundle code之前，都要先經過 [dompurify](https://www.npmjs.com/package/dompurify)套件的清理，防止危險的code被存到server上。
 
 ### Prisma Seeder
 

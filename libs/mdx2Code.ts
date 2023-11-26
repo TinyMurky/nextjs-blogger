@@ -38,7 +38,7 @@ function removeXSSFromMDX(source: string): string {
 function extractCodeBlocks(source:string): {noCodeBlocksSource: string, codeBlocks: string[]} {
   const codeBlocks: string[] = []
   // 只有在code block裡的html會被保存
-  const noCodeBlocksSource = source.replace(/```[\s\S]*?```/g, (match) => {
+  const noCodeBlocksSource = source.replace(/(```[\s\S]*?```)|(`[\s\S]*?`)/g, (match) => {
     codeBlocks.push(match);
     return "CODE_BLOCK_PLACEHOLDER";
   })

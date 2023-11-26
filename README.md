@@ -167,7 +167,7 @@
 - image-size 1.0.2 (抓取圖片的長寬)
 - plaiceholder 3.0.0 (製作圖片在如前的模糊圖片)
 - react-icons 4.11.0 (一些漂亮的圖案)
-- dompurify 3.0.6 (防止Mdx被注入奇怪的Script)
+- isomorphic-dompurify 1.9.0 (防止Mdx被注入奇怪的Script, dompurify的nextjs server版)
 - jszip (壓縮文章與圖片，以供下載)
 - sweetalert2 (漂亮的彈出視窗)
 

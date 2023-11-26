@@ -184,7 +184,7 @@ contentlayer套件本身需要使用local端的md檔，也就是說如果我若�
 
 ### XSS攻擊
 
-開放一般使用者可以隨意更改`mdx` file其實超危險的，隨時都可能被注入奇怪的 `jsx` ，然後我寫完整個專案才發現這個問題。目前的解法是所有前端的 `mdx` 黨要compile成 bundle code之前，都要先經過 [dompurify](https://www.npmjs.com/package/dompurify)套件的清理，防止危險的code被存到server上。
+開放一般使用者可以隨意更改`mdx` file其實超危險的，隨時都可能被注入奇怪的 `jsx` ，然後我寫完整個專案才發現這個問題。目前的解法是所有前端的 `mdx` file要compile成 bundle code之前，都要先經過 [dompurify](https://www.npmjs.com/package/dompurify)套件的清理，防止危險的code被存到server上。
 
 ### Prisma Seeder
 

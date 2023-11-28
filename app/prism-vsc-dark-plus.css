@@ -39,7 +39,7 @@ code[class*="language-"] *::selection {
 
 	pre[class*="language-"],
 	code[class*="language-"] {
-		font-size: 20px;
+		font-size: 18px;
 	}
 }
 

@@ -26,7 +26,10 @@ export async function mdx2Code( source: string, useRyhypePlugins: boolean = true
 // 需要防止code block以外的code備注入jsx
 function removeXSSFromMDX(source: string): string {
   const { noCodeBlocksSource, codeBlocks } = extractCodeBlocks(source)
-  const cleanSource = sanitize(noCodeBlocksSource,  { ADD_TAGS: ["iframe"], ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling'] }) // 防止XSS
+  const cleanSource = sanitize(noCodeBlocksSource,  {
+    ADD_TAGS:  ["iframe"],
+    ADD_ATTR: ['allow', 'allowfullscreen', 'frameborder', 'scrolling']
+  }).replace(/&gt;/g, '>') // 防止XSS，最後要把 &gt;轉回>，不然mdx會讀不到
 
   // 每次match都會使用callback, callback從blocks shift一個出來填上
   const finalSource = cleanSource.replace(/CODE_BLOCK_PLACEHOLDER/g, (): string => {

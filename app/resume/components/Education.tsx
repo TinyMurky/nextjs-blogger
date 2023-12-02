@@ -5,7 +5,7 @@ type Props = {}
 export default function Education({}: Props) {
   return (
     <section className="mt-16 mb-8">
-      <h1 className="text-2xl mb-4 font-bold">學歷</h1>
+      <h1 className="text-2xl mb-4 font-bold">Education 學歷</h1>
       <hr className="mt-2 mb-4 h-px border-0 bg-gray-500"/>
       <div className="outside-box w-full mt-12">
         <div className="mx-auto relative w-full md:w-11/12">
@@ -58,13 +58,6 @@ export default function Education({}: Props) {
                       </Link>
                       <p>使用DNN預測會計師未查核出財務報表異常之可能性。</p>
                     </li>
-                    <li className="text-white/70" >
-                      機器學習課程(2019)，成績為A，3人
-                      <Link  target='_blank'  className="text-sky-300 hover:bg-gray-500" href="https://github.com/TinyMurky/ML2019FALL/blob/master/final/Report.pdf">
-                        期末專案
-                      </Link>
-                      使用DANN模型進行跨Domain圖片辨識，模型正確率排名班級第一
-                    </li>
                   </ul>
                 </div>
               </div>
@@ -95,9 +88,6 @@ export default function Education({}: Props) {
                     <li className="text-white/70" >
                       於106(2017)學年度獲頒書卷獎。
                     </li>
-                    <li className="text-white/70" >
-                      演算法、資料結構、程式設計等課程皆為A+
-                    </li>
                   </ul>
                 </div>
               </div>
@@ -108,7 +98,7 @@ export default function Education({}: Props) {
                   height={200}
                   width={200}
                   loading="lazy"
-                  className="rounded-full  relative top-[-12px]"
+                  className=" relative top-[-12px]"
                 />
               </div>
             </li>

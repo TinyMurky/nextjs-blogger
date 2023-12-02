@@ -2,16 +2,16 @@ type Props = {}
 
 const skills: Array<{name: string, items:Array<string>}> = [
   {
-    name:"後端技能(Back-end)",
-    items:["Node.js / Express", "Python", "AWS EC2/Elastic Beanstalk/RDS", "MySQL / Sequelize", "MongoDB / Mongoose", "RESTful API"]
+    name:"Back-end",
+    items:["Node.js / Express", "Python", "MySQL / Sequelize / Prisma", "AWS EC2/Elastic Beanstalk/RDS", "Railway / Vercel / Heroku", "RESTful API"]
   },
   {
-    name:"前端技能(Front-end)",
-    items:["Next.js / Tailwind", "HTML5 / CSS3", "JavaScript", "Bootstrap"],
+    name:"Front-end",
+    items:["Next.js / Tailwind", "JavaScript/TypeScript", "HTML5 / CSS3", "Bootstrap"],
   },
   {
-    name:"其他技能",
-    items:["Heroku", "Git / Git Flow", "npm", "MVC Framework"]
+    name:"Others",
+    items:["MongoDB / Mongoose", "Git / Git Flow", "npm", "MVC Framework"]
   }
 ]
 
@@ -39,7 +39,7 @@ const skillBlock = (
 export default function Skill({}: Props) {
   return (
     <section className="my-8">
-      <h1 className="text-2xl mb-6 font-bold">技能</h1>
+      <h1 className="text-2xl mb-6 font-bold">Skills 技能</h1>
       {skillBlock}
     </section>
   )

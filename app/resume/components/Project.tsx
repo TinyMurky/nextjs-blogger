@@ -146,7 +146,7 @@ export default function Project({}: Props) {
               <h4 className="font-bold mb-2">使用技術：</h4>
               <ul className="list-disc list-inside ">
                 <li className="text-white/70" ><span className="font-bold">Front-end：</span>Bootstrap、Axios、HTML、CSS、JavaScript</li>
-                <li className="text-white/70" ><span className="font-bold">Back-end：</span>lebars、MySQL、Sequelize、passport、imgur、bcrypt.js</li>
+                <li className="text-white/70" ><span className="font-bold">Back-end：</span>Handlebars、MySQL、Sequelize、passport、imgur、bcrypt.js</li>
                 <li className="text-white/70" ><span className="font-bold">Deploy：</span>AWS Elastic Beanstalk, Amazon RDS</li>
               </ul>
             </div>

@@ -5,7 +5,7 @@ type Props = {}
 export default function WorkingExperiance({}: Props) {
   return (
     <section className="mt-16 mb-8">
-      <h1 className="text-2xl mb-4 font-bold">工作經歷</h1>
+      <h1 className="text-2xl mb-4 font-bold">Experiences 工作經歷</h1>
       <hr className="mt-2 mb-4 h-px border-0 bg-gray-500"/>
       <div className="outside-box w-full mt-12">
         <div className="mx-auto relative w-full md:w-11/12">

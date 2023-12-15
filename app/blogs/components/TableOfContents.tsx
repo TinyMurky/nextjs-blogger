@@ -90,7 +90,7 @@ const useIntersectionObserver:UseIntersectionObserverType = (setActiveId) => {
 
     headingElements.forEach((element) => observer.observe(element))// 全部丟進去observe
 
-    return () => observer.disconnect() // useEffect結束後一次性的註銷所有元素的觀察，還在
+    return () => observer.disconnect() // 一次性的註銷所有元素的觀察，這個return是給下次setActive啟動useEffect先執行，避免有上次殘留
 
   }, [setActiveId])
 }

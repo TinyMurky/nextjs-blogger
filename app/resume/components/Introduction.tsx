@@ -37,7 +37,6 @@ export default function Introduction({}: Props) {
               畢業於國立臺灣大學會計學系研究所，從學習深度學習開始，轉而學習後端工程領域，於9個月的自學期間，掌握 JavaScript、Node. js、Express、MySQL、Next.js、 RESTful API 與 AWS EB部署等技能，並於期間整理技術筆記，發布於個人部落格。
             </p>
             <p className="text-base text-white/70 my-4">
-              任職於會計師事務所風險管理部門一年，負責電腦審計與內部控制專審，擅於主動提出優化方案、專案時程掌控。具備敏銳觀察、溝通技巧、客戶管理、多功處理等能力。
               任職於會計師事務所風險管理部門一年，負責電腦審計與內部控制專審，具備敏銳觀察、客戶管理能力，並擅長主動提出優化方案。
             </p>
           </div>
